@@ -9,6 +9,7 @@
         android:id="@+id/pretraga"
         android:title="Pretrazi"
         app:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_search"
         app:actionViewClass="android.widget.SearchView">
     </item>
 </menu>
