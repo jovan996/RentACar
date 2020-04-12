@@ -1,6 +1,7 @@
-package com.example.rentacar;
+package com.example.rentacar.Adapteri;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,24 +10,28 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.rentacar.Modeli.AutomobilItemModel;
+import com.example.rentacar.R;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListViewAdapter extends BaseAdapter {
+public class AutomobilViewAdapter extends BaseAdapter {
 
     private Context context;
 
     private LayoutInflater inflater;
 
-    private List<ModelListItem> listaModel;
+    private List<AutomobilItemModel> listaModel;
 
-    private ArrayList<ModelListItem> lista;
+    private ArrayList<AutomobilItemModel> lista;
 
-    public ListViewAdapter(Context context,List<ModelListItem> listaModel){
+    public AutomobilViewAdapter(Context context, List<AutomobilItemModel> listaModel){
         this.context=context;
         this.listaModel=listaModel;
         this.inflater=LayoutInflater.from(context);
-        this.lista=new ArrayList<ModelListItem>();
+        this.lista=new ArrayList<AutomobilItemModel>();
         this.lista.addAll(listaModel);
     }
 
@@ -72,7 +77,11 @@ public class ListViewAdapter extends BaseAdapter {
             holder=(ViewHolder)convertView.getTag();
         }
         holder.naslov.setText(lista.get(position).getMarka()+ " " +lista.get(position).getModel());
+        holder.detalji.setText(lista.get(position).getCijenaPoDanu());
+        File file=new File("/slike");  //neki folder sa slikama
+        holder.slika.setImageURI(Uri.fromFile(file));
+        holder.dugme.setText("Prikazi detalje");
 
-        return null;
+        return convertView;
     }
 }

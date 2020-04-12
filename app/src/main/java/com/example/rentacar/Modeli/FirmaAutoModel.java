@@ -1,6 +1,6 @@
-package com.example.rentacar;
+package com.example.rentacar.Modeli;
 
-public class FirmaAuto {
+public class FirmaAutoModel {
 
     private int firmaAutoId;
 
@@ -20,11 +20,11 @@ public class FirmaAuto {
 
     private int kilometraza;
 
-    public FirmaAuto(){
+    public FirmaAutoModel(){
 
     }
 
-    public FirmaAuto(int firmaAutoId, int automobilId, int firmaId, int polisaOsiguranja, int cijenaPoDanu, boolean status, String boja, int godiste, int kilometraza) {
+    public FirmaAutoModel(int firmaAutoId, int automobilId, int firmaId, int polisaOsiguranja, int cijenaPoDanu, boolean status, String boja, int godiste, int kilometraza) {
         this.firmaAutoId = firmaAutoId;
         this.automobilId = automobilId;
         this.firmaId = firmaId;

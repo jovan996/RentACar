@@ -1,6 +1,6 @@
-package com.example.rentacar;
+package com.example.rentacar.Modeli;
 
-public class ModelListItem {
+public class AutomobilItemModel {
 
     private int faId;
 
@@ -12,7 +12,7 @@ public class ModelListItem {
 
     private int cijenaPoDanu;
 
-    public ModelListItem(ModelAutomobila modelAutomobila,FirmaAuto firmaAuto,Slika slika){
+    public AutomobilItemModel(AutomobilModel modelAutomobila, FirmaAutoModel firmaAuto, SlikaModel slika){
         this.faId=firmaAuto.getFirmaAutoId();
         this.model=modelAutomobila.getModel();
         this.marka=modelAutomobila.getMarka();

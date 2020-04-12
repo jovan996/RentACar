@@ -1,6 +1,6 @@
-package com.example.rentacar;
+package com.example.rentacar.Modeli;
 
-public class ModelAutomobila {
+public class AutomobilModel {
 
     private int id;
 
@@ -8,11 +8,11 @@ public class ModelAutomobila {
 
     private String marka;
 
-    public ModelAutomobila(){
+    public AutomobilModel(){
 
     }
 
-    public ModelAutomobila(int id, String model, String marka) {
+    public AutomobilModel(int id, String model, String marka) {
         this.id = id;
         this.model = model;
         this.marka = marka;

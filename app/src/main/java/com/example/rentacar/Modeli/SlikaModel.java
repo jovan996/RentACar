@@ -1,6 +1,6 @@
-package com.example.rentacar;
+package com.example.rentacar.Modeli;
 
-public class Slika {
+public class SlikaModel {
 
     private int  slikaId;
 
@@ -8,11 +8,11 @@ public class Slika {
 
     private int automobilId;
 
-    public Slika(){
+    public SlikaModel(){
 
     }
 
-    public Slika(int slikaId, String slikaPutanja, int automobilId) {
+    public SlikaModel(int slikaId, String slikaPutanja, int automobilId) {
         this.slikaId = slikaId;
         this.slikaPutanja = slikaPutanja;
         this.automobilId = automobilId;
