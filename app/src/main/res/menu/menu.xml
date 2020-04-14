@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/podesavanja"
-        android:title="Podesavanja">
+        android:title="@string/podesavanja">
     </item>
     <item
         android:id="@+id/pretraga"
-        android:title="Pretrazi"
+        android:title="@string/pretrazi"
         app:showAsAction="always"
         android:icon="@android:drawable/ic_menu_search"
         app:actionViewClass="android.widget.SearchView">

@@ -3,4 +3,6 @@
     <string name="naslov">Naslov</string>
     <string name="ovo_su_neki_detalji">Ovo su neki detalji</string>
     <string name="prikazi_detalje">Prikazi detalje</string>
+    <string name="pretrazi">Pretrazi</string>
+    <string name="podesavanja">Podesavanja</string>
 </resources>

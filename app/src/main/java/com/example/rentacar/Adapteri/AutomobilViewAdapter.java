@@ -16,6 +16,7 @@ import com.example.rentacar.R;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class AutomobilViewAdapter extends BaseAdapter {
 
@@ -82,6 +83,28 @@ public class AutomobilViewAdapter extends BaseAdapter {
         holder.slika.setImageURI(Uri.fromFile(file));
         holder.dugme.setText("Prikazi detalje");
 
+       /* holder.dugme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });*/
         return convertView;
+    }
+
+    public void search(String searchText){
+        searchText=searchText.toLowerCase(Locale.getDefault());
+        this.listaModel.clear();
+        if(searchText.trim().length()==0){
+            listaModel.addAll(lista);
+        }else{
+            for(int i=0;i<lista.size();i++){
+                String naslov=(lista.get(i).getMarka() + lista.get(i).getModel()).toLowerCase(Locale.getDefault());
+                if(naslov.contains(searchText)){
+                    listaModel.add(lista.get(i));
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }
