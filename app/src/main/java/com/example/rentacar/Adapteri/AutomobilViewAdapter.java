@@ -26,7 +26,7 @@ public class AutomobilViewAdapter extends BaseAdapter {
 
     private List<AutomobilItemModel> listaModel;
 
-    private ArrayList<AutomobilItemModel> lista;
+    private ArrayList<AutomobilItemModel> lista;  //ova druga lista je zbog genericnosti jer sada parametar u konstruktoru moze biti bilo kakva kolekcija
 
     public AutomobilViewAdapter(Context context, List<AutomobilItemModel> listaModel){
         this.context=context;

@@ -39,7 +39,7 @@ public class MasterViewActivity  extends AppCompatActivity {
         listView=(ListView) findViewById(R.id.listaAutomobila);
         setContentView(R.layout.activity_main);
 
-        identifikatori=new int[]{1,2,3};                      //ovi nizovi su samo za potrebe testiranja
+        identifikatori=new int[]{1,2,3};                      //ovi nizovi su samo za potrebe testiranja kao i for petlja
         marke=new String[]{"audi","honda","mercedes"};
         modeli=new String[]{"a6","civic","s300"};
         cijene=new int[]{3400,765,987};
@@ -50,7 +50,7 @@ public class MasterViewActivity  extends AppCompatActivity {
             listaAutomobila.add(a);
         }
 
-        automobilViewAdapter=new AutomobilViewAdapter(this,listaAutomobila);
+        automobilViewAdapter=new AutomobilViewAdapter(this,listaAutomobila); //samo za potrebe testiranja posto jos nemamo bazu
         listView.setAdapter(automobilViewAdapter);
 
     }
