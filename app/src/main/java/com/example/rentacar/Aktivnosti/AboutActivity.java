@@ -1,9 +1,12 @@
 package com.example.rentacar.Aktivnosti;
 
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
+import com.example.rentacar.R;
 
-public class AboutActivity {
+public class AboutActivity extends AppCompatActivity {
 
     private TextView appIme;
 
@@ -15,16 +18,10 @@ public class AboutActivity {
 
     private ListView appDozvole;
 
-    public AboutActivity(){
-
-    }
-
-    public AboutActivity(TextView appIme, TextView appVerzija, TextView datumInstalacije, TextView appMemorija, ListView appDozvole) {
-        this.appIme = appIme;
-        this.appVerzija = appVerzija;
-        this.datumInstalacije = datumInstalacije;
-        this.appMemorija = appMemorija;
-        this.appDozvole = appDozvole;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_about);
     }
 
     public TextView getAppIme() {

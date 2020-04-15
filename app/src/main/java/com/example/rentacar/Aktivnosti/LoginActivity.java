@@ -1,9 +1,12 @@
 package com.example.rentacar.Aktivnosti;
 
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import com.example.rentacar.R;
 
-public class LoginActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private int id;
 
@@ -13,14 +16,10 @@ public class LoginActivity {
 
     private Button submit;
 
-    public LoginActivity(){
-
-    }
-
-    public LoginActivity(EditText email, EditText lozinka, Button submit) {
-        this.email = email;
-        this.lozinka = lozinka;
-        this.submit = submit;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
     }
 
     public int getId() {

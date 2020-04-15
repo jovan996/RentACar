@@ -1,6 +1,7 @@
 package com.example.rentacar.Aktivnosti;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -14,6 +15,8 @@ import com.example.rentacar.Modeli.AutomobilItemModel;
 import com.example.rentacar.R;
 
 import java.util.ArrayList;
+
+import static com.example.rentacar.R.id.listaAutomobila;
 
 public class MasterViewActivity  extends AppCompatActivity {
 
@@ -36,8 +39,12 @@ public class MasterViewActivity  extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listView=(ListView) findViewById(R.id.listaAutomobila);
         setContentView(R.layout.activity_main);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Lista automobila");
+
+        listView=(ListView) findViewById(R.id.listaAutomobila);
 
         identifikatori=new int[]{1,2,3};                      //ovi nizovi su samo za potrebe testiranja kao i for petlja
         marke=new String[]{"audi","honda","mercedes"};
@@ -79,7 +86,13 @@ public class MasterViewActivity  extends AppCompatActivity {
         return true;
     }
 
-    public boolean onOptionsItemSelected(){
-        return false;
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.podesavanja) {
+            // napisati kod za pokretanje nove aktivnosti
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

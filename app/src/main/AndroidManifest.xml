@@ -9,6 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Aktivnosti.SettingsActivity"></activity>
+        <activity android:name=".Aktivnosti.RegisterActivity" />
+        <activity android:name=".Aktivnosti.LoginActivity" />
+        <activity android:name=".Aktivnosti.AboutActivity" />
+        <activity
+            android:name=".Aktivnosti.DetailViewActivity"
+            android:parentActivityName="Aktivnosti.MasterViewActivity" />
         <activity android:name=".Aktivnosti.MasterViewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

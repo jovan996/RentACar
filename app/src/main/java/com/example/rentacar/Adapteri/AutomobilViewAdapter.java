@@ -1,6 +1,7 @@
 package com.example.rentacar.Adapteri;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.rentacar.Aktivnosti.DetailViewActivity;
 import com.example.rentacar.Modeli.AutomobilItemModel;
 import com.example.rentacar.R;
 
@@ -63,7 +65,7 @@ public class AutomobilViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         ViewHolder holder;
         if(convertView==null){
@@ -71,24 +73,27 @@ public class AutomobilViewAdapter extends BaseAdapter {
             convertView=inflater.inflate(R.layout.item_automobil,null);
             holder.naslov=convertView.findViewById(R.id.naslov);
             holder.detalji=convertView.findViewById(R.id.detalji);
-            holder.slika=convertView.findViewById(R.id.slikaAutomobila);
+            //holder.slika=convertView.findViewById(R.id.slikaAutomobila);
             holder.dugme=convertView.findViewById(R.id.prikaziDetalje);
             convertView.setTag(holder);
         }else{
             holder=(ViewHolder)convertView.getTag();
         }
         holder.naslov.setText(lista.get(position).getMarka()+ " " +lista.get(position).getModel());
-        holder.detalji.setText(lista.get(position).getCijenaPoDanu());
-        File file=new File("/slike");  //neki folder sa slikama
-        holder.slika.setImageURI(Uri.fromFile(file));
+        holder.detalji.setText(Integer.toString(lista.get(position).getCijenaPoDanu()));
+        /*File file=new File("/slike");  //neki folder sa slikama
+        holder.slika.setImageURI(Uri.fromFile(file));*/
         holder.dugme.setText("Prikazi detalje");
 
-       /* holder.dugme.setOnClickListener(new View.OnClickListener() {
+        holder.dugme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(context, DetailViewActivity.class);
+                intent.putExtra("naslov", listaModel.get(position).getMarka() + listaModel.get(position).getModel());
+                intent.putExtra("detalji", listaModel.get(position).getCijenaPoDanu());
+                context.startActivity(intent);
             }
-        });*/
+        });
         return convertView;
     }
 
