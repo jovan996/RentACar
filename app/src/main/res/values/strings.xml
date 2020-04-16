@@ -14,4 +14,22 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="iznajmi">Iznajmi</string>
+    <string name="naslov_detalji">Naslov</string>
+    <string name="broj_sjedista">Broj sjedista:</string>
+    <string name="broj_vrata">Broj vrata:</string>
+    <string name="kubikaza">Kubikaza:</string>
+    <string name="tip_motora">Tip motora:</string>
+    <string name="snaga_motora">Snaga motora:</string>
+    <string name="boja">Boja:</string>
+    <string name="godiste">Godiste:</string>
+    <string name="kilometraza">Kilometraza:</string>
+    <string name="cijena_po_danu">Cijena po danu:</string>
+    <string name="ocijeni_automobil">Ocijeni automobil</string>
+    <string name="firma">Firma</string>
+    <string name="ovdje_ide_neki_opis_firme">Ovdje ide neki opis firme</string>
+    <string name="grad">Grad:</string>
+    <string name="adresa">Adresa:</string>
+    <string name="email">Email:</string>
+    <string name="broj_telefona">Broj telefona:</string>
 </resources>

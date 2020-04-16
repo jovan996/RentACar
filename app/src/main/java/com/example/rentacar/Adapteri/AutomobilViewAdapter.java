@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,10 +19,11 @@ import com.example.rentacar.R;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
-public class AutomobilViewAdapter extends BaseAdapter {
+public class AutomobilViewAdapter extends BaseAdapter implements Filterable {
 
     private Context context;
 
@@ -37,6 +40,42 @@ public class AutomobilViewAdapter extends BaseAdapter {
         this.lista=new ArrayList<AutomobilItemModel>();
         this.lista.addAll(listaModel);
     }
+
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+    Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            listaModel.clear();
+
+            if (constraint.toString().isEmpty()) {
+                listaModel.addAll(lista);
+            }
+            else {
+                for (AutomobilItemModel model : lista) {
+                    String naslov = (model.getMarka() + model.getModel()).toLowerCase(Locale.getDefault());
+                    if (naslov.contains(constraint.toString().toLowerCase(Locale.getDefault()))) {
+                        listaModel.add(model);
+                    }
+                }
+            }
+
+            FilterResults rezultati = new FilterResults();
+            rezultati.values = listaModel;
+
+            return rezultati;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            listaModel.addAll((Collection<? extends AutomobilItemModel>) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public class ViewHolder{
 
@@ -97,7 +136,7 @@ public class AutomobilViewAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public void search(String searchText){
+    /*public void search(String searchText){
         searchText=searchText.toLowerCase(Locale.getDefault());
         this.listaModel.clear();
         if(searchText.trim().length()==0){
@@ -111,5 +150,5 @@ public class AutomobilViewAdapter extends BaseAdapter {
             }
         }
         notifyDataSetChanged();
-    }
+    }*/
 }

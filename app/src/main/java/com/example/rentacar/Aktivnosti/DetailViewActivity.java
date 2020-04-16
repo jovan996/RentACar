@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.view.MenuItem;
 
 import com.example.rentacar.R;
 
@@ -16,14 +17,23 @@ public class DetailViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_view);
 
         ActionBar actionBar = getSupportActionBar();
-        TextView naslov = findViewById(R.id.detailViewNaslov);
-        TextView detalji = findViewById(R.id.detailViewDetalji);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        //TextView naslov = findViewById(R.id.detailViewNaslov);
+        //TextView detalji = findViewById(R.id.detailViewDetalji);
 
         Intent intent = getIntent();
         String textNaslov = intent.getStringExtra("naslov");
         String textDetalji = intent.getStringExtra("detalji");
 
-        naslov.setText(textNaslov);
-        detalji.setText(textDetalji);
+        actionBar.setTitle("Detalji");
+        //naslov.setText(textNaslov);
+        //detalji.setText(textDetalji);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent myIntent = new Intent(getApplicationContext(), MasterViewActivity.class);
+        startActivityForResult(myIntent, 0);
+        return true;
     }
 }

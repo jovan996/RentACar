@@ -4,21 +4,218 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".Aktivnosti.DetailViewActivity">
 
-    <TextView
-        android:id="@+id/detailViewNaslov"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="aaaa"
-        android:textSize="30sp" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-            android:id="@+id/detailViewDetalji"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-        />
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/detailViewGlavnaSlika"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="horizontal">
+
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/detailViewNaslov"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/naslov_detalji"
+                android:layout_marginBottom="10dp"
+                android:textSize="36sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginRight="20dp">
+
+                    <TextView
+                        android:id="@+id/detailViewBrojSedista"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/broj_sjedista"
+                        android:textSize="20sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/detailViewBrojVrata"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/broj_vrata"
+                        android:textSize="20sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/detailViewKubikaza"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/kubikaza"
+                        android:textSize="20sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/detailViewMotor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tip_motora"
+                        android:textSize="20sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/detailViewSnagaMotora"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/snaga_motora"
+                        android:textSize="20sp"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/detailViewBoja"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/boja"
+                        android:textSize="20sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/detailViewGodiste"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/godiste"
+                        android:textSize="20sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/detailViewKilometraza"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/kilometraza"
+                        android:textSize="20sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/detailViewCijeniPoDanu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cijena_po_danu"
+                        android:textSize="20sp"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right">
+
+                <Button
+                    android:id="@+id/detailViewIznajmiButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/iznajmi"
+                    android:textSize="20sp"
+                    android:padding="15dp"
+                    android:layout_marginRight="10dp"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/detailViewOceniText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ocijeni_automobil"
+                android:textSize="20sp"/>
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:stepSize="1"/>
+
+
+            <TextView
+                android:id="@+id/detailViewImeFirme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/firma"
+                android:textSize="36sp"/>
+
+            <TextView
+                android:id="@+id/detailViewOpisFirme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ovdje_ide_neki_opis_firme"
+                android:textSize="20sp"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/detailViewFirmaGrad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/grad"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/detailViewFirmaAdresa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/adresa"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/detailViewFirmaEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/email"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/detailViewFirmaBrojTelefona"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/broj_telefona"
+                android:textSize="20sp"/>
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
 </LinearLayout>

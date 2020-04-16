@@ -74,13 +74,8 @@ public class MasterViewActivity  extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(TextUtils.isEmpty(newText)){
-                    automobilViewAdapter.search("");
-                    listView.clearTextFilter();
-                }else{
-                    automobilViewAdapter.search(newText);
-                }
-                return true;
+                automobilViewAdapter.getFilter().filter(newText);
+                return false;
             }
         });
         return true;
