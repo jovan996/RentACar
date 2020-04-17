@@ -1,5 +1,7 @@
 package com.example.rentacar.Modeli;
 
+import java.util.Date;
+
 public class KomentarModel {
 
     private int komentarId;
@@ -10,15 +12,18 @@ public class KomentarModel {
 
     private String komentarTekst;
 
+    private Date komentarDatum;
+
     public KomentarModel(){
 
     }
 
-    public KomentarModel(int komentarId, int korisnikId, int fa_id, String komentarTekst) {
+    public KomentarModel(int komentarId, int korisnikId, int fa_id, String komentarTekst, Date komentarDatum) {
         this.komentarId = komentarId;
         this.korisnikId = korisnikId;
         this.fa_id = fa_id;
         this.komentarTekst = komentarTekst;
+        this.komentarDatum = komentarDatum;
     }
 
     public int getKomentarId() {
@@ -51,5 +56,13 @@ public class KomentarModel {
 
     public void setKomentarTekst(String komentarTekst) {
         this.komentarTekst = komentarTekst;
+    }
+
+    public Date getKomentarDatum() {
+        return komentarDatum;
+    }
+
+    public void setKomentarDatum(Date komentarDatum) {
+        this.komentarDatum = komentarDatum;
     }
 }

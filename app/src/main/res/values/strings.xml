@@ -41,4 +41,9 @@
     <string name="lozinka_register">Lozinka</string>
     <string name="broj_telefona_register">Broj telefona</string>
     <string name="jmbg">Jmbg</string>
+    <string name="neki_komentar">Neki komentar</string>
+    <string name="_12_07_2020">12.07.2020</string>
+    <string name="ime_prezime">Ime prezime</string>
+    <string name="komentari">Komentari</string>
+    <string name="dodaj_u_omiljene">Dodaj u omiljene</string>
 </resources>

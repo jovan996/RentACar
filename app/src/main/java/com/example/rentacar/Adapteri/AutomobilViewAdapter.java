@@ -112,7 +112,7 @@ public class AutomobilViewAdapter extends BaseAdapter implements Filterable {
             convertView=inflater.inflate(R.layout.item_automobil,null);
             holder.naslov=convertView.findViewById(R.id.naslov);
             holder.detalji=convertView.findViewById(R.id.detalji);
-            //holder.slika=convertView.findViewById(R.id.slikaAutomobila);
+            holder.slika=convertView.findViewById(R.id.slikaAutomobila);
             holder.dugme=convertView.findViewById(R.id.prikaziDetalje);
             convertView.setTag(holder);
         }else{
@@ -120,8 +120,9 @@ public class AutomobilViewAdapter extends BaseAdapter implements Filterable {
         }
         holder.naslov.setText(lista.get(position).getMarka()+ " " +lista.get(position).getModel());
         holder.detalji.setText(Integer.toString(lista.get(position).getCijenaPoDanu()));
-        /*File file=new File("/slike");  //neki folder sa slikama
-        holder.slika.setImageURI(Uri.fromFile(file));*/
+        String putanjaId = lista.get(position).getSlikaPutanja().replace("R.drawable.", "");
+        int id = context.getResources().getIdentifier(putanjaId, "drawable", context.getPackageName());
+        holder.slika.setImageResource(id);
         holder.dugme.setText("Prikazi detalje");
 
         holder.dugme.setOnClickListener(new View.OnClickListener() {
@@ -136,19 +137,4 @@ public class AutomobilViewAdapter extends BaseAdapter implements Filterable {
         return convertView;
     }
 
-    /*public void search(String searchText){
-        searchText=searchText.toLowerCase(Locale.getDefault());
-        this.listaModel.clear();
-        if(searchText.trim().length()==0){
-            listaModel.addAll(lista);
-        }else{
-            for(int i=0;i<lista.size();i++){
-                String naslov=(lista.get(i).getMarka() + lista.get(i).getModel()).toLowerCase(Locale.getDefault());
-                if(naslov.contains(searchText)){
-                    listaModel.add(lista.get(i));
-                }
-            }
-        }
-        notifyDataSetChanged();
-    }*/
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/komentarAvatar"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/ic_launcher_background"
+        android:gravity="center"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="17dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="right">
+
+        <TextView
+            android:id="@+id/komentarAutor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ime_prezime"
+            android:textSize="20sp"
+            android:textStyle="bold">
+        </TextView>
+        <TextView
+            android:id="@+id/komentarTekst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/neki_komentar"
+            android:textSize="16sp">
+        </TextView>
+        <TextView
+            android:id="@+id/komentarDatum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_12_07_2020"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,22 +1,19 @@
 package com.example.rentacar.Aktivnosti;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Adapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.rentacar.Adapteri.AutomobilViewAdapter;
 import com.example.rentacar.Modeli.AutomobilItemModel;
 import com.example.rentacar.R;
 
 import java.util.ArrayList;
-
-import static com.example.rentacar.R.id.listaAutomobila;
 
 public class MasterViewActivity  extends AppCompatActivity {
 

@@ -19,14 +19,13 @@
             <ImageView
                 android:id="@+id/detailViewGlavnaSlika"
                 android:layout_width="match_parent"
-                android:layout_height="300dp" />
+                android:layout_height="300dp"
+                android:src="@drawable/ic_launcher_background" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:orientation="horizontal">
-
-
 
             </LinearLayout>
 
@@ -37,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/naslov_detalji"
                 android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
                 android:textSize="36sp" />
 
             <LinearLayout
@@ -151,17 +151,40 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/detailViewOmiljenitText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dodaj_u_omiljene"
+                    android:textSize="20sp"
+                    android:padding="20dp"
+                    />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/detailViewOceniText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/ocijeni_automobil"
+                android:layout_marginLeft="20dp"
                 android:textSize="20sp"/>
 
             <RatingBar
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:stepSize="1"/>
+                android:stepSize="1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"/>
 
 
             <TextView
@@ -169,6 +192,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/firma"
+                android:layout_marginLeft="20dp"
                 android:textSize="36sp"/>
 
             <TextView
@@ -177,6 +201,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/ovdje_ide_neki_opis_firme"
                 android:textSize="20sp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginBottom="10dp"/>
 
             <TextView
@@ -184,6 +209,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/grad"
+                android:layout_marginLeft="20dp"
                 android:textSize="20sp"/>
 
             <TextView
@@ -191,6 +217,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/adresa"
+                android:layout_marginLeft="20dp"
                 android:textSize="20sp"/>
 
             <TextView
@@ -198,6 +225,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/email"
+                android:layout_marginLeft="20dp"
                 android:textSize="20sp"/>
 
             <TextView
@@ -205,6 +233,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/broj_telefona"
+                android:layout_marginLeft="20dp"
                 android:textSize="20sp"/>
 
             <com.google.android.gms.maps.MapView
@@ -212,6 +241,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/detailViewKomentarNaslov"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/komentari"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:textSize="36sp"/>
+
+            <ListView
+                android:id="@+id/detailViewKomentari"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
