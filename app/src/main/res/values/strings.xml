@@ -11,7 +11,6 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="iznajmi">Iznajmi</string>
@@ -32,4 +31,14 @@
     <string name="adresa">Adresa:</string>
     <string name="email">Email:</string>
     <string name="broj_telefona">Broj telefona:</string>
+    <string name="email_login">Email</string>
+    <string name="lozinka_login">Lozinka</string>
+    <string name="prijavi_se">Prijavi se</string>
+    <string name="prezime">Prezime</string>
+    <string name="ime">Ime</string>
+    <string name="email_register">Email</string>
+    <string name="registruj_se">Registruj se</string>
+    <string name="lozinka_register">Lozinka</string>
+    <string name="broj_telefona_register">Broj telefona</string>
+    <string name="jmbg">Jmbg</string>
 </resources>

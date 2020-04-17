@@ -1,9 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Aktivnosti.LoginActivity">
+    tools:context=".Aktivnosti.LoginActivity"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/emailLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/email_login"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="50dp"
+        android:textSize="20sp">
+    </TextView>
+
+    <EditText
+        android:id="@+id/emailUnosLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="10dp"
+        android:ems="10">
+    </EditText>
+
+    <TextView
+        android:id="@+id/lozinkaLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lozinka_login"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="30dp"
+        android:textSize="20sp">
+    </TextView>
+
+    <EditText
+        android:id="@+id/lozinkaUnosLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="10dp"
+        android:inputType="textPassword">
+    </EditText>
+
+    <Button
+        android:id="@+id/prijava"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/prijavi_se"
+        android:layout_gravity="right"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="30dp">
+    </Button>
+
+
+</LinearLayout>

@@ -1,9 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Aktivnosti.RegisterActivity">
+    tools:context=".Aktivnosti.RegisterActivity"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ime"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="50dp"
+                android:textSize="20sp">
+            </TextView>
+
+            <EditText
+                android:id="@+id/imeUnos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="10dp"
+                android:ems="10">
+            </EditText>
+
+            <TextView
+                android:id="@+id/prezime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/prezime"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="30dp"
+                android:textSize="20sp">
+            </TextView>
+
+            <EditText
+                android:id="@+id/prezimeUnos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="10dp">
+            </EditText>
+
+            <TextView
+                android:id="@+id/emailRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/email_register"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="30dp"
+                android:textSize="20sp">
+            </TextView>
+
+            <EditText
+                android:id="@+id/emailUnosRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="10dp"
+                android:ems="10">
+            </EditText>
+
+            <TextView
+                android:id="@+id/lozinkaRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lozinka_register"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="30dp"
+                android:textSize="20sp">
+            </TextView>
+
+            <EditText
+                android:id="@+id/lozinkaUnosRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:inputType="textPassword">
+            </EditText>
+
+            <TextView
+                android:id="@+id/brojTelefona"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/broj_telefona_register"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="30dp"
+                android:textSize="20sp">
+            </TextView>
+
+            <EditText
+                android:id="@+id/telefonUnosRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="10dp"
+                android:ems="10">
+            </EditText>
+
+            <TextView
+                android:id="@+id/jmbg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/jmbg"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="30dp"
+                android:textSize="20sp">
+            </TextView>
+
+            <EditText
+                android:id="@+id/jmbgUnos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="10dp"
+                android:ems="10">
+            </EditText>
+
+            <Button
+                android:id="@+id/registracija"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/registruj_se"
+                android:layout_gravity="right"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp">
+            </Button>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
