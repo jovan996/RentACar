@@ -1,9 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".Aktivnosti.AboutActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/appIme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RentACar"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/brojVerzije"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Verzija 1.0.0"
+        android:textSize="14sp"
+        />
+
+    <TextView
+        android:id="@+id/appDatumInstalacijeNaslov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Datum instalacije"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/appDatumInstalacije"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="18.04.2020"
+        android:textSize="14sp"
+        />
+
+    <TextView
+        android:id="@+id/appMemorijaNaslov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Memorija"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/appMemorija"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3.7MB"
+        android:textSize="14sp"
+        />
+
+    <TextView
+        android:id="@+id/appDozvoleNaslov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Dozvole"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/appDozvolaBaterija"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Baterija"
+        android:textSize="14sp"
+        />
+
+    <TextView
+        android:id="@+id/appDozvolaMemorija"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pristup memoriji"
+        android:textSize="14sp"
+        />
+
+
+</LinearLayout>

@@ -1,9 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".Aktivnosti.SettingsActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="left">
+
+            <TextView
+                android:id="@+id/settingTemaNaslov"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tema"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/settingsTemaDetalji"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Promijenite temu aplikacije"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+        <Switch
+            android:id="@+id/settingPromeniTemu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:layout_marginLeft="130dp"/>
+
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/izaberiJezikNaslov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jezik"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
+
+    <Spinner
+        android:id="@+id/izaberiJezik"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+        />
+
+    <TextView
+        android:id="@+id/velicinaSlovaNaslov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Velicina slova"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
+
+    <Spinner
+        android:id="@+id/velicinaSlova"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+        />
+
+    <TextView
+    android:id="@+id/oAplikacijiNaslov"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="O aplikaciji"
+    android:textSize="22sp"
+    android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/oAplikacijiDetalji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pogledajte detalje aplikacije"
+        android:textSize="16sp"/>
+
+</LinearLayout>

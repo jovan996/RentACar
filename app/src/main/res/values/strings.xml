@@ -46,4 +46,6 @@
     <string name="ime_prezime">Ime prezime</string>
     <string name="komentari">Komentari</string>
     <string name="dodaj_u_omiljene">Dodaj u omiljene</string>
+    <string name="nemate_nalog">Nemate nalog?</string>
+    <string name="prihvatam_uslove_koriscenja">Prihvatam uslove koriscenja</string>
 </resources>

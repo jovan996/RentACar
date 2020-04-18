@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".Aktivnosti.RentActivity">
+
+    <TextView
+        android:id="@+id/rentNaslov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Marka model"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:id="@+id/detailViewBrojSedista"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/broj_sjedista"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:id="@+id/detailViewBrojVrata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/broj_vrata"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:id="@+id/detailViewKubikaza"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kubikaza"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:id="@+id/detailViewMotor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tip_motora"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:id="@+id/detailViewSnagaMotora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/snaga_motora"
+                android:textSize="20sp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/detailViewBoja"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/boja"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:id="@+id/detailViewGodiste"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/godiste"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:id="@+id/detailViewKilometraza"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kilometraza"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:id="@+id/detailViewCijeniPoDanu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cijena_po_danu"
+                android:textSize="20sp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/rentDatumUzimanjaNaslov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Datum uzimanja"
+        android:textSize="20sp"
+        />
+
+    <EditText
+        android:id="@+id/rentDatumUzimanja"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:id="@+id/rentDatumVracanjaNaslov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Datum vracanja"
+        android:textSize="20sp"
+        />
+
+    <EditText
+        android:id="@+id/rentDatumVracanja"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:id="@+id/rentNacinPlacanjaNaslov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nacin placanja"
+        android:textSize="20sp"
+        />
+
+    <Spinner
+        android:id="@+id/rentNacinPlacanja"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:id="@+id/rentUkupnaCijena"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ukupna cijena: "
+        android:textSize="20sp"
+        />
+
+    <Button
+        android:id="@+id/rentIznajmi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:text="Iznajmi"
+        android:textSize="18sp"
+        android:layout_gravity="right"/>
+
+</LinearLayout>

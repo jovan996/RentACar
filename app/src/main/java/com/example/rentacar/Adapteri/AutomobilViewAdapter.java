@@ -118,9 +118,9 @@ public class AutomobilViewAdapter extends BaseAdapter implements Filterable {
         }else{
             holder=(ViewHolder)convertView.getTag();
         }
-        holder.naslov.setText(lista.get(position).getMarka()+ " " +lista.get(position).getModel());
-        holder.detalji.setText(Integer.toString(lista.get(position).getCijenaPoDanu()));
-        String putanjaId = lista.get(position).getSlikaPutanja().replace("R.drawable.", "");
+        holder.naslov.setText(listaModel.get(position).getMarka()+ " " +listaModel.get(position).getModel());
+        holder.detalji.setText(Integer.toString(listaModel.get(position).getCijenaPoDanu()));
+        String putanjaId = listaModel.get(position).getSlikaPutanja().replace("R.drawable.", "");
         int id = context.getResources().getIdentifier(putanjaId, "drawable", context.getPackageName());
         holder.slika.setImageResource(id);
         holder.dugme.setText("Prikazi detalje");
