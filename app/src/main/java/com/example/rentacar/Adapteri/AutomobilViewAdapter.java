@@ -50,29 +50,30 @@ public class AutomobilViewAdapter extends BaseAdapter implements Filterable {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
 
-            listaModel.clear();
+            List<AutomobilItemModel> filtriranaLista = new ArrayList<>();
 
             if (constraint.toString().isEmpty()) {
-                listaModel.addAll(lista);
+                filtriranaLista.addAll(lista);
             }
             else {
                 for (AutomobilItemModel model : lista) {
                     String naslov = (model.getMarka() + model.getModel()).toLowerCase(Locale.getDefault());
                     if (naslov.contains(constraint.toString().toLowerCase(Locale.getDefault()))) {
-                        listaModel.add(model);
+                        filtriranaLista.add(model);
                     }
                 }
             }
 
             FilterResults rezultati = new FilterResults();
-            rezultati.values = listaModel;
+            rezultati.values = filtriranaLista;
 
             return rezultati;
         }
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            listaModel.addAll((Collection<? extends AutomobilItemModel>) results.values);
+            listaModel.clear();
+            listaModel.addAll((ArrayList)results.values);
             notifyDataSetChanged();
         }
     };
@@ -90,12 +91,12 @@ public class AutomobilViewAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public int getCount() {
-        return lista.size();
+        return listaModel.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return lista.get(position);
+        return listaModel.get(position);
     }
 
     @Override

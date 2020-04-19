@@ -12,7 +12,7 @@
         android:id="@+id/appIme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RentACar"
+        android:text="@string/rentacar_verzija_naslov"
         android:textSize="22sp"
         android:textStyle="bold"/>
 
@@ -20,7 +20,7 @@
         android:id="@+id/brojVerzije"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Verzija 1.0.0"
+        android:text="@string/verzija_1_0_0"
         android:textSize="14sp"
         />
 
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Datum instalacije"
+        android:text="@string/datum_instalacije"
         android:textSize="22sp"
         android:textStyle="bold"/>
 
@@ -37,7 +37,7 @@
         android:id="@+id/appDatumInstalacije"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="18.04.2020"
+        android:text="@string/broj_datum_instalacije"
         android:textSize="14sp"
         />
 
@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Memorija"
+        android:text="@string/memorija_naslov"
         android:textSize="22sp"
         android:textStyle="bold"/>
 
@@ -54,7 +54,7 @@
         android:id="@+id/appMemorija"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="3.7MB"
+        android:text="@string/memorija_vrijednost"
         android:textSize="14sp"
         />
 
@@ -63,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Dozvole"
+        android:text="@string/dozvole_naslov"
         android:textSize="22sp"
         android:textStyle="bold"/>
 
@@ -71,7 +71,7 @@
         android:id="@+id/appDozvolaBaterija"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Baterija"
+        android:text="@string/baterija"
         android:textSize="14sp"
         />
 
@@ -79,7 +79,7 @@
         android:id="@+id/appDozvolaMemorija"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pristup memoriji"
+        android:text="@string/pristup_memoriji"
         android:textSize="14sp"
         />
 

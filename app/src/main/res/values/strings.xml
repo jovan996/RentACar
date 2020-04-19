@@ -4,7 +4,6 @@
     <string name="ovo_su_neki_detalji">Ovo su neki detalji</string>
     <string name="prikazi_detalje">Prikazi detalje</string>
     <string name="pretrazi">Pretrazi</string>
-    <string name="podesavanja">Podesavanja</string>
     <string name="title_activity_detail_view">DetailViewActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -48,4 +47,20 @@
     <string name="dodaj_u_omiljene">Dodaj u omiljene</string>
     <string name="nemate_nalog">Nemate nalog?</string>
     <string name="prihvatam_uslove_koriscenja">Prihvatam uslove koriscenja</string>
+    <string name="verzija_1_0_0">Verzija 1.0.0</string>
+    <string name="datum_instalacije">Datum instalacije</string>
+    <string name="rentacar_verzija_naslov">RentACar</string>
+    <string name="broj_datum_instalacije">18.04.2020</string>
+    <string name="memorija_naslov">Memorija</string>
+    <string name="memorija_vrijednost">3.7MB</string>
+    <string name="dozvole_naslov">Dozvole</string>
+    <string name="baterija">Baterija</string>
+    <string name="pristup_memoriji">Pristup memoriji</string>
+    <string name="pocetna">Pocetna</string>
+    <string name="prijava">Prijava</string>
+    <string name="registracija">Registracija</string>
+    <string name="podesavanja">Podesavanja</string>
+    <string name="posalji_komentar">Posalji</string>
+    <string name="komentar_ostavljanje">Komentar...</string>
+    <string name="ostavite_komentar">Ostavite komentar</string>
 </resources>
