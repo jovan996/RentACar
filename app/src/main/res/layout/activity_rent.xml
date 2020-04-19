@@ -30,7 +30,7 @@
             android:layout_marginRight="20dp">
 
             <TextView
-                android:id="@+id/detailViewBrojSedista"
+                android:id="@+id/iznajmiBrojSedista"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/broj_sjedista"
@@ -38,7 +38,7 @@
                 />
 
             <TextView
-                android:id="@+id/detailViewBrojVrata"
+                android:id="@+id/iznajmiBrojVrata"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/broj_vrata"
@@ -46,7 +46,7 @@
                 />
 
             <TextView
-                android:id="@+id/detailViewKubikaza"
+                android:id="@+id/iznajmiKubikaza"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/kubikaza"
@@ -54,7 +54,7 @@
                 />
 
             <TextView
-                android:id="@+id/detailViewMotor"
+                android:id="@+id/iznajmiTipMotor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tip_motora"
@@ -62,7 +62,7 @@
                 />
 
             <TextView
-                android:id="@+id/detailViewSnagaMotora"
+                android:id="@+id/iznajmiSnagaMotora"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/snaga_motora"
@@ -77,7 +77,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/detailViewBoja"
+                android:id="@+id/iznajmiBoja"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/boja"
@@ -85,7 +85,7 @@
                 />
 
             <TextView
-                android:id="@+id/detailViewGodiste"
+                android:id="@+id/iznajmiGodiste"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/godiste"
@@ -93,7 +93,7 @@
                 />
 
             <TextView
-                android:id="@+id/detailViewKilometraza"
+                android:id="@+id/iznajmiKilometraza"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/kilometraza"
@@ -101,7 +101,7 @@
                 />
 
             <TextView
-                android:id="@+id/detailViewCijeniPoDanu"
+                android:id="@+id/iznajmiCijenaPoDanu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/cijena_po_danu"
@@ -142,20 +142,6 @@
         android:textSize="16sp"
         android:layout_marginBottom="20dp"/>
 
-    <TextView
-        android:id="@+id/rentNacinPlacanjaNaslov"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nacin placanja"
-        android:textSize="20sp"
-        />
-
-    <Spinner
-        android:id="@+id/rentNacinPlacanja"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:spinnerMode="dropdown"
-        android:layout_marginBottom="20dp"/>
 
     <TextView
         android:id="@+id/rentUkupnaCijena"

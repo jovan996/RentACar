@@ -31,6 +31,10 @@ public class AboutActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("O aplikaciji");
+
+        appVerzija= (TextView) findViewById(R.id.brojVerzije);
+        datumInstalacije = (TextView) findViewById(R.id.appDatumInstalacije);
+        appMemorija = (TextView) findViewById(R.id.appMemorija);
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

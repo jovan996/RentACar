@@ -19,7 +19,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText lozinka;
 
-    private Button submit;
+    private Button submitLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,11 @@ public class LoginActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Prijava");
+
+        email = (EditText) findViewById(R.id.emailUnosLogin);
+        lozinka = (EditText) findViewById(R.id.lozinkaUnosLogin);
+        submitLogin = (Button) findViewById(R.id.prijava);
+
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -61,11 +66,11 @@ public class LoginActivity extends AppCompatActivity {
         this.lozinka = lozinka;
     }
 
-    public Button getSubmit() {
-        return submit;
+    public Button getSubmitLogin() {
+        return submitLogin;
     }
 
-    public void setSubmit(Button submit) {
-        this.submit = submit;
+    public void setSubmitLogin(Button submitLogin) {
+        this.submitLogin = submitLogin;
     }
 }
