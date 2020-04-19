@@ -159,7 +159,7 @@
                 android:layout_marginTop="30dp">
 
                 <TextView
-                    android:id="@+id/detailViewOmiljenitText"
+                    android:id="@+id/detailViewOmiljeniText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dodaj_u_omiljene"
@@ -168,6 +168,7 @@
                     />
 
                 <CheckBox
+                    android:id="@+id/detailViewCekirajOmiljeni"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -182,6 +183,7 @@
                 android:textSize="20sp"/>
 
             <RatingBar
+                android:id="@+id/detailViewOznaciZvjezdicu"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:stepSize="1"
@@ -239,7 +241,7 @@
                 android:textSize="20sp"/>
 
             <com.google.android.gms.maps.MapView
-                android:id="@+id/mapView"
+                android:id="@+id/detailMapView"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginTop="10dp"/>
