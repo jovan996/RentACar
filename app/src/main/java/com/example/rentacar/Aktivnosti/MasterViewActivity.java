@@ -1,30 +1,27 @@
 package com.example.rentacar.Aktivnosti;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.example.rentacar.Adapteri.AutomobilViewAdapter;
+import com.example.rentacar.BazaPodataka.DatabaseHelper;
 import com.example.rentacar.Modeli.AutomobilItemModel;
 import com.example.rentacar.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.rentacar.utils.DrawerUtil;
 
 import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MasterViewActivity  extends AppCompatActivity {
 
@@ -46,10 +43,21 @@ public class MasterViewActivity  extends AppCompatActivity {
 
     private String[] slike;
 
+    /*@Nullable
+    @BindView(R.id.drawerToolbar)
+    public Toolbar toolBar;*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /*ButterKnife.bind(this);
+
+        toolBar.setTitle(getResources().getString(R.string.tournament));
+        setSupportActionBar(toolBar);
+
+        DrawerUtil.getDrawer(this, toolBar);*/
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Lista automobila");

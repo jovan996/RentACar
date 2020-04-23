@@ -1,10 +1,5 @@
 package com.example.rentacar.Modeli;
 
-enum Motor
-{
-    BENZIN, DIZEL;
-}
-
 public class AutomobilModel {
 
     private int id;
@@ -19,7 +14,7 @@ public class AutomobilModel {
 
     private int kubikaza;
 
-    private Motor motor;
+    private String motor;
 
     private int snagaMotora;
 
@@ -27,7 +22,7 @@ public class AutomobilModel {
 
     }
 
-    public AutomobilModel(int id, String model, String marka, int brojVrata, int brojSjedista, int kubikaza, Motor motor, int snagaMotora) {
+    public AutomobilModel(int id, String model, String marka, int brojVrata, int brojSjedista, int kubikaza, String motor, int snagaMotora) {
         this.id = id;
         this.model = model;
         this.marka = marka;
@@ -86,11 +81,11 @@ public class AutomobilModel {
         this.kubikaza = kubikaza;
     }
 
-    public Motor getMotor() {
+    public String getMotor() {
         return motor;
     }
 
-    public void setMotor(Motor motor) {
+    public void setMotor(String motor) {
         this.motor = motor;
     }
 

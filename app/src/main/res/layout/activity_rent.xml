@@ -8,156 +8,171 @@
     android:padding="10dp"
     tools:context=".Aktivnosti.RentActivity">
 
-    <TextView
-        android:id="@+id/rentNaslov"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Marka model"
-        android:textSize="30sp"
-        android:textStyle="bold"/>
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="20dp"
-        android:padding="20dp">
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginRight="20dp">
-
-            <TextView
-                android:id="@+id/iznajmiBrojSedista"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/broj_sjedista"
-                android:textSize="20sp"
-                />
-
-            <TextView
-                android:id="@+id/iznajmiBrojVrata"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/broj_vrata"
-                android:textSize="20sp"
-                />
-
-            <TextView
-                android:id="@+id/iznajmiKubikaza"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/kubikaza"
-                android:textSize="20sp"
-                />
-
-            <TextView
-                android:id="@+id/iznajmiTipMotor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tip_motora"
-                android:textSize="20sp"
-                />
-
-            <TextView
-                android:id="@+id/iznajmiSnagaMotora"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/snaga_motora"
-                android:textSize="20sp"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/iznajmiBoja"
+                android:id="@+id/rentNaslov"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/boja"
+                android:text="Marka model"
+                android:textSize="30sp"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginRight="20dp">
+
+                    <TextView
+                        android:id="@+id/iznajmiBrojSedista"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/broj_sjedista"
+                        android:textSize="20sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/iznajmiBrojVrata"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/broj_vrata"
+                        android:textSize="20sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/iznajmiKubikaza"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/kubikaza"
+                        android:textSize="20sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/iznajmiTipMotor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tip_motora"
+                        android:textSize="20sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/iznajmiSnagaMotora"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/snaga_motora"
+                        android:textSize="20sp"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iznajmiBoja"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/boja"
+                        android:textSize="20sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/iznajmiGodiste"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/godiste"
+                        android:textSize="20sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/iznajmiKilometraza"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/kilometraza"
+                        android:textSize="20sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/iznajmiCijenaPoDanu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cijena_po_danu"
+                        android:textSize="20sp"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/rentDatumUzimanjaNaslov"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/datum_uzimanja"
+                android:textSize="20sp"
+                android:layout_marginBottom="10dp"/>
+
+            <DatePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+            </DatePicker>
+
+
+            <TextView
+                android:id="@+id/rentDatumVracanjaNaslov"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/datum_vracanja"
+                android:layout_marginBottom="10dp"
                 android:textSize="20sp"
                 />
 
-            <TextView
-                android:id="@+id/iznajmiGodiste"
+            <DatePicker
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/godiste"
+                android:layout_marginBottom="10dp">
+
+            </DatePicker>
+
+
+            <TextView
+                android:id="@+id/rentUkupnaCijena"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ukupna cijena: "
                 android:textSize="20sp"
                 />
 
-            <TextView
-                android:id="@+id/iznajmiKilometraza"
+            <Button
+                android:id="@+id/rentIznajmi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/kilometraza"
-                android:textSize="20sp"
-                />
-
-            <TextView
-                android:id="@+id/iznajmiCijenaPoDanu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cijena_po_danu"
-                android:textSize="20sp"
-                />
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:text="Iznajmi"
+                android:textSize="18sp"
+                android:layout_gravity="right"/>
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/rentDatumUzimanjaNaslov"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/datum_uzimanja"
-        android:textSize="20sp"
-        android:layout_marginBottom="10dp"/>
-
-    <DatePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </DatePicker>
-
-
-    <TextView
-        android:id="@+id/rentDatumVracanjaNaslov"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/datum_vracanja"
-        android:textSize="20sp"
-        />
-
-    <DatePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </DatePicker>
-
-
-    <TextView
-        android:id="@+id/rentUkupnaCijena"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ukupna cijena: "
-        android:textSize="20sp"
-        />
-
-    <Button
-        android:id="@+id/rentIznajmi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:text="Iznajmi"
-        android:textSize="18sp"
-        android:layout_gravity="right"/>
+    </ScrollView>
 
 </LinearLayout>
