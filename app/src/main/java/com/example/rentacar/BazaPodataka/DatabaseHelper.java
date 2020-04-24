@@ -1,14 +1,19 @@
 package com.example.rentacar.BazaPodataka;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "rentacar";
+    private static final String DATABASE_NAME = "rentacar.db";
     private static final String AUTOMOBIL_TABLE = "automobil";
     private static final String KORISNIK_TABLE = "korisnik";
     private static final String FIRMA_TABLE = "firma";
@@ -19,8 +24,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String OCJENA_TABLE = "ocjena";
     private static final String OMILJENI_TABLE = "omiljeni";
 
-    public DatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public DatabaseHelper(Context context) {
+        super(context, DATABASE_NAME, null, 1);
     }
 
     @Override
@@ -33,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String createIndexAutomobil = "create unique index AUTOMOBIL_PK on " + AUTOMOBIL_TABLE + " (\n" +
                 "AUTOMOBIL_ID ASC);";
 
-        String createKorisnik =  "CREATE TABLE " + KORISNIK_TABLE + " (KORISNIK_ID integer not null, KORISNIK_IME varchar(50) not null," +
+        String createKorisnik =  "CREATE TABLE " + KORISNIK_TABLE + " (KORISNIK_ID integer AUTOINCREMENT not null, KORISNIK_IME varchar(50) not null," +
                 "   KORISNIK_PREZIME     varchar(50)                    not null,\n" +
                 "   KORISNIK_EMAIL       varchar(50)                    not null,\n" +
                 "   KORISNIK_BR_TEL      varchar(20)                    not null,\n" +
@@ -125,8 +130,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "   constraint PK_OCJENA primary key (OCJENA_ID)\n" +
                 ")";
 
-        String createIndexOcjena = "create unique index OCENA_PK on " + OCJENA_TABLE + " (\n" +
-                "OCENA_ID ASC\n" +
+        String createIndexOcjena = "create unique index OCJENA_PK on " + OCJENA_TABLE + " (\n" +
+                "OCJENA_ID ASC\n" +
                 ");";
 
         String createOmiljeni = "CREATE TABLE " + OMILJENI_TABLE + "(\n" +
@@ -136,47 +141,47 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "   constraint PK_OMILJENI primary key (OMILJENI_ID)\n" +
                 ")";
 
-        String relationship1 = "create index RELATIONSHIP_1_FK on EVIDENCIJA (\n" +
+        String relationship1 = "create index RELATIONSHIP_1_FK on " + EVIDENCIJA_TABLE + " (\n" +
                 "KORISNIK_ID ASC\n" +
                 ");";
 
-        String relationship2 = "create index RELATIONSHIP_2_FK on EVIDENCIJA (\n" +
+        String relationship2 = "create index RELATIONSHIP_2_FK on " + EVIDENCIJA_TABLE + " (\n" +
                 "AUTOMOBIL_ID ASC\n" +
                 ");";
 
-        String relationship3 = "create index RELATIONSHIP_3_FK on FIRMA_AUTO (\n" +
+        String relationship3 = "create index RELATIONSHIP_3_FK on " + FIRMA_AUTOMOBIL_TABLE + " (\n" +
                 "AUTOMOBIL_ID ASC\n" +
                 ");";
 
-        String relationship4 = "create index RELATIONSHIP_4_FK on FIRMA_AUTO (\n" +
+        String relationship4 = "create index RELATIONSHIP_4_FK on " + FIRMA_AUTOMOBIL_TABLE + " (\n" +
                 "FIRMA_ID ASC\n" +
                 ");";
 
-        String relationship5 = "create index RELATIONSHIP_5_FK on SLIKA (\n" +
+        String relationship5 = "create index RELATIONSHIP_5_FK on " + SLIKA_TABLE + " (\n" +
                 "AUTOMOBIL_ID ASC\n" +
                 ");\n";
 
-        String relationship6 = "create index RELATIONSHIP_6_FK on KOMENTAR (\n" +
+        String relationship6 = "create index RELATIONSHIP_6_FK on " + KOMENTAR_TABLE + " (\n" +
                 "KORISNIK_ID ASC\n" +
                 ");";
 
-        String relationship7 = "create index RELATIONSHIP_7_FK on KOMENTAR (\n" +
+        String relationship7 = "create index RELATIONSHIP_7_FK on " + KOMENTAR_TABLE + " (\n" +
                 "FA_ID ASC\n" +
                 ");";
 
-        String relationship8 = "create index RELATIONSHIP_8_FK on OCENA (\n" +
+        String relationship8 = "create index RELATIONSHIP_8_FK on " + OCJENA_TABLE + " (\n" +
                 "KORISNIK_ID ASC\n" +
                 ");";
 
-        String relationship9 = "create index RELATIONSHIP_9_FK on OCENA (\n" +
+        String relationship9 = "create index RELATIONSHIP_9_FK on " + OCJENA_TABLE + " (\n" +
                 "FA_ID ASC\n" +
                 ");\n";
 
-        String relationship10 = "create index RELATIONSHIP_10_FK on OMILJENI (\n" +
+        String relationship10 = "create index RELATIONSHIP_10_FK on " + OMILJENI_TABLE + " (\n" +
                 "KORISNIK_ID ASC\n" +
                 ");";
 
-        String relationship11 = "create index RELATIONSHIP_11_FK on OMILJENI (\n" +
+        String relationship11 = "create index RELATIONSHIP_11_FK on " + OMILJENI_TABLE + " (\n" +
                 "FA_ID ASC\n" +
                 ");";
 
@@ -185,7 +190,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ");";
 
         String alterTables = "alter table " + EVIDENCIJA_TABLE + "\n" +
-                "   add constraint FK_EVIDENCI_RELATIONS_KORISNIK foreign key (KORISNIK_ID)\n" +
+                "  add constraint FK_EVIDENCI_RELATIONS_KORISNIK foreign key (KORISNIK_ID)\n" +
                 "      references KORISNIK (KORISNIK_ID)\n" +
                 "      on update restrict\n" +
                 "      on delete restrict;\n" +
@@ -227,7 +232,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "      on delete restrict;\n" +
                 "\n" +
                 "alter table " + OCJENA_TABLE + "\n" +
-                "   add constraint FK_OCENA_RELATIONS_FIRMA_AU foreign key (FA_ID)\n" +
+                "   add constraint FK_OCJENA_RELATIONS_FIRMA_AU foreign key (FA_ID)\n" +
                 "      references FIRMA_AUTO (FA_ID)\n" +
                 "      on update restrict\n" +
                 "      on delete restrict;\n" +
@@ -251,27 +256,77 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "      on delete restrict;";
 
         db.execSQL(createAutomobil);
+        /*db.execSQL(createIndexAutomobil);
         db.execSQL(createEvidencija);
+        db.execSQL(createIndexEvidencija);
+        db.execSQL(relationship1);
+        db.execSQL(relationship2);
         db.execSQL(createFirma);
+        db.execSQL(createIndexFirma);
         db.execSQL(createFirmaAutomobil);
+        db.execSQL(createIndexFirmaAutomobil);
+        db.execSQL(relationship3);
+        db.execSQL(relationship4);
         db.execSQL(createKomentar);
+        db.execSQL(createIndexKOmentar);
+        db.execSQL(relationship6);
+        db.execSQL(relationship7);
         db.execSQL(createKorisnik);
+        db.execSQL(createIndexKorisnik);
         db.execSQL(createOcjena);
+        db.execSQL(createIndexOcjena);
+        db.execSQL(relationship8);
+        db.execSQL(relationship9);
         db.execSQL(createOmiljeni);
+        db.execSQL(createIndexOmiljeni);
+        db.execSQL(relationship10);
+        db.execSQL(relationship11);
         db.execSQL(createSlika);
+        db.execSQL(createIndexSlika);
+        db.execSQL(relationship5);
+        db.execSQL(alterTables);*/
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + AUTOMOBIL_TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + KORISNIK_TABLE);
+        /*db.execSQL("DROP TABLE IF EXISTS " + KORISNIK_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + FIRMA_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + FIRMA_AUTOMOBIL_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + KOMENTAR_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + OCJENA_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + OMILJENI_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + EVIDENCIJA_TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + SLIKA_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + SLIKA_TABLE);*/
         onCreate(db);
     }
+
+    public boolean insertAutomobil(String marka, String model, int brojSedista, int brojVrata, int kubikaza, String motor, int snaga) {
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+
+        ContentValues vrednosti = new ContentValues();
+        vrednosti.put("AUTOMOBIL_MARKA", marka);
+        vrednosti.put("AUTOMOBIL_MODEL", model);
+        vrednosti.put("AUTOMOBIL_BROJ_SEDISTA", brojSedista);
+        vrednosti.put("AUTOMOBIL_BROJ_VRATA", brojVrata);
+        vrednosti.put("AUTOMOBIL_KUBIKAZA", kubikaza);
+        vrednosti.put("AUTOMOBIL_MOTOR", motor);
+        vrednosti.put("AUTOMOBIL_SNAGA_MOTOR", snaga);
+
+        sqLiteDb.insert(AUTOMOBIL_TABLE, null, vrednosti);
+        return true;
+    }
+
+    public ArrayList<String> getAutomobili() {
+        SQLiteDatabase sqLiteDb = this.getReadableDatabase();
+        ArrayList<String> listaAutomobila = new ArrayList<>();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT * FROM " + AUTOMOBIL_TABLE, null);
+        cursor.moveToFirst();
+        while(cursor.isAfterLast()) {
+            listaAutomobila.add(cursor.getString(cursor.getColumnIndex("AUTOMOBIL_MARKA")));
+            cursor.moveToNext();
+        }
+        return listaAutomobila;
+    }
+
 }

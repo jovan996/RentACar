@@ -43,6 +43,8 @@ public class MasterViewActivity  extends AppCompatActivity {
 
     private String[] slike;
 
+    private DatabaseHelper db;
+
     /*@Nullable
     @BindView(R.id.drawerToolbar)
     public Toolbar toolBar;*/
@@ -51,6 +53,8 @@ public class MasterViewActivity  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        db = new DatabaseHelper(this);
 
         /*ButterKnife.bind(this);
 
@@ -64,7 +68,7 @@ public class MasterViewActivity  extends AppCompatActivity {
 
         listView=(ListView) findViewById(R.id.listaAutomobila);
 
-        identifikatori=new int[]{1,2,3,4,5};                      //ovi nizovi su samo za potrebe testiranja kao i for petlja
+        /*identifikatori=new int[]{1,2,3,4,5};                      //ovi nizovi su samo za potrebe testiranja kao i for petlja
         marke=new String[]{"audi","honda","mercedes","ferarri","citroen"};
         modeli=new String[]{"a6","civic","s300","k67","c4"};
         cijene=new int[]{3400,765,987,45,789};
@@ -73,7 +77,11 @@ public class MasterViewActivity  extends AppCompatActivity {
         for(int i=0;i<identifikatori.length;i++){
             AutomobilItemModel a=new AutomobilItemModel(identifikatori[i],marke[i],modeli[i],cijene[i],slike[i]);
             listaAutomobila.add(a);
-        }
+        }*/
+
+        db.insertAutomobil("audi", "a5", 4, 5, 2000, "benzin", 150);
+
+        //listaAutomobila = db.getAutomobili();
 
         automobilViewAdapter=new AutomobilViewAdapter(this,listaAutomobila); //samo za potrebe testiranja posto jos nemamo bazu
         listView.setAdapter(automobilViewAdapter);
