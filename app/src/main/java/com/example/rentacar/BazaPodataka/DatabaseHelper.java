@@ -30,7 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "AUTOMOBIL_KUBIKAZA integer not null, AUTOMOBIL_MOTOR VARCHAR(50), AUTOMOBIL_SNAGA_MOTORA integer not null," +
                 " constraint PK_AUTOMOBIL primary key (AUTOMOBIL_ID))";
 
-        String createIndexAutomobil = "create unique index AUTOMOBIL_PK on AUTOMOBIL (\n" +
+        String createIndexAutomobil = "create unique index AUTOMOBIL_PK on " + AUTOMOBIL_TABLE + " (\n" +
                 "AUTOMOBIL_ID ASC);";
 
         String createKorisnik =  "CREATE TABLE " + KORISNIK_TABLE + " (KORISNIK_ID integer not null, KORISNIK_IME varchar(50) not null," +
@@ -43,7 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "   constraint PK_KORISNIK primary key (KORISNIK_ID)\n" +
                 ")";
 
-        String createIndexKorisnik = "create unique index KORISNIK_PK on KORISNIK (\n" +
+        String createIndexKorisnik = "create unique index KORISNIK_PK on " + KORISNIK_TABLE + " (\n" +
                 "KORISNIK_ID ASC);";
 
         String createFirma = "CREATE TABLE " + FIRMA_TABLE + "(FIRMA_ID integer not null,\n" +
@@ -59,7 +59,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "   constraint PK_FIRMA primary key (FIRMA_ID)\n" +
                 ")";
 
-        String createIndexFirma = "create unique index FIRMA_PK on FIRMA (\n" +
+        String createIndexFirma = "create unique index FIRMA_PK on " + FIRMA_TABLE + " (\n" +
                 "FIRMA_ID ASC\n" +
                 ");";
 
@@ -69,7 +69,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "   constraint PK_SLIKA primary key (SLIKA_ID)\n" +
                 ")";
 
-        String createIndexSlika = "create unique index SLIKA_PK on SLIKA (\n" +
+        String createIndexSlika = "create unique index SLIKA_PK on " + SLIKA_TABLE + " (\n" +
                 "SLIKA_ID ASC\n" +
                 ");";
 
@@ -86,7 +86,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "   constraint PK_FIRMA_AUTO primary key (FA_ID)\n" +
                 ")";
 
-        String createIndexFirmaAutomobil = "create unique index FIRMA_AUTO_PK on FIRMA_AUTO (\n" +
+        String createIndexFirmaAutomobil = "create unique index FIRMA_AUTO_PK on " + FIRMA_AUTOMOBIL_TABLE + " (\n" +
                 "FA_ID ASC\n" +
                 ");";
 
@@ -100,7 +100,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "   constraint PK_EVIDENCIJA primary key (EVIDENCIJA_ID)\n" +
                 ")";
 
-        String createIndexEvidencija = "create unique index EVIDENCIJA_PK on EVIDENCIJA (\n" +
+        String createIndexEvidencija = "create unique index EVIDENCIJA_PK on " + EVIDENCIJA_TABLE + " (\n" +
                 "EVIDENCIJA_ID ASC\n" +
                 ");";
 
@@ -113,7 +113,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "   constraint PK_KOMENTAR primary key (KOMENTAR_ID)\n" +
                 ");\n";
 
-        String createIndexKOmentar = "create unique index KOMENTAR_PK on KOMENTAR (\n" +
+        String createIndexKOmentar = "create unique index KOMENTAR_PK on " + KOMENTAR_TABLE + " (\n" +
                 "KOMENTAR_ID ASC\n" +
                 ");";
 
@@ -122,10 +122,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "   KORISNIK_ID          integer                        not null,\n" +
                 "   FA_ID                integer                        not null,\n" +
                 "   OCJENA_BROJ           integer                       not null,\n" +
-                "   constraint PK_OCENA primary key (OCENA_ID)\n" +
+                "   constraint PK_OCJENA primary key (OCJENA_ID)\n" +
                 ")";
 
-        String createIndexOcjena = "create unique index OCENA_PK on " + OCJENA_TABLE +
+        String createIndexOcjena = "create unique index OCENA_PK on " + OCJENA_TABLE + " (\n" +
                 "OCENA_ID ASC\n" +
                 ");";
 
@@ -136,71 +136,115 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "   constraint PK_OMILJENI primary key (OMILJENI_ID)\n" +
                 ")";
 
-        String createIndexOmiljeni = "create unique index OMILJENI_PK on OMILJENI (\n" +
+        String relationship1 = "create index RELATIONSHIP_1_FK on EVIDENCIJA (\n" +
+                "KORISNIK_ID ASC\n" +
+                ");";
+
+        String relationship2 = "create index RELATIONSHIP_2_FK on EVIDENCIJA (\n" +
+                "AUTOMOBIL_ID ASC\n" +
+                ");";
+
+        String relationship3 = "create index RELATIONSHIP_3_FK on FIRMA_AUTO (\n" +
+                "AUTOMOBIL_ID ASC\n" +
+                ");";
+
+        String relationship4 = "create index RELATIONSHIP_4_FK on FIRMA_AUTO (\n" +
+                "FIRMA_ID ASC\n" +
+                ");";
+
+        String relationship5 = "create index RELATIONSHIP_5_FK on SLIKA (\n" +
+                "AUTOMOBIL_ID ASC\n" +
+                ");\n";
+
+        String relationship6 = "create index RELATIONSHIP_6_FK on KOMENTAR (\n" +
+                "KORISNIK_ID ASC\n" +
+                ");";
+
+        String relationship7 = "create index RELATIONSHIP_7_FK on KOMENTAR (\n" +
+                "FA_ID ASC\n" +
+                ");";
+
+        String relationship8 = "create index RELATIONSHIP_8_FK on OCENA (\n" +
+                "KORISNIK_ID ASC\n" +
+                ");";
+
+        String relationship9 = "create index RELATIONSHIP_9_FK on OCENA (\n" +
+                "FA_ID ASC\n" +
+                ");\n";
+
+        String relationship10 = "create index RELATIONSHIP_10_FK on OMILJENI (\n" +
+                "KORISNIK_ID ASC\n" +
+                ");";
+
+        String relationship11 = "create index RELATIONSHIP_11_FK on OMILJENI (\n" +
+                "FA_ID ASC\n" +
+                ");";
+
+        String createIndexOmiljeni = "create unique index OMILJENI_PK on " + OMILJENI_TABLE + " (\n" +
                 "OMILJENI_ID ASC\n" +
                 ");";
 
-        String alterTables = "alter table EVIDENCIJA\n" +
+        String alterTables = "alter table " + EVIDENCIJA_TABLE + "\n" +
                 "   add constraint FK_EVIDENCI_RELATIONS_KORISNIK foreign key (KORISNIK_ID)\n" +
                 "      references KORISNIK (KORISNIK_ID)\n" +
                 "      on update restrict\n" +
                 "      on delete restrict;\n" +
                 "\n" +
-                "alter table EVIDENCIJA\n" +
+                "alter table " + EVIDENCIJA_TABLE + "\n" +
                 "   add constraint FK_EVIDENCI_RELATIONS_AUTOMOBI foreign key (AUTOMOBIL_ID)\n" +
                 "      references AUTOMOBIL (AUTOMOBIL_ID)\n" +
                 "      on update restrict\n" +
                 "      on delete restrict;\n" +
                 "\n" +
-                "alter table FIRMA_AUTO\n" +
+                "alter table " + FIRMA_AUTOMOBIL_TABLE + "\n" +
                 "   add constraint FK_FIRMA_AU_RELATIONS_AUTOMOBI foreign key (AUTOMOBIL_ID)\n" +
                 "      references AUTOMOBIL (AUTOMOBIL_ID)\n" +
                 "      on update restrict\n" +
                 "      on delete restrict;\n" +
                 "\n" +
-                "alter table FIRMA_AUTO\n" +
+                "alter table " + FIRMA_AUTOMOBIL_TABLE + "\n" +
                 "   add constraint FK_FIRMA_AU_RELATIONS_FIRMA foreign key (FIRMA_ID)\n" +
                 "      references FIRMA (FIRMA_ID)\n" +
                 "      on update restrict\n" +
                 "      on delete restrict;\n" +
                 "\n" +
-                "alter table KOMENTAR\n" +
+                "alter table " + KOMENTAR_TABLE + "\n" +
                 "   add constraint FK_KOMENTAR_RELATIONS_KORISNIK foreign key (KORISNIK_ID)\n" +
                 "      references KORISNIK (KORISNIK_ID)\n" +
                 "      on update restrict\n" +
                 "      on delete restrict;\n" +
                 "\n" +
-                "alter table KOMENTAR\n" +
+                "alter table " + KOMENTAR_TABLE + "\n" +
                 "   add constraint FK_KOMENTAR_RELATIONS_FIRMA_AU foreign key (FA_ID)\n" +
                 "      references FIRMA_AUTO (FA_ID)\n" +
                 "      on update restrict\n" +
                 "      on delete restrict;\n" +
                 "\n" +
-                "alter table OCENA\n" +
-                "   add constraint FK_OCENA_RELATIONS_KORISNIK foreign key (KORISNIK_ID)\n" +
+                "alter table " + OCJENA_TABLE + "\n" +
+                "   add constraint FK_OCJENA_RELATIONS_KORISNIK foreign key (KORISNIK_ID)\n" +
                 "      references KORISNIK (KORISNIK_ID)\n" +
                 "      on update restrict\n" +
                 "      on delete restrict;\n" +
                 "\n" +
-                "alter table OCENA\n" +
+                "alter table " + OCJENA_TABLE + "\n" +
                 "   add constraint FK_OCENA_RELATIONS_FIRMA_AU foreign key (FA_ID)\n" +
                 "      references FIRMA_AUTO (FA_ID)\n" +
                 "      on update restrict\n" +
                 "      on delete restrict;\n" +
                 "\n" +
-                "alter table OMILJENI\n" +
+                "alter table " + OMILJENI_TABLE + "\n" +
                 "   add constraint FK_OMILJENI_RELATIONS_KORISNIK foreign key (KORISNIK_ID)\n" +
                 "      references KORISNIK (KORISNIK_ID)\n" +
                 "      on update restrict\n" +
                 "      on delete restrict;\n" +
                 "\n" +
-                "alter table OMILJENI\n" +
+                "alter table " + OMILJENI_TABLE + "\n" +
                 "   add constraint FK_OMILJENI_RELATIONS_FIRMA_AU foreign key (FA_ID)\n" +
                 "      references FIRMA_AUTO (FA_ID)\n" +
                 "      on update restrict\n" +
                 "      on delete restrict;\n" +
                 "\n" +
-                "alter table SLIKA\n" +
+                "alter table " + SLIKA_TABLE + "\n" +
                 "   add constraint FK_SLIKA_RELATIONS_AUTOMOBI foreign key (AUTOMOBIL_ID)\n" +
                 "      references AUTOMOBIL (AUTOMOBIL_ID)\n" +
                 "      on update restrict\n" +
