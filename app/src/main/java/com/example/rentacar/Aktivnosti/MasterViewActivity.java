@@ -79,12 +79,14 @@ public class MasterViewActivity  extends AppCompatActivity {
             listaAutomobila.add(a);
         }*/
 
-        db.insertAutomobil("audi", "a5", 4, 5, 2000, "benzin", 150);
+        //db.insertAutomobil("audi", "a5", 4, 5, 2000, "benzin", 150);
 
-        //listaAutomobila = db.getAutomobili();
+        listaAutomobila = db.getAutomobili();
 
         automobilViewAdapter=new AutomobilViewAdapter(this,listaAutomobila); //samo za potrebe testiranja posto jos nemamo bazu
         listView.setAdapter(automobilViewAdapter);
+
+        //db.obrisiBazu(this);
 
     }
 

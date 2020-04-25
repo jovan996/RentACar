@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.rentacar.Modeli.AutomobilItemModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,28 +32,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createAutomobil = "CREATE TABLE " + AUTOMOBIL_TABLE + " (AUTOMOBIL_ID integer not null, AUTOMOBIL_MARKA varchar(50) not null," +
-                "AUTOMOBIL_MODEL varchar(50) not null, AUTOMOBIL_BROJ_SEDISTA integer not null, AUTOMOBIL_BROJ_VRATA integer not null," +
-                "AUTOMOBIL_KUBIKAZA integer not null, AUTOMOBIL_MOTOR VARCHAR(50), AUTOMOBIL_SNAGA_MOTORA integer not null," +
-                " constraint PK_AUTOMOBIL primary key (AUTOMOBIL_ID))";
+        String createAutomobil = "CREATE TABLE " + AUTOMOBIL_TABLE + " (AUTOMOBIL_ID integer PRIMARY KEY AUTOINCREMENT not null, AUTOMOBIL_MARKA varchar(50) not null," +
+                "AUTOMOBIL_MODEL varchar(50) not null, AUTOMOBIL_BROJ_SJEDISTA integer not null, AUTOMOBIL_BROJ_VRATA integer not null," +
+                "AUTOMOBIL_KUBIKAZA integer not null, AUTOMOBIL_MOTOR VARCHAR(50), AUTOMOBIL_SNAGA_MOTORA integer not null);";
 
         String createIndexAutomobil = "create unique index AUTOMOBIL_PK on " + AUTOMOBIL_TABLE + " (\n" +
                 "AUTOMOBIL_ID ASC);";
 
-        String createKorisnik =  "CREATE TABLE " + KORISNIK_TABLE + " (KORISNIK_ID integer AUTOINCREMENT not null, KORISNIK_IME varchar(50) not null," +
+        String createKorisnik =  "CREATE TABLE " + KORISNIK_TABLE + " (KORISNIK_ID integer PRIMARY KEY AUTOINCREMENT not null, KORISNIK_IME varchar(50) not null," +
                 "   KORISNIK_PREZIME     varchar(50)                    not null,\n" +
                 "   KORISNIK_EMAIL       varchar(50)                    not null,\n" +
                 "   KORISNIK_BR_TEL      varchar(20)                    not null,\n" +
                 "   KORISNIK_JMBG        varchar(13)                    not null,\n" +
                 "   KORISNIK_LOZINKA     varchar(100)                   not null,\n" +
-                "   KORISNIK_SALT        varchar(50)                    not null,\n" +
-                "   constraint PK_KORISNIK primary key (KORISNIK_ID)\n" +
-                ")";
+                "   KORISNIK_SALT        varchar(50)                    not null\n" +
+                ");";
 
         String createIndexKorisnik = "create unique index KORISNIK_PK on " + KORISNIK_TABLE + " (\n" +
                 "KORISNIK_ID ASC);";
 
-        String createFirma = "CREATE TABLE " + FIRMA_TABLE + "(FIRMA_ID integer not null,\n" +
+        String createFirma = "CREATE TABLE " + FIRMA_TABLE + "(FIRMA_ID integer PRIMARY KEY AUTOINCREMENT not null,\n" +
                 "   FIRMA_IME            varchar(50)                    not null,\n" +
                 "   FIRMA_PIB            varchar(30)                    not null,\n" +
                 "   FIRMA_OPIS           text                   not null,\n" +
@@ -60,26 +60,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "   FIRMA_EMAIL          varchar(50)                    not null,\n" +
                 "   FIRMA_BROJ_TELEFONA  varchar(20)                    not null,\n" +
                 "   FIRMA_LAT            float                          not null,\n" +
-                "   FIRMA_LONG           float                          not null,\n" +
-                "   constraint PK_FIRMA primary key (FIRMA_ID)\n" +
-                ")";
+                "   FIRMA_LONG           float                          not null\n" +
+                ");";
 
         String createIndexFirma = "create unique index FIRMA_PK on " + FIRMA_TABLE + " (\n" +
                 "FIRMA_ID ASC\n" +
                 ");";
 
-        String createSlika =  "CREATE TABLE " + SLIKA_TABLE + "(SLIKA_ID integer not null,\n" +
-                "   AUTOMOBIL_ID         integer                        not null,\n" +
-                "   SLIKA_PUTANJA        text                  not null,\n" +
-                "   constraint PK_SLIKA primary key (SLIKA_ID)\n" +
-                ")";
+        String createSlika =  "CREATE TABLE " + SLIKA_TABLE + "(SLIKA_ID integer PRIMARY KEY AUTOINCREMENT not null,\n" +
+                "   AUTOMOBIL_ID integer not null,\n" +
+                "   SLIKA_PUTANJA text not null,\n" +
+                "CONSTRAINT fk_automobil\n" +
+                "    FOREIGN KEY (AUTOMOBIL_ID)\n" +
+                "    REFERENCES " + AUTOMOBIL_TABLE + "(AUTOMOBIL_ID));";
 
         String createIndexSlika = "create unique index SLIKA_PK on " + SLIKA_TABLE + " (\n" +
                 "SLIKA_ID ASC\n" +
                 ");";
 
         String createFirmaAutomobil = "CREATE TABLE " + FIRMA_AUTOMOBIL_TABLE + "(\n" +
-                "   FA_ID                integer                        not null,\n" +
+                "   FA_ID                integer PRIMARY KEY AUTOINCREMENT                      not null,\n" +
                 "   AUTOMOBIL_ID         integer                        not null,\n" +
                 "   FIRMA_ID             integer                        not null,\n" +
                 "   POLISA_OSIGURANJA    integer                        not null,\n" +
@@ -88,34 +88,41 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "   BOJA                 varchar(20)                    not null,\n" +
                 "   GODISTE              integer                        not null,\n" +
                 "   KILOMETRAZA          integer                        not null,\n" +
-                "   constraint PK_FIRMA_AUTO primary key (FA_ID)\n" +
-                ")";
+                " FOREIGN KEY (AUTOMOBIL_ID)\n" +
+                " REFERENCES " + AUTOMOBIL_TABLE + "(AUTOMOBIL_ID)," +
+                "FOREIGN KEY (FIRMA_ID)\n" +
+                "REFERENCES " + FIRMA_TABLE + "(FIRMA_ID));";
 
         String createIndexFirmaAutomobil = "create unique index FIRMA_AUTO_PK on " + FIRMA_AUTOMOBIL_TABLE + " (\n" +
                 "FA_ID ASC\n" +
                 ");";
 
         String createEvidencija = "CREATE TABLE " + EVIDENCIJA_TABLE + "(\n" +
-                "   EVIDENCIJA_ID        integer                        not null,\n" +
+                "   EVIDENCIJA_ID        integer PRIMARY KEY AUTOINCREMENT                       not null,\n" +
                 "   KORISNIK_ID          integer                        not null,\n" +
                 "   AUTOMOBIL_ID         integer                        not null,\n" +
                 "   EVIDENCIJA_DATUM     date                           not null,\n" +
                 "   DATUM_UZIMANJA       date                           not null,\n" +
                 "   DATUM_VRACANJA       date                           not null,\n" +
-                "   constraint PK_EVIDENCIJA primary key (EVIDENCIJA_ID)\n" +
-                ")";
+                "   FOREIGN KEY (KORISNIK_ID)\n" +
+                "   REFERENCES " + KORISNIK_TABLE + "(KORISNIK_ID)," +
+                "   FOREIGN KEY (AUTOMOBIL_ID)\n" +
+                "   REFERENCES \" + AUTOMOBIL_TABLE + \"(AUTOMOBIL_ID));";
 
         String createIndexEvidencija = "create unique index EVIDENCIJA_PK on " + EVIDENCIJA_TABLE + " (\n" +
                 "EVIDENCIJA_ID ASC\n" +
                 ");";
 
         String createKomentar = "CREATE TABLE " + KOMENTAR_TABLE + "(\n" +
-                "   KOMENTAR_ID          integer                        not null,\n" +
+                "   KOMENTAR_ID          integer PRIMARY KEY AUTOINCREMENT                        not null,\n" +
                 "   KORISNIK_ID          integer                        not null,\n" +
                 "   FA_ID                integer                        not null,\n" +
                 "   KOMENTAR_NASLOV      varchar(100)                   not null,\n" +
                 "   KOMENTAR_TEKST       text                   not null,\n" +
-                "   constraint PK_KOMENTAR primary key (KOMENTAR_ID)\n" +
+                "   FOREIGN KEY (KORISNIK_ID)\n" +
+                "   REFERENCES " + KORISNIK_TABLE + "(KORISNIK_ID)," +
+                "   FOREIGN KEY (FA_ID)\n" +
+                "   REFERENCES " + FIRMA_AUTOMOBIL_TABLE + "(FA_ID)" +
                 ");\n";
 
         String createIndexKOmentar = "create unique index KOMENTAR_PK on " + KOMENTAR_TABLE + " (\n" +
@@ -123,23 +130,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ");";
 
         String createOcjena = "CREATE TABLE " + OCJENA_TABLE + "(\n" +
-                "   OCJENA_ID             integer                       not null,\n" +
+                "   OCJENA_ID             integer PRIMARY KEY AUTOINCREMENT                      not null,\n" +
                 "   KORISNIK_ID          integer                        not null,\n" +
                 "   FA_ID                integer                        not null,\n" +
                 "   OCJENA_BROJ           integer                       not null,\n" +
-                "   constraint PK_OCJENA primary key (OCJENA_ID)\n" +
-                ")";
+                "   FOREIGN KEY (KORISNIK_ID)\n" +
+                "   REFERENCES " + KORISNIK_TABLE + "(KORISNIK_ID)," +
+                "   FOREIGN KEY (FA_ID)\n" +
+                "   REFERENCES " + FIRMA_AUTOMOBIL_TABLE + "(FA_ID)" +
+                ");\n";
 
         String createIndexOcjena = "create unique index OCJENA_PK on " + OCJENA_TABLE + " (\n" +
                 "OCJENA_ID ASC\n" +
                 ");";
 
         String createOmiljeni = "CREATE TABLE " + OMILJENI_TABLE + "(\n" +
-                "   OMILJENI_ID          integer                        not null,\n" +
+                "   OMILJENI_ID          integer PRIMARY KEY AUTOINCREMENT                       not null,\n" +
                 "   KORISNIK_ID          integer                        not null,\n" +
                 "   FA_ID                integer                        not null,\n" +
-                "   constraint PK_OMILJENI primary key (OMILJENI_ID)\n" +
-                ")";
+                "   FOREIGN KEY (KORISNIK_ID)\n" +
+                "   REFERENCES " + KORISNIK_TABLE + "(KORISNIK_ID)," +
+                "   FOREIGN KEY (FA_ID)\n" +
+                "   REFERENCES " + FIRMA_AUTOMOBIL_TABLE + "(FA_ID)" +
+                ");\n";
 
         String relationship1 = "create index RELATIONSHIP_1_FK on " + EVIDENCIJA_TABLE + " (\n" +
                 "KORISNIK_ID ASC\n" +
@@ -189,74 +202,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "OMILJENI_ID ASC\n" +
                 ");";
 
-        String alterTables = "alter table " + EVIDENCIJA_TABLE + "\n" +
-                "  add constraint FK_EVIDENCI_RELATIONS_KORISNIK foreign key (KORISNIK_ID)\n" +
-                "      references KORISNIK (KORISNIK_ID)\n" +
-                "      on update restrict\n" +
-                "      on delete restrict;\n" +
-                "\n" +
-                "alter table " + EVIDENCIJA_TABLE + "\n" +
-                "   add constraint FK_EVIDENCI_RELATIONS_AUTOMOBI foreign key (AUTOMOBIL_ID)\n" +
-                "      references AUTOMOBIL (AUTOMOBIL_ID)\n" +
-                "      on update restrict\n" +
-                "      on delete restrict;\n" +
-                "\n" +
-                "alter table " + FIRMA_AUTOMOBIL_TABLE + "\n" +
-                "   add constraint FK_FIRMA_AU_RELATIONS_AUTOMOBI foreign key (AUTOMOBIL_ID)\n" +
-                "      references AUTOMOBIL (AUTOMOBIL_ID)\n" +
-                "      on update restrict\n" +
-                "      on delete restrict;\n" +
-                "\n" +
-                "alter table " + FIRMA_AUTOMOBIL_TABLE + "\n" +
-                "   add constraint FK_FIRMA_AU_RELATIONS_FIRMA foreign key (FIRMA_ID)\n" +
-                "      references FIRMA (FIRMA_ID)\n" +
-                "      on update restrict\n" +
-                "      on delete restrict;\n" +
-                "\n" +
-                "alter table " + KOMENTAR_TABLE + "\n" +
-                "   add constraint FK_KOMENTAR_RELATIONS_KORISNIK foreign key (KORISNIK_ID)\n" +
-                "      references KORISNIK (KORISNIK_ID)\n" +
-                "      on update restrict\n" +
-                "      on delete restrict;\n" +
-                "\n" +
-                "alter table " + KOMENTAR_TABLE + "\n" +
-                "   add constraint FK_KOMENTAR_RELATIONS_FIRMA_AU foreign key (FA_ID)\n" +
-                "      references FIRMA_AUTO (FA_ID)\n" +
-                "      on update restrict\n" +
-                "      on delete restrict;\n" +
-                "\n" +
-                "alter table " + OCJENA_TABLE + "\n" +
-                "   add constraint FK_OCJENA_RELATIONS_KORISNIK foreign key (KORISNIK_ID)\n" +
-                "      references KORISNIK (KORISNIK_ID)\n" +
-                "      on update restrict\n" +
-                "      on delete restrict;\n" +
-                "\n" +
-                "alter table " + OCJENA_TABLE + "\n" +
-                "   add constraint FK_OCJENA_RELATIONS_FIRMA_AU foreign key (FA_ID)\n" +
-                "      references FIRMA_AUTO (FA_ID)\n" +
-                "      on update restrict\n" +
-                "      on delete restrict;\n" +
-                "\n" +
-                "alter table " + OMILJENI_TABLE + "\n" +
-                "   add constraint FK_OMILJENI_RELATIONS_KORISNIK foreign key (KORISNIK_ID)\n" +
-                "      references KORISNIK (KORISNIK_ID)\n" +
-                "      on update restrict\n" +
-                "      on delete restrict;\n" +
-                "\n" +
-                "alter table " + OMILJENI_TABLE + "\n" +
-                "   add constraint FK_OMILJENI_RELATIONS_FIRMA_AU foreign key (FA_ID)\n" +
-                "      references FIRMA_AUTO (FA_ID)\n" +
-                "      on update restrict\n" +
-                "      on delete restrict;\n" +
-                "\n" +
-                "alter table " + SLIKA_TABLE + "\n" +
-                "   add constraint FK_SLIKA_RELATIONS_AUTOMOBI foreign key (AUTOMOBIL_ID)\n" +
-                "      references AUTOMOBIL (AUTOMOBIL_ID)\n" +
-                "      on update restrict\n" +
-                "      on delete restrict;";
-
         db.execSQL(createAutomobil);
-        /*db.execSQL(createIndexAutomobil);
+        db.execSQL(createIndexAutomobil);
         db.execSQL(createEvidencija);
         db.execSQL(createIndexEvidencija);
         db.execSQL(relationship1);
@@ -284,49 +231,58 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(createSlika);
         db.execSQL(createIndexSlika);
         db.execSQL(relationship5);
-        db.execSQL(alterTables);*/
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + AUTOMOBIL_TABLE);
-        /*db.execSQL("DROP TABLE IF EXISTS " + KORISNIK_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + KORISNIK_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + FIRMA_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + FIRMA_AUTOMOBIL_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + KOMENTAR_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + OCJENA_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + OMILJENI_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + EVIDENCIJA_TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + SLIKA_TABLE);*/
+        db.execSQL("DROP TABLE IF EXISTS " + SLIKA_TABLE);
         onCreate(db);
     }
 
-    public boolean insertAutomobil(String marka, String model, int brojSedista, int brojVrata, int kubikaza, String motor, int snaga) {
+    /*public boolean insertAutomobil(String marka, String model, int brojSedista, int brojVrata, int kubikaza, String motor, int snaga) {
         SQLiteDatabase sqLiteDb = this.getWritableDatabase();
 
         ContentValues vrednosti = new ContentValues();
         vrednosti.put("AUTOMOBIL_MARKA", marka);
         vrednosti.put("AUTOMOBIL_MODEL", model);
-        vrednosti.put("AUTOMOBIL_BROJ_SEDISTA", brojSedista);
+        vrednosti.put("AUTOMOBIL_BROJ_SJEDISTA", brojSedista);
         vrednosti.put("AUTOMOBIL_BROJ_VRATA", brojVrata);
         vrednosti.put("AUTOMOBIL_KUBIKAZA", kubikaza);
         vrednosti.put("AUTOMOBIL_MOTOR", motor);
-        vrednosti.put("AUTOMOBIL_SNAGA_MOTOR", snaga);
+        vrednosti.put("AUTOMOBIL_SNAGA_MOTORA", snaga);
 
         sqLiteDb.insert(AUTOMOBIL_TABLE, null, vrednosti);
         return true;
-    }
+    }*/
 
-    public ArrayList<String> getAutomobili() {
+    public ArrayList<AutomobilItemModel> getAutomobili() {
         SQLiteDatabase sqLiteDb = this.getReadableDatabase();
-        ArrayList<String> listaAutomobila = new ArrayList<>();
-        Cursor cursor = sqLiteDb.rawQuery("SELECT * FROM " + AUTOMOBIL_TABLE, null);
+        ArrayList<AutomobilItemModel> listaAutomobila = new ArrayList<>();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT * FROM " + AUTOMOBIL_TABLE + " as a INNER JOIN " + FIRMA_AUTOMOBIL_TABLE +
+                "as fa ON a.AUTOMOBIL_ID = fa.AUTOMOBIL_ID INNER JOIN " + SLIKA_TABLE + " as s ON a.AUTOMOBIL_ID = s.AUTOMOBIL_ID WHERE fa.STATUS = 0", null);
         cursor.moveToFirst();
         while(cursor.isAfterLast()) {
-            listaAutomobila.add(cursor.getString(cursor.getColumnIndex("AUTOMOBIL_MARKA")));
+            int id = cursor.getInt(cursor.getColumnIndex("FA_ID"));
+            String marka = cursor.getString(cursor.getColumnIndex("AUTOMOBIL_MARKA"));
+            String model = cursor.getString(cursor.getColumnIndex("AUTOMOBIL_MODEL"));
+            String slikaPutanja = cursor.getString(cursor.getColumnIndex("SLIKA_PUTANJA"));
+            int cijenaPoDanu = cursor.getInt(cursor.getColumnIndex("CENA_PO_DANU"));
+            listaAutomobila.add(new AutomobilItemModel(id, marka, model, cijenaPoDanu, slikaPutanja));
             cursor.moveToNext();
         }
         return listaAutomobila;
+    }
+
+    public void obrisiBazu(Context context) {
+        context.deleteDatabase(DATABASE_NAME);
     }
 
 }
