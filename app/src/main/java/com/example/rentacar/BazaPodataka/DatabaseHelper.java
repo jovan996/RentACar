@@ -267,7 +267,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDb = this.getReadableDatabase();
         ArrayList<AutomobilItemModel> listaAutomobila = new ArrayList<>();
         Cursor cursor = sqLiteDb.rawQuery("SELECT * FROM " + AUTOMOBIL_TABLE + " as a INNER JOIN " + FIRMA_AUTOMOBIL_TABLE +
-                "as fa ON a.AUTOMOBIL_ID = fa.AUTOMOBIL_ID INNER JOIN " + SLIKA_TABLE + " as s ON a.AUTOMOBIL_ID = s.AUTOMOBIL_ID WHERE fa.STATUS = 0", null);
+                " as fa ON a.AUTOMOBIL_ID = fa.AUTOMOBIL_ID INNER JOIN " + SLIKA_TABLE + " as s ON a.AUTOMOBIL_ID = s.AUTOMOBIL_ID WHERE fa.STATUS = 0", null);
         cursor.moveToFirst();
         while(cursor.isAfterLast()) {
             int id = cursor.getInt(cursor.getColumnIndex("FA_ID"));
