@@ -120,7 +120,7 @@ public class AutomobilViewAdapter extends BaseAdapter implements Filterable {
             holder=(ViewHolder)convertView.getTag();
         }
         holder.naslov.setText(listaModel.get(position).getMarka()+ " " +listaModel.get(position).getModel());
-        holder.detalji.setText(Integer.toString(listaModel.get(position).getCijenaPoDanu()));
+        holder.detalji.setText("Cijena: " + Integer.toString(listaModel.get(position).getCijenaPoDanu()) + "€/dan");
         String putanjaId = listaModel.get(position).getSlikaPutanja().replace("R.drawable.", "");
         int id = context.getResources().getIdentifier(putanjaId, "drawable", context.getPackageName());
         holder.slika.setImageResource(id);
@@ -130,8 +130,7 @@ public class AutomobilViewAdapter extends BaseAdapter implements Filterable {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailViewActivity.class);
-                intent.putExtra("naslov", listaModel.get(position).getMarka() + listaModel.get(position).getModel());
-                intent.putExtra("detalji", listaModel.get(position).getCijenaPoDanu());
+                intent.putExtra("id", listaModel.get(position).getFaId());
                 context.startActivity(intent);
             }
         });

@@ -1,5 +1,6 @@
 package com.example.rentacar.Aktivnosti;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import com.example.rentacar.R;
 import com.example.rentacar.utils.DrawerUtil;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,6 +57,8 @@ public class MasterViewActivity  extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         db = new DatabaseHelper(this);
+        SQLiteDatabase database = db.getWritableDatabase();
+        //SQLiteDatabase database = db.getReadableDatabase();
 
         /*ButterKnife.bind(this);
 
@@ -81,7 +85,7 @@ public class MasterViewActivity  extends AppCompatActivity {
 
         //db.insertAutomobil("audi", "a5", 4, 5, 2000, "benzin", 150);
 
-        //listaAutomobila = db.getAutomobili();
+        listaAutomobila = db.getAutomobili();
 
         automobilViewAdapter=new AutomobilViewAdapter(this,listaAutomobila); //samo za potrebe testiranja posto jos nemamo bazu
         listView.setAdapter(automobilViewAdapter);

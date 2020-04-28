@@ -1,21 +1,20 @@
 package com.example.rentacar.BazaPodataka;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import androidx.annotation.Nullable;
+import android.nfc.Tag;
+import android.util.Log;
 
 import com.example.rentacar.Modeli.AutomobilItemModel;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "rentacar.db";
+    private static final String DATABASE_NAME = "rentcar.db";
     private static final String AUTOMOBIL_TABLE = "automobil";
     private static final String KORISNIK_TABLE = "korisnik";
     private static final String FIRMA_TABLE = "firma";
@@ -32,6 +31,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+
         String createAutomobil = "CREATE TABLE " + AUTOMOBIL_TABLE + " (AUTOMOBIL_ID integer PRIMARY KEY AUTOINCREMENT not null, AUTOMOBIL_MARKA varchar(50) not null," +
                 "AUTOMOBIL_MODEL varchar(50) not null, AUTOMOBIL_BROJ_SJEDISTA integer not null, AUTOMOBIL_BROJ_VRATA integer not null," +
                 "AUTOMOBIL_KUBIKAZA integer not null, AUTOMOBIL_MOTOR VARCHAR(50), AUTOMOBIL_SNAGA_MOTORA integer not null);";
@@ -68,11 +69,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ");";
 
         String createSlika =  "CREATE TABLE " + SLIKA_TABLE + "(SLIKA_ID integer PRIMARY KEY AUTOINCREMENT not null,\n" +
-                "   AUTOMOBIL_ID integer not null,\n" +
+                "   FA_ID integer not null,\n" +
                 "   SLIKA_PUTANJA text not null,\n" +
-                "CONSTRAINT fk_automobil\n" +
-                "    FOREIGN KEY (AUTOMOBIL_ID)\n" +
-                "    REFERENCES " + AUTOMOBIL_TABLE + "(AUTOMOBIL_ID));";
+                "CONSTRAINT fk_fa\n" +
+                "    FOREIGN KEY (FA_ID)\n" +
+                "    REFERENCES " + FIRMA_AUTOMOBIL_TABLE + "(FA_ID));"; //promijeniti auto -> firma_auto
 
         String createIndexSlika = "create unique index SLIKA_PK on " + SLIKA_TABLE + " (\n" +
                 "SLIKA_ID ASC\n" +
@@ -107,7 +108,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "   FOREIGN KEY (KORISNIK_ID)\n" +
                 "   REFERENCES " + KORISNIK_TABLE + "(KORISNIK_ID)," +
                 "   FOREIGN KEY (AUTOMOBIL_ID)\n" +
-                "   REFERENCES \" + AUTOMOBIL_TABLE + \"(AUTOMOBIL_ID));";
+                "   REFERENCES " + AUTOMOBIL_TABLE + "(AUTOMOBIL_ID));";
 
         String createIndexEvidencija = "create unique index EVIDENCIJA_PK on " + EVIDENCIJA_TABLE + " (\n" +
                 "EVIDENCIJA_ID ASC\n" +
@@ -154,6 +155,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "   REFERENCES " + FIRMA_AUTOMOBIL_TABLE + "(FA_ID)" +
                 ");\n";
 
+        String createIndexOmiljeni = "create unique index OMILJENI_PK on " + OMILJENI_TABLE + " (\n" +
+                "OMILJENI_ID ASC\n" +
+                ");";
+
         String relationship1 = "create index RELATIONSHIP_1_FK on " + EVIDENCIJA_TABLE + " (\n" +
                 "KORISNIK_ID ASC\n" +
                 ");";
@@ -169,10 +174,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String relationship4 = "create index RELATIONSHIP_4_FK on " + FIRMA_AUTOMOBIL_TABLE + " (\n" +
                 "FIRMA_ID ASC\n" +
                 ");";
-
-        String relationship5 = "create index RELATIONSHIP_5_FK on " + SLIKA_TABLE + " (\n" +
-                "AUTOMOBIL_ID ASC\n" +
-                ");\n";
 
         String relationship6 = "create index RELATIONSHIP_6_FK on " + KOMENTAR_TABLE + " (\n" +
                 "KORISNIK_ID ASC\n" +
@@ -198,9 +199,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "FA_ID ASC\n" +
                 ");";
 
-        String createIndexOmiljeni = "create unique index OMILJENI_PK on " + OMILJENI_TABLE + " (\n" +
-                "OMILJENI_ID ASC\n" +
-                ");";
+        String relationship5 = "create index RELATIONSHIP_5_FK on " + SLIKA_TABLE + " (\n" +
+                "FA_ID ASC\n" + //promeni fa_id
+                ");\n";
+
 
         db.execSQL(createAutomobil);
         db.execSQL(createIndexAutomobil);
@@ -266,19 +268,60 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<AutomobilItemModel> getAutomobili() {
         SQLiteDatabase sqLiteDb = this.getReadableDatabase();
         ArrayList<AutomobilItemModel> listaAutomobila = new ArrayList<>();
-        Cursor cursor = sqLiteDb.rawQuery("SELECT * FROM " + AUTOMOBIL_TABLE + " as a INNER JOIN " + FIRMA_AUTOMOBIL_TABLE +
-                " as fa ON a.AUTOMOBIL_ID = fa.AUTOMOBIL_ID INNER JOIN " + SLIKA_TABLE + " as s ON a.AUTOMOBIL_ID = s.AUTOMOBIL_ID WHERE fa.STATUS = 0", null);
-        cursor.moveToFirst();
-        while(cursor.isAfterLast()) {
-            int id = cursor.getInt(cursor.getColumnIndex("FA_ID"));
-            String marka = cursor.getString(cursor.getColumnIndex("AUTOMOBIL_MARKA"));
-            String model = cursor.getString(cursor.getColumnIndex("AUTOMOBIL_MODEL"));
-            String slikaPutanja = cursor.getString(cursor.getColumnIndex("SLIKA_PUTANJA"));
-            int cijenaPoDanu = cursor.getInt(cursor.getColumnIndex("CENA_PO_DANU"));
-            listaAutomobila.add(new AutomobilItemModel(id, marka, model, cijenaPoDanu, slikaPutanja));
-            cursor.moveToNext();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT * FROM " + AUTOMOBIL_TABLE + " as a INNER JOIN " + FIRMA_AUTOMOBIL_TABLE + " as fa ON a.AUTOMOBIL_ID = fa.AUTOMOBIL_ID" +
+                " INNER JOIN " + SLIKA_TABLE + " as s ON fa.FA_ID = s.FA_ID WHERE fa.STATUS = 0;", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(cursor.getColumnIndex("FA_ID"));
+                String marka = cursor.getString(cursor.getColumnIndex("AUTOMOBIL_MARKA"));
+                String model = cursor.getString(cursor.getColumnIndex("AUTOMOBIL_MODEL"));
+                String slikaPutanja = cursor.getString(cursor.getColumnIndex("SLIKA_PUTANJA"));
+                int cijenaPoDanu = cursor.getInt(cursor.getColumnIndex("CENA_PO_DANU"));
+                listaAutomobila.add(new AutomobilItemModel(id, marka, model, cijenaPoDanu, slikaPutanja));
+            } while (cursor.moveToNext());
         }
+
         return listaAutomobila;
+    }
+
+    public ArrayList<String> getDetailSlike(int id) {
+        SQLiteDatabase sqLiteDb = this.getReadableDatabase();
+        ArrayList<String> listaSlika = new ArrayList<>();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT SLIKA_PUTANJA FROM " + FIRMA_AUTOMOBIL_TABLE + " as fa INNER JOIN "
+                + SLIKA_TABLE + " as s ON fa.FA_ID = s.FA_ID WHERE fa.FA_ID = " + id + ";", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                listaSlika.add(cursor.getString(cursor.getColumnIndex("SLIKA_PUTANJA")));
+            } while (cursor.moveToNext());
+        }
+
+        return listaSlika;
+    }
+
+    public HashMap<String, String> getDetails(int id) {
+        SQLiteDatabase sqLiteDb = this.getReadableDatabase();
+        HashMap<String, String> podaci = new HashMap<>();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT * FROM " + FIRMA_AUTOMOBIL_TABLE + " as fa INNER JOIN "
+                + AUTOMOBIL_TABLE + " as a ON fa.AUTOMOBIL_ID = a.AUTOMOBIL_ID WHERE fa.FA_ID = " + id + ";", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                podaci.put("naslov", cursor.getString(cursor.getColumnIndex("AUTOMOBIL_MARKA")) + " " + cursor.getString(cursor.getColumnIndex("AUTOMOBIL_MODEL")));
+                podaci.put("broj_sjedista", cursor.getString(cursor.getColumnIndex("AUTOMOBIL_BROJ_SJEDISTA")));
+                podaci.put("broj_vrata", cursor.getString(cursor.getColumnIndex("AUTOMOBIL_BROJ_VRATA")));
+                podaci.put("broj_kubikaza", cursor.getString(cursor.getColumnIndex("AUTOMOBIL_KUBIKAZA")));
+                podaci.put("tip_motora", cursor.getString(cursor.getColumnIndex("AUTOMOBIL_MOTORA")));
+                podaci.put("snaga_motora", cursor.getString(cursor.getColumnIndex("AUTOMOBIL_SNAGA_MOTORA")));
+                podaci.put("boja", cursor.getString(cursor.getColumnIndex("BOJA")));
+                podaci.put("godiste", cursor.getString(cursor.getColumnIndex("GODISTE")));
+                podaci.put("kilometraza", cursor.getString(cursor.getColumnIndex("KILOMETRAZA")));
+                podaci.put("cijena", cursor.getString(cursor.getColumnIndex("CENA_PO_DANU")));
+            } while (cursor.moveToNext());
+        }
+
+        return podaci;
     }
 
     public void obrisiBazu(Context context) {
