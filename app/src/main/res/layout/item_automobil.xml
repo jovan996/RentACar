@@ -45,6 +45,7 @@
             android:layout_height="30dp"
             android:text="@string/prikazi_detalje"
             android:layout_marginBottom="10dp"
+            android:layout_marginRight="7dp"
             android:padding="6dp"
             android:textSize="10sp"
             android:background="@color/svijetloPlava2">

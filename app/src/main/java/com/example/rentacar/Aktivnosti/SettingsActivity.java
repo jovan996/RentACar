@@ -7,10 +7,14 @@ import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.rentacar.R;
+
+import butterknife.BindView;
 
 
 public class SettingsActivity extends AppCompatActivity {
@@ -18,6 +22,9 @@ public class SettingsActivity extends AppCompatActivity {
     private Switch promjenaTeme;
 
     private TextView detaljiAplikacije;
+
+
+    public Toolbar toolBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +34,10 @@ public class SettingsActivity extends AppCompatActivity {
         /*ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Podesavanja");*/
+
+        toolBar = (Toolbar) findViewById(R.id.settingsToolbar);
+        toolBar.setTitle(R.string.podesavanja);
+        setSupportActionBar(toolBar);
 
         promjenaTeme = (Switch) findViewById(R.id.settingPromijeniTemu);
     }

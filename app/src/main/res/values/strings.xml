@@ -81,4 +81,10 @@
     <string name="manage_player">meni</string>
     <string name="tournament">RentACar</string>
     <string name="detalji_automobila">Detalji automobila</string>
+    <string name="pogledajte_detalje_aplikacije">Pogledajte detalje aplikacije</string>
+    <string name="o_aplikaciji">O aplikaciji</string>
+    <string name="velicina_slova">Velicina slova</string>
+    <string name="jezik">Jezik</string>
+    <string name="promijenite_temu_aplikacije">Promijenite temu aplikacije</string>
+    <string name="tema">Tema</string>
 </resources>

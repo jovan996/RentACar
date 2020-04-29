@@ -6,10 +6,14 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.rentacar.R;
+
+import butterknife.BindView;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -23,6 +27,10 @@ public class AboutActivity extends AppCompatActivity {
 
     private ListView appDozvole;
 
+    @Nullable
+    @BindView(R.id.aboutToolbar)
+    public Toolbar toolBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +39,10 @@ public class AboutActivity extends AppCompatActivity {
         /*ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("O aplikaciji");*/
+
+        toolBar = (Toolbar) findViewById(R.id.aboutToolbar);
+        toolBar.setTitle("O aplikaciji");
+        setSupportActionBar(toolBar);
 
         appVerzija= (TextView) findViewById(R.id.brojVerzije);
         datumInstalacije = (TextView) findViewById(R.id.appDatumInstalacije);

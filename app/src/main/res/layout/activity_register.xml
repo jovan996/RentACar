@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="40dp"
-                android:layout_marginTop="10dp"
+
                 android:ems="10">
             </EditText>
 
@@ -54,8 +54,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginRight="40dp">
             </EditText>
 
             <TextView
@@ -75,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="40dp"
-                android:layout_marginTop="10dp"
+
                 android:ems="10">
             </EditText>
 
@@ -96,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="40dp"
-                android:layout_marginTop="10dp"
+
                 android:ems="10"
                 android:inputType="textPassword">
             </EditText>
@@ -118,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="40dp"
-                android:layout_marginTop="10dp"
+
                 android:ems="10">
             </EditText>
 
@@ -139,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="40dp"
-                android:layout_marginTop="10dp"
+
                 android:ems="10">
             </EditText>
 
@@ -168,13 +167,13 @@
             <Button
                 android:id="@+id/registracija"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:text="@string/registruj_se"
                 android:layout_gravity="right"
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
-                android:padding="7dp"
+                android:padding="6dp"
                 android:background="@color/svijetloPlava2">
             </Button>
 

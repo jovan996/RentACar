@@ -5,8 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp"
     tools:context=".Aktivnosti.RentActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/rentToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,7 +20,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/rentNaslov"
@@ -169,7 +175,8 @@
                 android:padding="10dp"
                 android:text="Iznajmi"
                 android:textSize="18sp"
-                android:layout_gravity="right"/>
+                android:layout_gravity="right"
+                android:background="@color/svijetloPlava2"/>
 
         </LinearLayout>
 

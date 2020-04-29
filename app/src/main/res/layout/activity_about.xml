@@ -5,8 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp"
+
     tools:context=".Aktivnosti.AboutActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/aboutToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"/>
 
     <TextView
         android:id="@+id/appIme"
@@ -14,6 +20,8 @@
         android:layout_height="wrap_content"
         android:text="@string/rentacar_verzija_naslov"
         android:textSize="22sp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="20dp"
         android:textStyle="bold"/>
 
     <TextView
@@ -21,6 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/verzija_1_0_0"
+        android:layout_marginLeft="20dp"
         android:textSize="14sp"
         />
 
@@ -31,6 +40,7 @@
         android:layout_marginTop="10dp"
         android:text="@string/datum_instalacije"
         android:textSize="22sp"
+        android:layout_marginLeft="20dp"
         android:textStyle="bold"/>
 
     <TextView
@@ -38,6 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/broj_datum_instalacije"
+        android:layout_marginLeft="20dp"
         android:textSize="14sp"
         />
 
@@ -48,6 +59,7 @@
         android:layout_marginTop="10dp"
         android:text="@string/memorija_naslov"
         android:textSize="22sp"
+        android:layout_marginLeft="20dp"
         android:textStyle="bold"/>
 
     <TextView
@@ -55,6 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/memorija_vrijednost"
+        android:layout_marginLeft="20dp"
         android:textSize="14sp"
         />
 
@@ -64,6 +77,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/dozvole_naslov"
+        android:layout_marginLeft="20dp"
         android:textSize="22sp"
         android:textStyle="bold"/>
 
@@ -72,6 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/baterija"
+        android:layout_marginLeft="20dp"
         android:textSize="14sp"
         />
 
@@ -80,6 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/pristup_memoriji"
+        android:layout_marginLeft="20dp"
         android:textSize="14sp"
         />
 

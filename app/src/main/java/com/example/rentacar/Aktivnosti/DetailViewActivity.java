@@ -92,7 +92,7 @@ public class DetailViewActivity extends AppCompatActivity {
     private Date[] datumi;
 
     @Nullable
-    @BindView(R.id.drawerToolbar)
+    @BindView(R.id.detailToolbar)
     public Toolbar toolbar;
 
     @Override

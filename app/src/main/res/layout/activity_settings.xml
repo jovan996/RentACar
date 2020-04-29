@@ -5,14 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp"
     tools:context=".Aktivnosti.SettingsActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/settingsToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -24,7 +31,7 @@
                 android:id="@+id/settingTemaNaslov"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tema"
+                android:text="@string/tema"
                 android:textSize="22sp"
                 android:textStyle="bold"/>
 
@@ -32,7 +39,7 @@
                 android:id="@+id/settingsTemaDetalji"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Promijenite temu aplikacije"
+                android:text="@string/promijenite_temu_aplikacije"
                 android:textSize="16sp"/>
 
         </LinearLayout>
@@ -57,45 +64,49 @@
         android:id="@+id/izaberiJezikNaslov"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Jezik"
+        android:text="@string/jezik"
         android:textSize="22sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"/>
 
     <Spinner
         android:id="@+id/izaberiJezik"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:spinnerMode="dropdown"
-        />
+        android:layout_marginLeft="20dp"/>
 
     <TextView
         android:id="@+id/velicinaSlovaNaslov"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Velicina slova"
+        android:text="@string/velicina_slova"
         android:textSize="22sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"/>
 
     <Spinner
         android:id="@+id/velicinaSlova"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:spinnerMode="dropdown"
-        />
+        android:layout_marginLeft="20dp"/>
 
     <TextView
     android:id="@+id/oAplikacijiNaslov"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="O aplikaciji"
+    android:text="@string/o_aplikaciji"
     android:textSize="22sp"
-    android:textStyle="bold"/>
+    android:textStyle="bold"
+        android:layout_marginLeft="20dp"/>
 
     <TextView
         android:id="@+id/oAplikacijiDetalji"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pogledajte detalje aplikacije"
-        android:textSize="16sp"/>
+        android:text="@string/pogledajte_detalje_aplikacije"
+        android:textSize="16sp"
+        android:layout_marginLeft="20dp"/>
 
 </LinearLayout>

@@ -2,6 +2,8 @@ package com.example.rentacar.Aktivnosti;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.rentacar.R;
 
 import android.content.Intent;
@@ -37,6 +39,8 @@ public class RentActivity extends AppCompatActivity {
 
     private Button iznajmiAutomobil;
 
+    public Toolbar toolBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,10 @@ public class RentActivity extends AppCompatActivity {
         /*ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Iznajmljivanje automobila");*/
+
+        toolBar = (Toolbar) findViewById(R.id.rentToolbar);
+        toolBar.setTitle("Iznajmljivanje automobila");
+        setSupportActionBar(toolBar);
 
         rentNaslov =(TextView) findViewById(R.id.rentNaslov);
         brojSjedista = (TextView) findViewById(R.id.iznajmiBrojSedista);
