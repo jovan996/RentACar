@@ -79,5 +79,6 @@
 
     <string name="home_second">Home Second</string>
     <string name="manage_player">meni</string>
-    <string name="tournament">tournament</string>
+    <string name="tournament">RentACar</string>
+    <string name="detalji_automobila">Detalji automobila</string>
 </resources>

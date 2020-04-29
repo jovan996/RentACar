@@ -20,6 +20,7 @@ import com.example.rentacar.R;
 import com.example.rentacar.utils.DrawerUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -47,9 +48,9 @@ public class MasterViewActivity  extends AppCompatActivity {
 
     private DatabaseHelper db;
 
-    /*@Nullable
+    @Nullable
     @BindView(R.id.drawerToolbar)
-    public Toolbar toolBar;*/
+    public Toolbar toolBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,17 +59,15 @@ public class MasterViewActivity  extends AppCompatActivity {
 
         db = new DatabaseHelper(this);
         SQLiteDatabase database = db.getWritableDatabase();
+
         //SQLiteDatabase database = db.getReadableDatabase();
 
-        /*ButterKnife.bind(this);
+        ButterKnife.bind(this);
 
         toolBar.setTitle(getResources().getString(R.string.tournament));
         setSupportActionBar(toolBar);
 
-        DrawerUtil.getDrawer(this, toolBar);*/
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Lista automobila");
+        DrawerUtil.getDrawer(this, toolBar);
 
         listView=(ListView) findViewById(R.id.listaAutomobila);
 
@@ -87,7 +86,7 @@ public class MasterViewActivity  extends AppCompatActivity {
 
         listaAutomobila = db.getAutomobili();
 
-        automobilViewAdapter=new AutomobilViewAdapter(this,listaAutomobila); //samo za potrebe testiranja posto jos nemamo bazu
+        automobilViewAdapter=new AutomobilViewAdapter(this,listaAutomobila);
         listView.setAdapter(automobilViewAdapter);
 
         //db.obrisiBazu(this);
@@ -116,10 +115,6 @@ public class MasterViewActivity  extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.podesavanja) {
-            // napisati kod za pokretanje nove aktivnosti
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 

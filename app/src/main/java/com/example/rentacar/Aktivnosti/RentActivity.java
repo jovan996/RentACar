@@ -42,9 +42,9 @@ public class RentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rent);
 
-        ActionBar actionBar = getSupportActionBar();
+        /*ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Iznajmljivanje automobila");
+        actionBar.setTitle("Iznajmljivanje automobila");*/
 
         rentNaslov =(TextView) findViewById(R.id.rentNaslov);
         brojSjedista = (TextView) findViewById(R.id.iznajmiBrojSedista);

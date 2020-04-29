@@ -28,9 +28,9 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
-        ActionBar actionBar = getSupportActionBar();
+        /*ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("O aplikaciji");
+        actionBar.setTitle("O aplikaciji");*/
 
         appVerzija= (TextView) findViewById(R.id.brojVerzije);
         datumInstalacije = (TextView) findViewById(R.id.appDatumInstalacije);

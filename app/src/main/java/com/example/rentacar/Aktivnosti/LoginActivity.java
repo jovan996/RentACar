@@ -26,9 +26,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        ActionBar actionBar = getSupportActionBar();
+        /*ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Prijava");
+        actionBar.setTitle("Prijava");*/
 
         email = (EditText) findViewById(R.id.emailUnosLogin);
         lozinka = (EditText) findViewById(R.id.lozinkaUnosLogin);

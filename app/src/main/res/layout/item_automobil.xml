@@ -13,7 +13,8 @@
         android:layout_height="100dp"
         android:src="@drawable/ic_launcher_background"
         android:gravity="center"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp">
     </ImageView>
 
     <LinearLayout
@@ -41,10 +42,10 @@
         <Button
             android:id="@+id/prikaziDetalje"
             android:layout_width="wrap_content"
-            android:layout_height="36dp"
+            android:layout_height="30dp"
             android:text="@string/prikazi_detalje"
-
-            android:padding="7dp"
+            android:layout_marginBottom="10dp"
+            android:padding="6dp"
             android:textSize="10sp"
             android:background="@color/svijetloPlava2">
         </Button>

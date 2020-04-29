@@ -7,6 +7,11 @@
     android:orientation="vertical"
     tools:context=".Aktivnosti.DetailViewActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/detailToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

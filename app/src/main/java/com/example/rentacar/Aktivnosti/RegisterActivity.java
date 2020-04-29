@@ -34,9 +34,9 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        ActionBar actionBar = getSupportActionBar();
+        /*ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Registracija");
+        actionBar.setTitle("Registracija");*/
 
         ime = (EditText) findViewById(R.id.imeUnos);
         prezime = (EditText) findViewById(R.id.prezimeUnos);

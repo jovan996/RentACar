@@ -20,9 +20,9 @@ public class AutomobilItemModel {
         this.cijenaPoDanu=firmaAuto.getCijenaPoDanu();
     }
 
-    //ovaj ispod konstruktor je samo za potrebe tesiranja,kasnije nece trebati
-     public AutomobilItemModel(int i, String marka, String model, int cijenaPoDanu, String slika) {
-        this.faId=i;
+
+     public AutomobilItemModel(int id, String marka, String model, int cijenaPoDanu, String slika) {
+        this.faId=id;
         this.marka=marka;
         this.model=model;
         this.cijenaPoDanu=cijenaPoDanu;

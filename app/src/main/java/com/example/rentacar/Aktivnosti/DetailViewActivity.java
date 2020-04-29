@@ -12,17 +12,22 @@ import android.widget.MultiAutoCompleteTextView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.rentacar.Adapteri.AutomobilViewAdapter;
 import com.example.rentacar.Adapteri.KomentarViewAdapter;
 import com.example.rentacar.Modeli.KomentarItemModel;
 import com.example.rentacar.R;
+import com.example.rentacar.utils.DrawerUtil;
 import com.google.android.gms.maps.MapView;
 
 import java.util.ArrayList;
 import java.util.Date;
+
+import butterknife.BindView;
 
 public class DetailViewActivity extends AppCompatActivity {
 
@@ -86,13 +91,26 @@ public class DetailViewActivity extends AppCompatActivity {
 
     private Date[] datumi;
 
+    @Nullable
+    @BindView(R.id.drawerToolbar)
+    public Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_view);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        toolbar = (Toolbar) findViewById(R.id.detailToolbar);
+        toolbar.setTitle(R.string.detalji_automobila);
+        setSupportActionBar(toolbar);
+
+        /* ZA BACK DUGME */
+        /*if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }*/
+
+        DrawerUtil.getDrawer(this, toolbar);
 
         listView = (ListView)findViewById(R.id.detailViewKomentari);
         slika=(ImageView) findViewById(R.id.detailViewGlavnaSlika);
@@ -133,8 +151,6 @@ public class DetailViewActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String textNaslov = intent.getStringExtra("naslov");
         String textDetalji = intent.getStringExtra("detalji");
-
-        actionBar.setTitle("Detalji automobila");
 
         iznajmi = findViewById(R.id.detailViewIznajmiButton);
         iznajmi.setOnClickListener(new View.OnClickListener() {

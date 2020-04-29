@@ -24,9 +24,9 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        ActionBar actionBar = getSupportActionBar();
+        /*ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Podesavanja");
+        actionBar.setTitle("Podesavanja");*/
 
         promjenaTeme = (Switch) findViewById(R.id.settingPromijeniTemu);
     }

@@ -1,5 +1,6 @@
 package com.example.rentacar.BazaPodataka;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -312,7 +313,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 podaci.put("broj_sjedista", cursor.getString(cursor.getColumnIndex("AUTOMOBIL_BROJ_SJEDISTA")));
                 podaci.put("broj_vrata", cursor.getString(cursor.getColumnIndex("AUTOMOBIL_BROJ_VRATA")));
                 podaci.put("broj_kubikaza", cursor.getString(cursor.getColumnIndex("AUTOMOBIL_KUBIKAZA")));
-                podaci.put("tip_motora", cursor.getString(cursor.getColumnIndex("AUTOMOBIL_MOTORA")));
+                podaci.put("tip_motora", cursor.getString(cursor.getColumnIndex("AUTOMOBIL_MOTOR")));
                 podaci.put("snaga_motora", cursor.getString(cursor.getColumnIndex("AUTOMOBIL_SNAGA_MOTORA")));
                 podaci.put("boja", cursor.getString(cursor.getColumnIndex("BOJA")));
                 podaci.put("godiste", cursor.getString(cursor.getColumnIndex("GODISTE")));
@@ -322,6 +323,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         return podaci;
+    }
+
+    public void dodajOmiljeni(int korisnikId, int faId) {
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        ContentValues vrednosti = new ContentValues();
+        vrednosti.put("KORISNIK_ID", korisnikId);
+        vrednosti.put("FA_ID", faId);
+        sqLiteDb.insert(OMILJENI_TABLE, null, vrednosti);
+    }
+
+    public void obrisiOmiljeni(int korisnikId, int faId) {
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        sqLiteDb.delete(OMILJENI_TABLE, "KORISNIK_ID=" + korisnikId + " AND FA_ID=" + faId, null);
+    }
+
+    //implementirati
+    public boolean registracija() {
+        return true;
+    }
+
+    public boolean prijava(String email, String lozinka) {
+        return true;
     }
 
     public void obrisiBazu(Context context) {
