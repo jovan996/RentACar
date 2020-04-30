@@ -9,6 +9,8 @@ import android.nfc.Tag;
 import android.util.Log;
 
 import com.example.rentacar.Modeli.AutomobilItemModel;
+import com.example.rentacar.utils.Hesiranje;
+import com.example.rentacar.utils.Validation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -338,13 +340,101 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDb.delete(OMILJENI_TABLE, "KORISNIK_ID=" + korisnikId + " AND FA_ID=" + faId, null);
     }
 
-    //implementirati
-    public boolean registracija() {
-        return true;
+    public String registracija(String ime, String prezime, String email, String brojTelefona, String jmbg, String lozinka) {
+        //if (ime.trim() == "" || prezime.trim() == "" || email.trim() == "" || brojTelefona.trim() == "" || jmbg.trim() == "" ||  lozinka.trim() == "") return "Niste unijeli jedan od podataka!";
+
+        boolean status = true;
+        StringBuilder sb = new StringBuilder();
+        sb.append("");
+
+        if (!Validation.valIme(ime)) {
+            status = false;
+            sb.append(" Ime");
+        }
+
+        if (!Validation.valPrezime(prezime)) {
+            status = false;
+            sb.append(sb.toString() == "" ? " Prezime" : " ,Prezime");
+        }
+
+        if (!Validation.valEmail(email)) {
+            status = false;
+            sb.append(sb.toString() == "" ? " Email" : " ,Email");
+        }
+
+        if (!Validation.valBrojTelefona(brojTelefona)) {
+            status = false;
+            sb.append(sb.toString() == "" ? " Broj telefona" : " ,Broj telefona");
+        }
+
+        if (!Validation.valJMBG(jmbg)) {
+            status = false;
+            sb.append(sb.toString() == "" ? " JMBG" : " ,JMBG");
+        }
+
+        if (!Validation.valLozinka(lozinka)) {
+            status = false;
+            sb.append(sb.toString() == "" ? " Lozinka" : " ,Lozinka");
+        }
+
+        if (status) {
+            SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+            String salt = Hesiranje.generateSalt(32);
+            ContentValues vrednosti = new ContentValues();
+            vrednosti.put("KORISNIK_IME", ime);
+            vrednosti.put("KORISNIK_PREZIME", prezime);
+            vrednosti.put("KORISNIK_EMAIL", email);
+            vrednosti.put("KORISNIK_BR_TEL", brojTelefona);
+            vrednosti.put("KORISNIK_JMBG", jmbg);
+            vrednosti.put("KORISNIK_LOZINKA", Hesiranje.getSHA(lozinka + salt));
+            vrednosti.put("KORISNIK_SALT", salt);
+            sqLiteDb.insert(KORISNIK_TABLE, null, vrednosti);
+            return "";
+        }
+        return sb.toString();
     }
 
-    public boolean prijava(String email, String lozinka) {
-        return true;
+    public String prijava(String email, String lozinka) {
+
+        SQLiteDatabase sqLiteDb = this.getReadableDatabase();
+
+        boolean status = true;
+        StringBuilder sb = new StringBuilder();
+        sb.append("");
+
+        if (!Validation.valEmail(email)) {
+            status = false;
+            sb.append(sb.toString() == "" ? " Email" : " ,Email");
+        }
+
+        if (!Validation.valLozinka(lozinka)) {
+            status = false;
+            sb.append(sb.toString() == "" ? " Lozinka" : " ,Lozinka");
+        }
+
+        if (status) {
+
+            Cursor cursor = sqLiteDb.rawQuery("SELECT KORISNIK_EMAIL, KORISNIK_LOZINKA, KORISNIK_SALT " +
+                    "FROM " + KORISNIK_TABLE + " WHERE KORISNIK_EMAIL = '" + email + "'", null);
+
+            if (cursor.getCount() == 1) {
+                String sacuvanaLozinka = cursor.getString(cursor.getColumnIndex("KORISNIK_LOZINKA"));
+                String salt = cursor.getString(cursor.getColumnIndex("KORISNIK_SALT"));
+
+                if (Hesiranje.getSHA(lozinka + salt).equals(sacuvanaLozinka)) {
+                    return "";
+                }
+
+                else {
+                    return "Email ili lozinka nisu validni!";
+                }
+
+            }
+
+            return "Email ili lozinka nisu validni!";
+        }
+
+        return sb.toString();
     }
 
     public void obrisiBazu(Context context) {

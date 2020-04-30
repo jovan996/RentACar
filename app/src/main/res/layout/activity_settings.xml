@@ -67,7 +67,8 @@
         android:text="@string/jezik"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:layout_marginLeft="20dp"/>
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"/>
 
     <Spinner
         android:id="@+id/izaberiJezik"
@@ -76,6 +77,12 @@
         android:spinnerMode="dropdown"
         android:layout_marginLeft="20dp"/>
 
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
     <TextView
         android:id="@+id/velicinaSlovaNaslov"
         android:layout_width="wrap_content"
@@ -83,7 +90,8 @@
         android:text="@string/velicina_slova"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:layout_marginLeft="20dp"/>
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"/>
 
     <Spinner
         android:id="@+id/velicinaSlova"
@@ -92,6 +100,12 @@
         android:spinnerMode="dropdown"
         android:layout_marginLeft="20dp"/>
 
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
     <TextView
     android:id="@+id/oAplikacijiNaslov"
     android:layout_width="wrap_content"
@@ -99,7 +113,8 @@
     android:text="@string/o_aplikaciji"
     android:textSize="22sp"
     android:textStyle="bold"
-        android:layout_marginLeft="20dp"/>
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/oAplikacijiDetalji"

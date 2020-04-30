@@ -3,13 +3,20 @@ package com.example.rentacar.Aktivnosti;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import com.example.rentacar.BazaPodataka.DatabaseHelper;
 import com.example.rentacar.R;
+
+import butterknife.BindView;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -21,6 +28,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button submitLogin;
 
+    private TextView greske;
+
+    private DatabaseHelper db;
+
+    //@Nullable
+    //@BindView(R.id.detailToolbar)
+    public Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +45,24 @@ public class LoginActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Prijava");*/
 
+        toolbar = (Toolbar) findViewById(R.id.loginToolbar);
+        toolbar.setTitle("Prijava");
+        setSupportActionBar(toolbar);
+
         email = (EditText) findViewById(R.id.emailUnosLogin);
         lozinka = (EditText) findViewById(R.id.lozinkaUnosLogin);
         submitLogin = (Button) findViewById(R.id.prijava);
+        greske = (TextView) findViewById(R.id.loginGreske);
+
+        submitLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String emailText = email.getText().toString();
+                String lozinkaText = lozinka.getText().toString();
+
+
+            }
+        });
 
     }
 

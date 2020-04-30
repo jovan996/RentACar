@@ -7,6 +7,12 @@
     tools:context=".Aktivnosti.RegisterActivity"
     android:orientation="vertical">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/registerToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -163,6 +169,14 @@
                     android:textSize="16sp"/>
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/regGreske"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/colorRed"
+                android:layout_marginLeft="20dp"/>
 
             <Button
                 android:id="@+id/registracija"

@@ -5,17 +5,30 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 public class Session {
+
+    private static Session instanca;
     private SharedPreferences prefs;
 
-    public Session(Context cntx) {
+    private Session(Context cntx) {
         prefs = PreferenceManager.getDefaultSharedPreferences(cntx);
     }
 
+    public static Session getInstance(Context cntx) {
+        if (instanca == null) {
+            instanca = new Session(cntx);
+        }
+        return instanca;
+    }
+
     public void setKorisnikId(String id) {
-        prefs.edit().putString("id", id).commit();
+        prefs.edit().putString("korisnik_id", id).commit();
     }
 
     public String getKorisnikId() {
-        return prefs.getString("id","");
+        return prefs.getString("korisnik_id","");
+    }
+
+    public void removeKorisnikId() {
+        prefs.edit().remove("korisnik_id");
     }
 }
