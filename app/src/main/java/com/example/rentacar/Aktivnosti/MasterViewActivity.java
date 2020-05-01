@@ -2,6 +2,7 @@ package com.example.rentacar.Aktivnosti;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -18,8 +19,10 @@ import com.example.rentacar.BazaPodataka.DatabaseHelper;
 import com.example.rentacar.Modeli.AutomobilItemModel;
 import com.example.rentacar.R;
 import com.example.rentacar.utils.DrawerUtil;
+import com.example.rentacar.utils.Session;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -48,6 +51,8 @@ public class MasterViewActivity  extends AppCompatActivity {
 
     private DatabaseHelper db;
 
+    private Session sesija;
+
     @Nullable
     @BindView(R.id.drawerToolbar)
     public Toolbar toolBar;
@@ -60,6 +65,8 @@ public class MasterViewActivity  extends AppCompatActivity {
         db = new DatabaseHelper(this);
         SQLiteDatabase database = db.getWritableDatabase();
 
+        db.iznajmiAutomobil(1, 1, new Date(), new Date(), new Date());
+
         //SQLiteDatabase database = db.getReadableDatabase();
 
         ButterKnife.bind(this);
@@ -67,7 +74,9 @@ public class MasterViewActivity  extends AppCompatActivity {
         toolBar.setTitle(getResources().getString(R.string.tournament));
         setSupportActionBar(toolBar);
 
-        DrawerUtil.getDrawer(this, toolBar);
+        sesija = Session.getInstance(this);
+
+        DrawerUtil.getDrawer(this, toolBar, sesija);
 
         listView=(ListView) findViewById(R.id.listaAutomobila);
 

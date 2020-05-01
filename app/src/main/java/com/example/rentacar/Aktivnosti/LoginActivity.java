@@ -2,6 +2,7 @@ package com.example.rentacar.Aktivnosti;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -49,6 +50,8 @@ public class LoginActivity extends AppCompatActivity {
         toolbar.setTitle("Prijava");
         setSupportActionBar(toolbar);
 
+        db = new DatabaseHelper(this);
+
         email = (EditText) findViewById(R.id.emailUnosLogin);
         lozinka = (EditText) findViewById(R.id.lozinkaUnosLogin);
         submitLogin = (Button) findViewById(R.id.prijava);
@@ -60,7 +63,15 @@ public class LoginActivity extends AppCompatActivity {
                 String emailText = email.getText().toString();
                 String lozinkaText = lozinka.getText().toString();
 
+                String rezultat = db.prijava(emailText, lozinkaText);
 
+                if (rezultat.length() == 0) {
+                    Intent intent = new Intent(LoginActivity.this, MasterViewActivity.class);
+                    LoginActivity.this.startActivity(intent);
+                }
+                else {
+                    greske.setText("Greske:" + rezultat);
+                }
             }
         });
 

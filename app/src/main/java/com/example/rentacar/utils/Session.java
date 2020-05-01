@@ -28,7 +28,10 @@ public class Session {
         return prefs.getString("korisnik_id","");
     }
 
-    public void removeKorisnikId() {
-        prefs.edit().remove("korisnik_id");
+    public void destroy() {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove("korisnik_id");
+        editor.apply();
     }
+
 }

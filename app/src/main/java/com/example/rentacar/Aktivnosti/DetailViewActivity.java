@@ -22,6 +22,7 @@ import com.example.rentacar.Adapteri.KomentarViewAdapter;
 import com.example.rentacar.Modeli.KomentarItemModel;
 import com.example.rentacar.R;
 import com.example.rentacar.utils.DrawerUtil;
+import com.example.rentacar.utils.Session;
 import com.google.android.gms.maps.MapView;
 
 import java.util.ArrayList;
@@ -91,6 +92,8 @@ public class DetailViewActivity extends AppCompatActivity {
 
     private Date[] datumi;
 
+    private Session sesija;
+
     @Nullable
     @BindView(R.id.detailToolbar)
     public Toolbar toolbar;
@@ -110,7 +113,9 @@ public class DetailViewActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }*/
 
-        DrawerUtil.getDrawer(this, toolbar);
+        Session sesija = Session.getInstance(this);
+
+        DrawerUtil.getDrawer(this, toolbar, sesija);
 
         listView = (ListView)findViewById(R.id.detailViewKomentari);
         slika=(ImageView) findViewById(R.id.detailViewGlavnaSlika);
