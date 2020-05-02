@@ -94,5 +94,5 @@
         <item>English</item>
     </string-array>
     <string name="language_prompt">Izaberite jezik</string>
-
+    <string name="odjava">Odjava</string>
 </resources>

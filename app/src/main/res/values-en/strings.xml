@@ -94,5 +94,5 @@
         <item>English</item>
     </string-array>
     <string name="language_prompt">Choose a language</string>
-
+    <string name="odjava">Log out</string>
 </resources>
