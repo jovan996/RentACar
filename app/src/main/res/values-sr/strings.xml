@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">RentACar</string>
     <string name="naslov">Naslov</string>
@@ -87,11 +88,11 @@
     <string name="jezik">Jezik</string>
     <string name="promijenite_temu_aplikacije">Promijenite temu aplikacije</string>
     <string name="tema">Tema</string>
+
     <string-array name="language_arrays">
         <item>Srpski</item>
         <item>English</item>
     </string-array>
     <string name="language_prompt">Izaberite jezik</string>
-
     <string name="odjava">Odjava</string>
 </resources>
