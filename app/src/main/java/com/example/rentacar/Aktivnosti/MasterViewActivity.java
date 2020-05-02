@@ -1,5 +1,7 @@
 package com.example.rentacar.Aktivnosti;
 
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,6 +24,7 @@ import com.example.rentacar.utils.DrawerUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,6 +58,7 @@ public class MasterViewActivity  extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LoadLocale();
         setContentView(R.layout.activity_main);
 
         db = new DatabaseHelper(this);
@@ -112,6 +116,21 @@ public class MasterViewActivity  extends AppCompatActivity {
         return true;
     }
 
+    public void LoadLocale(){
+        SharedPreferences prefs = getSharedPreferences("Settings", MODE_PRIVATE);
+        String language = prefs.getString("My_Lang", "");
+        setLocale(language);
+    }
+    private void setLocale(String sr) {
+        Locale locale = new Locale(sr);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+        editor.putString("My_Lang", sr);
+        editor.apply();
+    }
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
