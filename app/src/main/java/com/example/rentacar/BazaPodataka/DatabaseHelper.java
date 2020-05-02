@@ -10,9 +10,11 @@ import android.util.Log;
 
 import com.example.rentacar.Modeli.AutomobilItemModel;
 import com.example.rentacar.utils.Hesiranje;
+import com.example.rentacar.utils.Session;
 import com.example.rentacar.utils.Validation;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -28,8 +30,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String OCJENA_TABLE = "ocjena";
     private static final String OMILJENI_TABLE = "omiljeni";
 
+    private Context context;
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
+        this.context = context;
     }
 
     @Override
@@ -104,14 +109,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String createEvidencija = "CREATE TABLE " + EVIDENCIJA_TABLE + "(\n" +
                 "   EVIDENCIJA_ID        integer PRIMARY KEY AUTOINCREMENT                       not null,\n" +
                 "   KORISNIK_ID          integer                        not null,\n" +
-                "   AUTOMOBIL_ID         integer                        not null,\n" +
+                "   FA_ID         integer                        not null,\n" +
                 "   EVIDENCIJA_DATUM     date                           not null,\n" +
                 "   DATUM_UZIMANJA       date                           not null,\n" +
                 "   DATUM_VRACANJA       date                           not null,\n" +
                 "   FOREIGN KEY (KORISNIK_ID)\n" +
                 "   REFERENCES " + KORISNIK_TABLE + "(KORISNIK_ID)," +
-                "   FOREIGN KEY (AUTOMOBIL_ID)\n" +
-                "   REFERENCES " + AUTOMOBIL_TABLE + "(AUTOMOBIL_ID));";
+                "   FOREIGN KEY (FA_ID)\n" +
+                "   REFERENCES " + FIRMA_AUTOMOBIL_TABLE + "(FA_ID));";
 
         String createIndexEvidencija = "create unique index EVIDENCIJA_PK on " + EVIDENCIJA_TABLE + " (\n" +
                 "EVIDENCIJA_ID ASC\n" +
@@ -167,7 +172,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ");";
 
         String relationship2 = "create index RELATIONSHIP_2_FK on " + EVIDENCIJA_TABLE + " (\n" +
-                "AUTOMOBIL_ID ASC\n" +
+                "FA_ID ASC\n" +
                 ");";
 
         String relationship3 = "create index RELATIONSHIP_3_FK on " + FIRMA_AUTOMOBIL_TABLE + " (\n" +
@@ -414,14 +419,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (status) {
 
-            Cursor cursor = sqLiteDb.rawQuery("SELECT KORISNIK_EMAIL, KORISNIK_LOZINKA, KORISNIK_SALT " +
+            Cursor cursor = sqLiteDb.rawQuery("SELECT KORISNIK_ID, KORISNIK_EMAIL, KORISNIK_LOZINKA, KORISNIK_SALT " +
                     "FROM " + KORISNIK_TABLE + " WHERE KORISNIK_EMAIL = '" + email + "'", null);
 
-            if (cursor.getCount() == 1) {
+            if (cursor.moveToFirst()) {
+                int id = cursor.getInt(cursor.getColumnIndex("KORISNIK_ID"));
                 String sacuvanaLozinka = cursor.getString(cursor.getColumnIndex("KORISNIK_LOZINKA"));
                 String salt = cursor.getString(cursor.getColumnIndex("KORISNIK_SALT"));
 
                 if (Hesiranje.getSHA(lozinka + salt).equals(sacuvanaLozinka)) {
+                    Session sesija = Session.getInstance(context);
+                    sesija.setKorisnikId(Integer.toString(id));
                     return "";
                 }
 
@@ -435,6 +443,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         return sb.toString();
+    }
+
+    public void iznajmiAutomobil(int korisnikId, int faId, Date evidencijaDatum, Date uzimanje, Date vracanje) {
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+
+        ContentValues vrednosti = new ContentValues();
+        vrednosti.put("KORISNIK_ID", korisnikId);
+        vrednosti.put("FA_ID", faId);
+        vrednosti.put("EVIDENCIJA_DATUM", evidencijaDatum.toString());
+        vrednosti.put("DATUM_UZIMANJA", uzimanje.toString());
+        vrednosti.put("DATUM_VRACANJA", vracanje.toString());
+
+        sqLiteDb.insert(EVIDENCIJA_TABLE, null, vrednosti);
     }
 
     public void obrisiBazu(Context context) {
