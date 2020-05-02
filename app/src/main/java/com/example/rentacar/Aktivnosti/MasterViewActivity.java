@@ -65,8 +65,6 @@ public class MasterViewActivity  extends AppCompatActivity {
         db = new DatabaseHelper(this);
         SQLiteDatabase database = db.getWritableDatabase();
 
-        db.iznajmiAutomobil(1, 1, new Date(), new Date(), new Date());
-
         //SQLiteDatabase database = db.getReadableDatabase();
 
         ButterKnife.bind(this);

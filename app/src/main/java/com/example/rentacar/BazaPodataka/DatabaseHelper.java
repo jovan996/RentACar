@@ -458,6 +458,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDb.insert(EVIDENCIJA_TABLE, null, vrednosti);
     }
 
+    public void setStatusAutomobil(int faId) {
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        sqLiteDb.execSQL("UPDATE " + FIRMA_AUTOMOBIL_TABLE + " SET STATUS = 1");
+    }
+
     public void obrisiBazu(Context context) {
         context.deleteDatabase(DATABASE_NAME);
     }
