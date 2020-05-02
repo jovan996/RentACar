@@ -1,5 +1,6 @@
 package com.example.rentacar.Aktivnosti;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +29,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
 
+import butterknife.BindView;
+
 public class RentActivity extends AppCompatActivity {
 
     private TextView rentNaslov;
@@ -54,8 +57,6 @@ public class RentActivity extends AppCompatActivity {
 
     private Button iznajmiAutomobil;
 
-    public Toolbar toolBar;
-
     private DatePicker datumUzimanja;
 
     private DatePicker datumVracanja;
@@ -63,6 +64,28 @@ public class RentActivity extends AppCompatActivity {
     private DatabaseHelper db;
 
     private Session sesija;
+
+    private TextView iznajmiBrojSedista;
+
+    private TextView iznajmiBrojVrata;
+
+    private TextView iznajmiKubikaza;
+
+    private TextView iznajmiTipMotor;
+
+    private TextView iznajmiSnagaMotora;
+
+    private TextView iznajmiBoja;
+
+    private TextView iznajmiGodiste;
+
+    private TextView iznajmiKilometraza;
+
+    private TextView iznajmiCijenaPoDanu;
+
+    @Nullable
+    @BindView(R.id.rentToolbar)
+    public Toolbar toolBar;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -101,16 +124,26 @@ public class RentActivity extends AppCompatActivity {
         datumUzimanja = (DatePicker) findViewById(R.id.rentDatumUzimanja);
         datumVracanja = (DatePicker) findViewById(R.id.rentDatumVracanja);
 
+        iznajmiBrojSedista = findViewById(R.id.iznajmiBrojSedista);
+        iznajmiBrojVrata = findViewById(R.id.iznajmiBrojVrata);
+        iznajmiBoja = findViewById(R.id.iznajmiBoja);
+        iznajmiGodiste=  findViewById(R.id.iznajmiGodiste);
+        iznajmiTipMotor =  findViewById(R.id.iznajmiTipMotor);
+        iznajmiSnagaMotora =  findViewById(R.id.iznajmiSnagaMotora);
+        iznajmiKilometraza =  findViewById(R.id.iznajmiKilometraza);
+        iznajmiKubikaza = findViewById(R.id.iznajmiKubikaza);
+        iznajmiCijenaPoDanu = findViewById(R.id.iznajmiCijenaPoDanu);
+
         rentNaslov.setText(podaci.get("naslov"));
-        brojSjedista.setText(podaci.get("broj_sjedista"));
-        brojVrata.setText(podaci.get("broj_vrata"));
-        kubikaza.setText(podaci.get("kubikaza") + "cm3");
-        tipMotora.setText(podaci.get("tip_motora"));
-        snagaMotora.setText(podaci.get("snaga_motora") + "kW");
-        boja.setText(podaci.get("boja"));
-        godiste.setText(podaci.get("godiste"));
-        kilometraza.setText(podaci.get("kilometraza") + "km");
-        cijenaPoDanu.setText(podaci.get("cijena") + "€/dan");
+        brojSjedista.setText(iznajmiBrojSedista.getText() + " " + podaci.get("broj_sjedista"));
+        brojVrata.setText(iznajmiBrojVrata.getText() + " " + podaci.get("broj_vrata"));
+        kubikaza.setText(iznajmiKubikaza.getText() + " " + podaci.get("broj_kubikaza") + " cm3");
+        tipMotora.setText(iznajmiTipMotor.getText() + " " + podaci.get("tip_motora"));
+        snagaMotora.setText(iznajmiSnagaMotora.getText() + " " + podaci.get("snaga_motora") + " kW");
+        boja.setText(iznajmiBoja.getText() + " " + podaci.get("boja"));
+        godiste.setText(iznajmiGodiste.getText() + " " + podaci.get("godiste"));
+        kilometraza.setText(iznajmiKilometraza.getText() + " " + podaci.get("kilometraza") + " km");
+        cijenaPoDanu.setText(iznajmiCijenaPoDanu.getText() + " " + podaci.get("cijena") + " €/dan");
 
         int cijena = Integer.parseInt(podaci.get("cijena"));
 
@@ -152,6 +185,7 @@ public class RentActivity extends AppCompatActivity {
                 }
 
                 db.iznajmiAutomobil(Integer.parseInt(sesija.getKorisnikId()), faId, datumEvidencije, datum1, datum2);
+                //db.setStatusAutomobil(faId);   samo podesiti u ovoj metodi da se promijeni status automobila u bazi
                 Toast.makeText(RentActivity.this,"Uspjesno ste iznajmili automobil!",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getApplicationContext(), MasterViewActivity.class);
                 startActivityForResult(intent, 0);
