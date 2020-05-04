@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.rentacar.R;
@@ -55,6 +57,19 @@ public class SettingsActivity extends AppCompatActivity {
 
         promjenaTeme = (Switch) findViewById(R.id.settingPromijeniTemu);
 
+//        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY);
+
+        promjenaTeme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                }
+            }
+        });
+
         initialDisplay = true;
         spinner = (Spinner) findViewById(R.id.izaberiJezik);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -64,8 +79,9 @@ public class SettingsActivity extends AppCompatActivity {
                     initialDisplay = false;
                 }else{
                     if(position == 0){
+                        Locale l =Locale.getDefault();
                         setLocale("sr");
-                        //recreate();
+//                        recreate();
                         finish();
                         overridePendingTransition( 0, 0);
                         startActivity(getIntent());
@@ -74,9 +90,10 @@ public class SettingsActivity extends AppCompatActivity {
                                 Toast.LENGTH_LONG).show();
 
                     }else if(position == 1){
+                        Locale l =Locale.getDefault();
 
                         setLocale("en");
-                        // recreate();
+//                         recreate();
                         finish();
                         overridePendingTransition( 0, 0);
                         startActivity(getIntent());
@@ -101,6 +118,7 @@ public class SettingsActivity extends AppCompatActivity {
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
         editor.putString("My_Lang", sr);
+        editor.putBoolean("update", true);
         editor.apply();
     }
 

@@ -2,8 +2,10 @@ package com.example.rentacar.utils;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.rentacar.Aktivnosti.LoginActivity;
@@ -28,7 +30,13 @@ public class DrawerUtil {
                 .withName(R.string.manage_player).withIcon(R.drawable.ic_menu_camera);
         PrimaryDrawerItem drawerItemManagePlayersTournaments = new PrimaryDrawerItem()
                 .withIdentifier(2).withName(R.string.tournament).withIcon(R.drawable.ic_menu_gallery);*/
-
+//        int textColor;
+//        int backgroundColor;
+//        switch (AppCompatDelegate.getDefaultNightMode()){
+//            case AppCompatDelegate.MODE_NIGHT_YES:
+//                backgroundColor= 121212;
+//
+//        }
         PrimaryDrawerItem drawerItemPocetna = new PrimaryDrawerItem().withIdentifier(1)
                 .withName(R.string.pocetna).withIcon(R.drawable.ic_home_black_24dp);
         PrimaryDrawerItem drawerItemPrijava = new PrimaryDrawerItem().withIdentifier(2)
@@ -84,6 +92,8 @@ public class DrawerUtil {
                             return true;
                         }
                     })
+                    .withSliderBackgroundColor(Color.LTGRAY)
+
                     .build();
         }
         else {
@@ -125,7 +135,9 @@ public class DrawerUtil {
                             return true;
                         }
                     })
+
                     .build();
+
         }
     }
 }
