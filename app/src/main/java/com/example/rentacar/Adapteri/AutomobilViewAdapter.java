@@ -130,7 +130,7 @@ public class AutomobilViewAdapter extends BaseAdapter implements Filterable {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailViewActivity.class);
-                intent.putExtra("id", listaModel.get(position).getFaId());
+                intent.putExtra("faId", listaModel.get(position).getFaId());
                 context.startActivity(intent);
             }
         });

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import com.example.rentacar.Aktivnosti.MasterViewActivity;
 
@@ -58,10 +60,30 @@ public class SettingsActivity extends AppCompatActivity {
         toolBar.setTitle(R.string.podesavanja);
         setSupportActionBar(toolBar);
 
+
         sesija = Session.getInstance(this);
         //DrawerUtil.getDrawer(this, toolBar, sesija);
 
+        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+
         promjenaTeme = (Switch) findViewById(R.id.settingPromijeniTemu);
+
+//        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY);
+
+        promjenaTeme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    editor.putInt("theme",AppCompatDelegate.MODE_NIGHT_NO);
+                    editor.apply();
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    editor.putInt("theme",AppCompatDelegate.MODE_NIGHT_YES);
+                    editor.apply();
+                }
+            }
+        });
 
         initialDisplay = true;
         spinner = (Spinner) findViewById(R.id.izaberiJezik);
@@ -72,8 +94,9 @@ public class SettingsActivity extends AppCompatActivity {
                     initialDisplay = false;
                 }else{
                     if(position == 0){
+                        Locale l =Locale.getDefault();
                         setLocale("sr");
-                        //recreate();
+//                        recreate();
                         finish();
                         overridePendingTransition( 0, 0);
                         startActivity(getIntent());
@@ -84,9 +107,10 @@ public class SettingsActivity extends AppCompatActivity {
 
 
                     }else if(position == 1){
+                        Locale l =Locale.getDefault();
 
                         setLocale("en");
-                        // recreate();
+//                         recreate();
                         finish();
                         overridePendingTransition( 0, 0);
                         startActivity(getIntent());
@@ -111,7 +135,11 @@ public class SettingsActivity extends AppCompatActivity {
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
         editor.putString("My_Lang", sr);
+
         editor.putBoolean("Update", true);
+
+        editor.putBoolean("update", true);
+
         editor.apply();
     }
 

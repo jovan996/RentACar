@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                     LoginActivity.this.startActivity(intent);
                 }
                 else {
-                    greske.setText("Greske:" + rezultat);
+                    greske.setText("Pogresan format:" + rezultat);
                 }
             }
         });

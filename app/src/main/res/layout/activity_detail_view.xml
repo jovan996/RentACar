@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/naslov_detalji"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="7dp"
                 android:layout_marginLeft="20dp"
                 android:textSize="29sp" />
 

@@ -94,4 +94,5 @@
     <string name="language_prompt">Izaberite jezik</string>
 
     <string name="odjava">Odjava</string>
+    <string name="marka_model">Marka model</string>
 </resources>

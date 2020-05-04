@@ -2,6 +2,7 @@ package com.example.rentacar.Aktivnosti;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import android.widget.ListView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -154,15 +156,21 @@ public class DetailViewActivity extends AppCompatActivity {
         listView.setAdapter(komentarViewAdapter);
 
         Intent intent = getIntent();
-        String textNaslov = intent.getStringExtra("naslov");
-        String textDetalji = intent.getStringExtra("detalji");
+        int id = intent.getIntExtra("faId",0);
+
 
         iznajmi = findViewById(R.id.detailViewIznajmiButton);
         iznajmi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), RentActivity.class);
-                startActivityForResult(intent, 0);
+                if (!sesija.getKorisnikId().equals("") && sesija.getKorisnikId()!=null) {
+                    Intent intent = new Intent(getApplicationContext(), RentActivity.class);
+                    intent.putExtra("faId", id);
+                    startActivityForResult(intent, 0);
+                }
+                else {
+                    Toast.makeText(DetailViewActivity.this,"Molimo vas da se prethodno ulogujete!",Toast.LENGTH_LONG).show();
+                }
             }
         });
 

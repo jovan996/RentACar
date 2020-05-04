@@ -13,6 +13,7 @@ import android.widget.SearchView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.ui.AppBarConfiguration;
 
@@ -69,14 +70,15 @@ public class MasterViewActivity  extends AppCompatActivity {
         db = new DatabaseHelper(this);
         SQLiteDatabase database = db.getWritableDatabase();
 
-        db.iznajmiAutomobil(1, 1, new Date(), new Date(), new Date());
-
         //SQLiteDatabase database = db.getReadableDatabase();
 
         ButterKnife.bind(this);
 
         toolBar.setTitle(getResources().getString(R.string.tournament));
         setSupportActionBar(toolBar);
+
+        SharedPreferences prefs = getSharedPreferences("Settings", MODE_PRIVATE);
+        AppCompatDelegate.setDefaultNightMode(prefs.getInt("theme",1));
 
         sesija = Session.getInstance(this);
 

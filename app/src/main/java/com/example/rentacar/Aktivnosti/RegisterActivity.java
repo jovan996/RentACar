@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -87,11 +88,11 @@ public class RegisterActivity extends AppCompatActivity {
                         RegisterActivity.this.startActivity(intent);
                     }
                     else {
-                        greske.setText("Greske:" + rezultat);
+                        greske.setText("Pogresan format:" + rezultat);
                     }
                 }
                 else {
-
+                    Toast.makeText(RegisterActivity.this,"Molim vas da prihvatite uslove koriscenja!",Toast.LENGTH_LONG).show();
                 }
 
             }
