@@ -30,23 +30,30 @@ public class DrawerUtil {
                 .withName(R.string.manage_player).withIcon(R.drawable.ic_menu_camera);
         PrimaryDrawerItem drawerItemManagePlayersTournaments = new PrimaryDrawerItem()
                 .withIdentifier(2).withName(R.string.tournament).withIcon(R.drawable.ic_menu_gallery);*/
-//        int textColor;
-//        int backgroundColor;
-//        switch (AppCompatDelegate.getDefaultNightMode()){
-//            case AppCompatDelegate.MODE_NIGHT_YES:
-//                backgroundColor= 121212;
-//
-//        }
+        int textColor = 0;
+        int backgroundColor = 0;
+        switch (AppCompatDelegate.getDefaultNightMode()){
+            case AppCompatDelegate.MODE_NIGHT_YES:
+                backgroundColor= 0xFF080808;
+                textColor= Color.LTGRAY;
+                break;
+            default:
+                backgroundColor= Color.WHITE;
+                textColor = Color.BLACK;
+                break;
+
+        }
+
         PrimaryDrawerItem drawerItemPocetna = new PrimaryDrawerItem().withIdentifier(1)
-                .withName(R.string.pocetna).withIcon(R.drawable.ic_home_black_24dp);
+                .withName(R.string.pocetna).withIcon(R.drawable.ic_home_black_24dp).withTextColor(textColor);
         PrimaryDrawerItem drawerItemPrijava = new PrimaryDrawerItem().withIdentifier(2)
-                .withName(R.string.prijava).withIcon(R.drawable.ic_account_circle_black_24dp);
+                .withName(R.string.prijava).withIcon(R.drawable.ic_account_circle_black_24dp).withTextColor(textColor);
         PrimaryDrawerItem drawerItemRegistracija = new PrimaryDrawerItem().withIdentifier(3)
-                .withName(R.string.registracija).withIcon(R.drawable.ic_account_box_black_24dp);
+                .withName(R.string.registracija).withIcon(R.drawable.ic_account_box_black_24dp).withTextColor(textColor);
         PrimaryDrawerItem drawerItemPodesavanja = new PrimaryDrawerItem().withIdentifier(4)
-                .withName(R.string.podesavanja).withIcon(R.drawable.ic_settings_black_24dp);
+                .withName(R.string.podesavanja).withIcon(R.drawable.ic_settings_black_24dp).withTextColor(textColor);
         PrimaryDrawerItem drawerItemOdjava = new PrimaryDrawerItem().withIdentifier(5)
-                .withName(R.string.odjava).withIcon(R.drawable.ic_subdirectory_arrow_right_black_24dp);
+                .withName(R.string.odjava).withIcon(R.drawable.ic_subdirectory_arrow_right_black_24dp).withTextColor(textColor);
 
         String id = sesija.getKorisnikId();
         if (id == null || id.equals("")) {
@@ -92,7 +99,7 @@ public class DrawerUtil {
                             return true;
                         }
                     })
-                    .withSliderBackgroundColor(Color.LTGRAY)
+                    .withSliderBackgroundColor(backgroundColor)
 
                     .build();
         }

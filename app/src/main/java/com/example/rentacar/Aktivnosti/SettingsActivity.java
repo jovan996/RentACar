@@ -55,6 +55,8 @@ public class SettingsActivity extends AppCompatActivity {
         toolBar.setTitle(R.string.podesavanja);
         setSupportActionBar(toolBar);
 
+        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+
         promjenaTeme = (Switch) findViewById(R.id.settingPromijeniTemu);
 
 //        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY);
@@ -64,8 +66,12 @@ public class SettingsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    editor.putInt("theme",AppCompatDelegate.MODE_NIGHT_NO);
+                    editor.apply();
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    editor.putInt("theme",AppCompatDelegate.MODE_NIGHT_YES);
+                    editor.apply();
                 }
             }
         });
