@@ -38,7 +38,7 @@ public class MasterViewActivity  extends AppCompatActivity {
 
     private AutomobilViewAdapter automobilViewAdapter;
 
-    private ArrayList<AutomobilItemModel> listaAutomobila=new ArrayList<>();
+    private ArrayList<AutomobilItemModel> listaAutomobila = new ArrayList<>();
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -82,7 +82,7 @@ public class MasterViewActivity  extends AppCompatActivity {
 
         DrawerUtil.getDrawer(this, toolBar, sesija);
 
-        listView=(ListView) findViewById(R.id.listaAutomobila);
+        listView = (ListView) findViewById(R.id.listaAutomobila);
 
         /*identifikatori=new int[]{1,2,3,4,5};                      //ovi nizovi su samo za potrebe testiranja kao i for petlja
         marke=new String[]{"audi","honda","mercedes","ferarri","citroen"};
@@ -99,7 +99,7 @@ public class MasterViewActivity  extends AppCompatActivity {
 
         listaAutomobila = db.getAutomobili();
 
-        automobilViewAdapter=new AutomobilViewAdapter(this,listaAutomobila);
+        automobilViewAdapter = new AutomobilViewAdapter(this, listaAutomobila);
         listView.setAdapter(automobilViewAdapter);
 
         //db.obrisiBazu(this);

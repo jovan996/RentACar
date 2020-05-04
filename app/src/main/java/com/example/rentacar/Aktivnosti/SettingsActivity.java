@@ -20,8 +20,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import com.example.rentacar.Aktivnosti.MasterViewActivity;
 
 import com.example.rentacar.R;
+import com.example.rentacar.utils.DrawerUtil;
+import com.example.rentacar.utils.Session;
 
 import java.util.Locale;
 
@@ -39,6 +42,8 @@ public class SettingsActivity extends AppCompatActivity {
     public Toolbar toolBar;
 
     private Boolean initialDisplay = true;
+
+    private Session sesija;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +57,9 @@ public class SettingsActivity extends AppCompatActivity {
         toolBar = (Toolbar) findViewById(R.id.settingsToolbar);
         toolBar.setTitle(R.string.podesavanja);
         setSupportActionBar(toolBar);
+
+        sesija = Session.getInstance(this);
+        //DrawerUtil.getDrawer(this, toolBar, sesija);
 
         promjenaTeme = (Switch) findViewById(R.id.settingPromijeniTemu);
 
@@ -72,6 +80,8 @@ public class SettingsActivity extends AppCompatActivity {
                         overridePendingTransition( 0, 0);
                         Toast.makeText(getApplicationContext(), "Srpski!",
                                 Toast.LENGTH_LONG).show();
+
+
 
                     }else if(position == 1){
 
@@ -101,6 +111,7 @@ public class SettingsActivity extends AppCompatActivity {
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
         editor.putString("My_Lang", sr);
+        editor.putBoolean("Update", true);
         editor.apply();
     }
 
@@ -110,7 +121,7 @@ public class SettingsActivity extends AppCompatActivity {
         setLocale(language);
     }
 
-    private void setSpinnerToLanguage() {
+    public void setSpinnerToLanguage() {
         spinner = (Spinner) findViewById(R.id.izaberiJezik);
         SharedPreferences prefs = getSharedPreferences("Settings", MODE_PRIVATE);
         String language = prefs.getString("My_Lang", "");
@@ -123,7 +134,9 @@ public class SettingsActivity extends AppCompatActivity {
                 int spinnerPosition = adapter.getPosition(compareValue);
                 spinner.setSelection(spinnerPosition);
             }
+
         }
+        //MasterViewActivity.update();
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

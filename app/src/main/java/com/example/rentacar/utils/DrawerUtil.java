@@ -20,6 +20,7 @@ import com.example.rentacar.Aktivnosti.MasterViewActivity;
 import com.example.rentacar.R;
 
 public class DrawerUtil {
+
     public static void getDrawer(final Activity activity, Toolbar toolbar, Session sesija) {
         //if you want to update the items at a later time it is recommended to keep it in a variable
         PrimaryDrawerItem drawerEmptyItem= new PrimaryDrawerItem().withIdentifier(0).withName("");
