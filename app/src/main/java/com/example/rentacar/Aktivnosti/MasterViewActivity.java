@@ -62,6 +62,21 @@ public class MasterViewActivity  extends AppCompatActivity {
     public Toolbar toolBar;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences prefs = getSharedPreferences("Settings", MODE_PRIVATE);
+        Boolean update = prefs.getBoolean("update", false);
+        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+
+        if (update) {
+            editor.putBoolean("update", false);
+            editor.apply();
+            recreate();
+        }
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LoadLocale();
