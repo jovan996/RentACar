@@ -169,7 +169,7 @@ public class DetailViewActivity extends AppCompatActivity {
                     startActivityForResult(intent, 0);
                 }
                 else {
-                    Toast.makeText(DetailViewActivity.this,"Molimo vas da se prethodno ulogujete!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(DetailViewActivity.this, R.string.poruka_mora_se_logovati,Toast.LENGTH_LONG).show();
                 }
             }
         });

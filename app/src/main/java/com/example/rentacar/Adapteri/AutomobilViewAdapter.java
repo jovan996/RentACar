@@ -1,5 +1,6 @@
 package com.example.rentacar.Adapteri;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -104,6 +105,7 @@ public class AutomobilViewAdapter extends BaseAdapter implements Filterable {
         return position;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
@@ -119,12 +121,14 @@ public class AutomobilViewAdapter extends BaseAdapter implements Filterable {
         }else{
             holder=(ViewHolder)convertView.getTag();
         }
+        String str = context.getResources().getString(R.string.cijena);
+        String str1 = context.getResources().getString(R.string.dan_d);
         holder.naslov.setText(listaModel.get(position).getMarka()+ " " +listaModel.get(position).getModel());
-        holder.detalji.setText("Cijena: " + Integer.toString(listaModel.get(position).getCijenaPoDanu()) + "€/dan");
+        holder.detalji.setText(str + Integer.toString(listaModel.get(position).getCijenaPoDanu()) + "€/" + str1);
         String putanjaId = listaModel.get(position).getSlikaPutanja().replace("R.drawable.", "");
         int id = context.getResources().getIdentifier(putanjaId, "drawable", context.getPackageName());
         holder.slika.setImageResource(id);
-        holder.dugme.setText("Prikazi detalje");
+        //holder.dugme.setText("@string/prikazi_detalje");
 
         holder.dugme.setOnClickListener(new View.OnClickListener() {
             @Override

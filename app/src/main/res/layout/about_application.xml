@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Aktivnosti.AboutAppActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/aboutAppToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"/>
+
+    <TextView
+        android:id="@+id/serijskiBrojNaslov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/serijski_broj_naslov"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/serijskiBroj"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/serijski_broj"
+        android:textSize="16sp"
+        android:layout_marginLeft="20dp"/>
+    <View
+        android:id="@+id/divider1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/verzijaAppNaslov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/verzija_app_naslov"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/verzijaApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/verzija_app"
+        android:textSize="16sp"
+        android:layout_marginLeft="20dp"/>
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/sertifikatNaslov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sertifikat_naslov"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/sertifikat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sertifikat_broj"
+        android:textSize="16sp"
+        android:layout_marginLeft="20dp"/>
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+    <TextView
+        android:id="@+id/garancijaNaslov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/garancija_naslov"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/garancija"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/garancija_broj"
+        android:textSize="16sp"
+        android:layout_marginLeft="20dp"/>
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <!--<TextView
+        android:id="@+id/serijskiBrojNaslov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/serijski_broj_naslov"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/serijskiBroj"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/serijski_broj"
+        android:textSize="16sp"
+        android:layout_marginLeft="20dp"/>
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />-->
+</LinearLayout>

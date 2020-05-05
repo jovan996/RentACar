@@ -94,7 +94,8 @@ public class DrawerUtil {
                     .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                         @Override
                         public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                            if (drawerItem.getIdentifier() == 1 && !(activity instanceof MasterViewActivity)) {
+                            if (drawerItem.getIdentifier() == 1) {
+                                /*&& !(activity instanceof MasterViewActivity)*/
                                 Intent intent = new Intent(activity, MasterViewActivity.class);
                                 view.getContext().startActivity(intent);
                             }
