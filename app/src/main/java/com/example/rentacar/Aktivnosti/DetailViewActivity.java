@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.MultiAutoCompleteTextView;
@@ -21,6 +22,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.rentacar.Adapteri.AutomobilViewAdapter;
 import com.example.rentacar.Adapteri.KomentarViewAdapter;
+import com.example.rentacar.BazaPodataka.DatabaseHelper;
 import com.example.rentacar.Modeli.KomentarItemModel;
 import com.example.rentacar.R;
 import com.example.rentacar.utils.DrawerUtil;
@@ -96,6 +98,10 @@ public class DetailViewActivity extends AppCompatActivity {
 
     private Session sesija;
 
+    private boolean flagOmiljeni;
+
+    private DatabaseHelper db;
+
     @Nullable
     @BindView(R.id.detailToolbar)
     public Toolbar toolbar;
@@ -116,8 +122,8 @@ public class DetailViewActivity extends AppCompatActivity {
         }*/
 
         Session sesija = Session.getInstance(this);
-
         DrawerUtil.getDrawer(this, toolbar, sesija);
+        db = new DatabaseHelper(this);
 
         listView = (ListView)findViewById(R.id.detailViewKomentari);
         slika=(ImageView) findViewById(R.id.detailViewGlavnaSlika);
@@ -142,6 +148,7 @@ public class DetailViewActivity extends AppCompatActivity {
         mapa= (MapView) findViewById(R.id.detailMapView);
         tekstKomentara = (MultiAutoCompleteTextView) findViewById(R.id.detailUnesiKomentar);
 
+
         imena = new String[]{"Marko", "Slavko", "Zivko"};                //ovi nizovi su samo za potrebe testiranja,svi ovi podaci ce se vuci iz baze
         prezimena = new String[]{"Petovic", "Minic", "Spajic"};
         tekstovi = new String[]{"Odlicna kola", "Krs", "Posto su?"};
@@ -158,6 +165,14 @@ public class DetailViewActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int id = intent.getIntExtra("faId",0);
 
+        if(!sesija.getKorisnikId().equals("") && sesija.getKorisnikId()!=null){
+            flagOmiljeni = db.daLiJeOmiljeni(Integer.parseInt(sesija.getKorisnikId()), id);
+
+            if(flagOmiljeni)
+                omiljeni.setChecked(true);
+            else
+                omiljeni.setChecked(false);
+        }
 
         iznajmi = findViewById(R.id.detailViewIznajmiButton);
         iznajmi.setOnClickListener(new View.OnClickListener() {
@@ -170,6 +185,27 @@ public class DetailViewActivity extends AppCompatActivity {
                 }
                 else {
                     Toast.makeText(DetailViewActivity.this, R.string.poruka_mora_se_logovati,Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        omiljeni.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if(isChecked){
+                    if (!sesija.getKorisnikId().equals("") && sesija.getKorisnikId()!=null) {
+                        db.dodajOmiljeni(Integer.parseInt(sesija.getKorisnikId()), id);
+                    }
+                    else {
+                        Toast.makeText(DetailViewActivity.this, R.string.poruka_mora_se_logovati,Toast.LENGTH_LONG).show();
+                        omiljeni.setChecked(false);
+                    }
+                }else{
+                    if (!sesija.getKorisnikId().equals("") && sesija.getKorisnikId()!=null) {
+                        db.obrisiOmiljeni(Integer.parseInt(sesija.getKorisnikId().toString()), id);
+                    }
                 }
             }
         });
