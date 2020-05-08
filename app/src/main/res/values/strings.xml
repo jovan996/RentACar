@@ -107,4 +107,5 @@
     <string name="cijena">Cijena</string>
 
     <string name="dan_d">dan</string>
+    <string name="poruka_niste_iznajmili">Niste ispunili uslove da ocijenite auto!</string>
 </resources>

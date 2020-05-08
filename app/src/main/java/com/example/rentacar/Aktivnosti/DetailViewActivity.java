@@ -173,6 +173,8 @@ public class DetailViewActivity extends AppCompatActivity {
             else
                 omiljeni.setChecked(false);
         }
+        ocjena.setRating(db.uzmiOcjenu());
+
 
         iznajmi = findViewById(R.id.detailViewIznajmiButton);
         iznajmi.setOnClickListener(new View.OnClickListener() {
@@ -185,6 +187,40 @@ public class DetailViewActivity extends AppCompatActivity {
                 }
                 else {
                     Toast.makeText(DetailViewActivity.this, R.string.poruka_mora_se_logovati,Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        ocjena.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                if(fromUser){
+                    if (!sesija.getKorisnikId().equals("") && sesija.getKorisnikId()!=null) {
+                        boolean b = db.provjeriDaLiJeIznajmio(Integer.parseInt(sesija.getKorisnikId()), id);
+                        if(b){
+                            int a = 1;
+                            if(rating >= 4)
+                                a = 5;
+                            if(rating >= 3 && rating < 4)
+                                a = 4;
+                            if(rating >= 2 && rating < 3)
+                                a = 3;
+                            if(rating >= 1 && rating < 2)
+                                a = 2;
+                            if(rating >=0 && rating < 1)
+                                a = 1;
+                            db.ocijeniAutomobil(a, Integer.parseInt(sesija.getKorisnikId()), id);
+                            ocjena.setRating(db.uzmiOcjenu());
+                        }else{
+                            ocjena.setRating(db.uzmiOcjenu());
+                            Toast.makeText(DetailViewActivity.this, R.string.poruka_niste_iznajmili,Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    else {
+                        ocjena.setRating(db.uzmiOcjenu());
+                        Toast.makeText(DetailViewActivity.this, R.string.poruka_mora_se_logovati,Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });

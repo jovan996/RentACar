@@ -332,6 +332,71 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return podaci;
     }
 
+    public boolean provjeriDaLiJeIznajmio(int korisnikId, int faId){
+        boolean brojac = false;
+        Date date = new Date();
+        String str;
+
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT KORISNIK_ID, FA_ID " +
+                "FROM " + EVIDENCIJA_TABLE + " WHERE KORISNIK_ID = '" + korisnikId + "'" + " AND FA_ID = '" + faId + "'" , null);
+
+        if (cursor.moveToFirst()){
+            do {
+                brojac = true;
+                //str = cursor.getString(cursor.getColumnIndex("DATUM_UZIMANJA"));
+            } while(cursor.moveToNext());
+        }
+        if(brojac)
+            return true;
+        else
+            return false;
+    }
+    public void ocijeniAutomobil(int ocjena, int korisnikId, int faId){
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        ContentValues vrednosti = new ContentValues();
+
+        Cursor cursor = sqLiteDb.rawQuery("SELECT KORISNIK_ID, FA_ID " +
+                "FROM " + OCJENA_TABLE + " WHERE KORISNIK_ID = '" + korisnikId + "'" + " AND FA_ID = '" + faId + "'" , null);
+
+        if(cursor.moveToFirst()){
+            sqLiteDb.delete(OCJENA_TABLE, "KORISNIK_ID=" + korisnikId + " AND FA_ID=" + faId, null);
+            vrednosti.put("KORISNIK_ID", korisnikId);
+            vrednosti.put("FA_ID", faId);
+            vrednosti.put("OCJENA_BROJ", ocjena);
+            sqLiteDb.insert(OCJENA_TABLE, null, vrednosti);
+        }else{
+            vrednosti.put("KORISNIK_ID", korisnikId);
+            vrednosti.put("FA_ID", faId);
+            vrednosti.put("OCJENA_BROJ", ocjena);
+            sqLiteDb.insert(OCJENA_TABLE, null, vrednosti);
+        }
+
+    }
+    public float uzmiOcjenu() {
+        float korId = 0;
+        int brojac = 0;
+        float ocjena = 0;
+
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT OCJENA_BROJ " +
+                "FROM " + OCJENA_TABLE, null);
+
+        if (cursor.moveToFirst()){
+            do {
+                // Passing values
+                korId += cursor.getInt(cursor.getColumnIndex("OCJENA_BROJ"));
+                brojac++;
+            } while(cursor.moveToNext());
+        }
+        if(korId != 0 && brojac != 0){
+            ocjena = korId / brojac;
+        }else{
+            ocjena = 0;
+        }
+
+        return ocjena;
+    }
     public void dodajOmiljeni(int korisnikId, int faId) {
         SQLiteDatabase sqLiteDb = this.getWritableDatabase();
         ContentValues vrednosti = new ContentValues();
@@ -362,6 +427,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else
             return false;
     }
+
+
 
     public String registracija(String ime, String prezime, String email, String brojTelefona, String jmbg, String lozinka) {
         //if (ime.trim() == "" || prezime.trim() == "" || email.trim() == "" || brojTelefona.trim() == "" || jmbg.trim() == "" ||  lozinka.trim() == "") return "Niste unijeli jedan od podataka!";
