@@ -126,6 +126,16 @@ public class SettingsActivity extends AppCompatActivity {
                 // your code here
             }
         });
+        detaljiAplikacije = (TextView) findViewById(R.id.oAplikacijiNaslov);
+
+        detaljiAplikacije.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(getApplicationContext(), AboutAppActivity.class);
+                startActivity(myIntent);
+
+            }
+        });
     }
 
     private void setLocale(String sr) {
@@ -136,11 +146,8 @@ public class SettingsActivity extends AppCompatActivity {
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
         editor.putString("My_Lang", sr);
-
         editor.putBoolean("Update", true);
-
         editor.putBoolean("update", true);
-
         editor.apply();
     }
 
@@ -167,6 +174,8 @@ public class SettingsActivity extends AppCompatActivity {
         }
         //MasterViewActivity.update();
     }
+
+
 
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent myIntent = new Intent(getApplicationContext(), MasterViewActivity.class);

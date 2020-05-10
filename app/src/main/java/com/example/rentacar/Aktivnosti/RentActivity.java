@@ -143,7 +143,7 @@ public class RentActivity extends AppCompatActivity {
         boja.setText(iznajmiBoja.getText() + " " + podaci.get("boja"));
         godiste.setText(iznajmiGodiste.getText() + " " + podaci.get("godiste"));
         kilometraza.setText(iznajmiKilometraza.getText() + " " + podaci.get("kilometraza") + " km");
-        cijenaPoDanu.setText(iznajmiCijenaPoDanu.getText() + " " + podaci.get("cijena") + " €/dan");
+        cijenaPoDanu.setText(iznajmiCijenaPoDanu.getText() + ":" + "  " + podaci.get("cijena") + " €/dan");
 
         int cijena = Integer.parseInt(podaci.get("cijena"));
 

@@ -95,4 +95,17 @@
 
     <string name="odjava">Odjava</string>
     <string name="marka_model">Marka model</string>
+    <string name="serijski_broj">7A85BX9A55Q</string>
+    <string name="serijski_broj_naslov">Serijski broj</string>
+    <string name="verzija_app_naslov">Verzija</string>
+    <string name="verzija_app">1.0</string>
+    <string name="sertifikat_naslov">Sertifikat</string>
+    <string name="sertifikat_broj">ID: A486HWL505F</string>
+    <string name="garancija_naslov">Garancija</string>
+    <string name="garancija_broj">RentACar LTD. GARANTISI</string>
+    <string name="poruka_mora_se_logovati">Molimo vas da se prethodno ulogujete!</string>
+    <string name="cijena">Cijena</string>
+
+    <string name="dan_d">dan</string>
+    <string name="poruka_niste_iznajmili">Niste ispunili uslove da ocijenite auto!</string>
 </resources>

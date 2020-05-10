@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.MultiAutoCompleteTextView;
@@ -109,6 +110,8 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
 
     SupportMapFragment mapFragment;
 
+    private boolean flagOmiljeni;
+
     @Nullable
     @BindView(R.id.detailToolbar)
     public Toolbar toolbar;
@@ -132,8 +135,8 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
         }*/
 
         Session sesija = Session.getInstance(this);
-
         DrawerUtil.getDrawer(this, toolbar, sesija);
+        db = new DatabaseHelper(this);
 
         listView = (ListView)findViewById(R.id.detailViewKomentari);
         slika=(ImageView) findViewById(R.id.detailViewGlavnaSlika);
@@ -160,6 +163,7 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapAPI);
         mapFragment.getMapAsync(this);
 
+
         imena = new String[]{"Marko", "Slavko", "Zivko"};                //ovi nizovi su samo za potrebe testiranja,svi ovi podaci ce se vuci iz baze
         prezimena = new String[]{"Petovic", "Minic", "Spajic"};
         tekstovi = new String[]{"Odlicna kola", "Krs", "Posto su?"};
@@ -176,6 +180,16 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
         Intent intent = getIntent();
         int id = intent.getIntExtra("faId",0);
 
+        if(!sesija.getKorisnikId().equals("") && sesija.getKorisnikId()!=null){
+            flagOmiljeni = db.daLiJeOmiljeni(Integer.parseInt(sesija.getKorisnikId()), id);
+
+            if(flagOmiljeni)
+                omiljeni.setChecked(true);
+            else
+                omiljeni.setChecked(false);
+        }
+        ocjena.setRating(db.uzmiOcjenu());
+
 
         iznajmi = findViewById(R.id.detailViewIznajmiButton);
         iznajmi.setOnClickListener(new View.OnClickListener() {
@@ -187,7 +201,62 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
                     startActivityForResult(intent, 0);
                 }
                 else {
-                    Toast.makeText(DetailViewActivity.this,"Molimo vas da se prethodno ulogujete!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(DetailViewActivity.this, R.string.poruka_mora_se_logovati,Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        ocjena.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                if(fromUser){
+                    if (!sesija.getKorisnikId().equals("") && sesija.getKorisnikId()!=null) {
+                        boolean b = db.provjeriDaLiJeIznajmio(Integer.parseInt(sesija.getKorisnikId()), id);
+                        if(b){
+                            int a = 1;
+                            if(rating >= 4)
+                                a = 5;
+                            if(rating >= 3 && rating < 4)
+                                a = 4;
+                            if(rating >= 2 && rating < 3)
+                                a = 3;
+                            if(rating >= 1 && rating < 2)
+                                a = 2;
+                            if(rating >=0 && rating < 1)
+                                a = 1;
+                            db.ocijeniAutomobil(a, Integer.parseInt(sesija.getKorisnikId()), id);
+                            ocjena.setRating(db.uzmiOcjenu());
+                        }else{
+                            ocjena.setRating(db.uzmiOcjenu());
+                            Toast.makeText(DetailViewActivity.this, R.string.poruka_niste_iznajmili,Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    else {
+                        ocjena.setRating(db.uzmiOcjenu());
+                        Toast.makeText(DetailViewActivity.this, R.string.poruka_mora_se_logovati,Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+
+        omiljeni.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if(isChecked){
+                    if (!sesija.getKorisnikId().equals("") && sesija.getKorisnikId()!=null) {
+                        db.dodajOmiljeni(Integer.parseInt(sesija.getKorisnikId()), id);
+                    }
+                    else {
+                        Toast.makeText(DetailViewActivity.this, R.string.poruka_mora_se_logovati,Toast.LENGTH_LONG).show();
+                        omiljeni.setChecked(false);
+                    }
+                }else{
+                    if (!sesija.getKorisnikId().equals("") && sesija.getKorisnikId()!=null) {
+                        db.obrisiOmiljeni(Integer.parseInt(sesija.getKorisnikId().toString()), id);
+                    }
                 }
             }
         });
