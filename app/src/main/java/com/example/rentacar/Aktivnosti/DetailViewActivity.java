@@ -21,18 +21,25 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.rentacar.Adapteri.AutomobilViewAdapter;
 import com.example.rentacar.Adapteri.KomentarViewAdapter;
+import com.example.rentacar.BazaPodataka.DatabaseHelper;
 import com.example.rentacar.Modeli.KomentarItemModel;
 import com.example.rentacar.R;
 import com.example.rentacar.utils.DrawerUtil;
 import com.example.rentacar.utils.Session;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 import butterknife.BindView;
 
-public class DetailViewActivity extends AppCompatActivity {
+public class DetailViewActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private ImageView slika;
 
@@ -96,6 +103,12 @@ public class DetailViewActivity extends AppCompatActivity {
 
     private Session sesija;
 
+    private DatabaseHelper db;
+
+    GoogleMap mapAPI;
+
+    SupportMapFragment mapFragment;
+
     @Nullable
     @BindView(R.id.detailToolbar)
     public Toolbar toolbar;
@@ -108,6 +121,9 @@ public class DetailViewActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.detailToolbar);
         toolbar.setTitle(R.string.detalji_automobila);
         setSupportActionBar(toolbar);
+
+        db = new DatabaseHelper(this);
+
 
         /* ZA BACK DUGME */
         /*if (getSupportActionBar() != null){
@@ -141,6 +157,8 @@ public class DetailViewActivity extends AppCompatActivity {
         brojTelefona = (TextView) findViewById(R.id.brojTelefona);
         mapa= (MapView) findViewById(R.id.detailMapView);
         tekstKomentara = (MultiAutoCompleteTextView) findViewById(R.id.detailUnesiKomentar);
+        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapAPI);
+        mapFragment.getMapAsync(this);
 
         imena = new String[]{"Marko", "Slavko", "Zivko"};                //ovi nizovi su samo za potrebe testiranja,svi ovi podaci ce se vuci iz baze
         prezimena = new String[]{"Petovic", "Minic", "Spajic"};
@@ -188,5 +206,15 @@ public class DetailViewActivity extends AppCompatActivity {
         Intent myIntent = new Intent(getApplicationContext(), MasterViewActivity.class);
         startActivityForResult(myIntent, 0);
         return true;
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mapAPI = googleMap;
+
+        LatLng Gacko = new LatLng(43.166002, 18.535319);
+
+        mapAPI.addMarker(new MarkerOptions().position(Gacko).title("Gacko"));
+        mapAPI.moveCamera(CameraUpdateFactory.newLatLngZoom(Gacko,10));
     }
 }
