@@ -23,6 +23,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.rentacar.Adapteri.AutomobilViewAdapter;
 import com.example.rentacar.Adapteri.KomentarViewAdapter;
 import com.example.rentacar.BazaPodataka.DatabaseHelper;
+import com.example.rentacar.Modeli.FirmaModel;
 import com.example.rentacar.Modeli.KomentarItemModel;
 import com.example.rentacar.R;
 import com.example.rentacar.utils.DrawerUtil;
@@ -158,7 +159,7 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
         grad = (TextView) findViewById(R.id.detailViewFirmaGrad);
         email= (TextView) findViewById(R.id.detailViewFirmaEmail);
         brojTelefona = (TextView) findViewById(R.id.brojTelefona);
-        mapa= (MapView) findViewById(R.id.detailMapView);
+
         tekstKomentara = (MultiAutoCompleteTextView) findViewById(R.id.detailUnesiKomentar);
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapAPI);
         mapFragment.getMapAsync(this);
@@ -279,11 +280,30 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
+        Intent intent= getIntent();
+
+        FirmaModel firma = db.getFirmaById(intent.getIntExtra("faId", 0));
+
         mapAPI = googleMap;
 
-        LatLng Gacko = new LatLng(43.166002, 18.535319);
+        if (firma != null){
+            if (firma.getMapaLat() != 0 && firma.getMapaLong() != 0){
+                LatLng geo = new LatLng(firma.getMapaLat(),firma.getMapaLong());
+                mapAPI.addMarker(new MarkerOptions().position(geo));
+                mapAPI.moveCamera(CameraUpdateFactory.newLatLngZoom(geo,10));
+            }
+            else {
+                LatLng Gacko = new LatLng(43.166002, 18.535319);
 
-        mapAPI.addMarker(new MarkerOptions().position(Gacko).title("Gacko"));
-        mapAPI.moveCamera(CameraUpdateFactory.newLatLngZoom(Gacko,10));
+                mapAPI.addMarker(new MarkerOptions().position(Gacko).title("Gacko"));
+                mapAPI.moveCamera(CameraUpdateFactory.newLatLngZoom(Gacko,10));
+            }
+        } else {
+            LatLng Gacko = new LatLng(43.166002, 18.535319);
+
+            mapAPI.addMarker(new MarkerOptions().position(Gacko).title("Gacko"));
+            mapAPI.moveCamera(CameraUpdateFactory.newLatLngZoom(Gacko, 10));
+        }
     }
 }

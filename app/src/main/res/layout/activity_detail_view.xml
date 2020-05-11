@@ -249,11 +249,6 @@
                 android:layout_marginLeft="20dp"
                 android:textSize="20sp"/>
 
-            <com.google.android.gms.maps.MapView
-                android:id="@+id/detailMapView"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="10dp"/>
             <fragment
                 android:layout_width="match_parent"
                 android:id="@+id/mapAPI"
