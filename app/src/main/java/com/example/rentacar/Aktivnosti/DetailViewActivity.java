@@ -24,11 +24,18 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.rentacar.Adapteri.AutomobilViewAdapter;
 import com.example.rentacar.Adapteri.KomentarViewAdapter;
 import com.example.rentacar.BazaPodataka.DatabaseHelper;
+import com.example.rentacar.Modeli.FirmaModel;
 import com.example.rentacar.Modeli.KomentarItemModel;
 import com.example.rentacar.R;
 import com.example.rentacar.utils.DrawerUtil;
 import com.example.rentacar.utils.Session;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -36,7 +43,7 @@ import java.util.Date;
 
 import butterknife.BindView;
 
-public class DetailViewActivity extends AppCompatActivity {
+public class DetailViewActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private ImageView slika;
 
@@ -100,9 +107,13 @@ public class DetailViewActivity extends AppCompatActivity {
 
     private Session sesija;
 
-    private boolean flagOmiljeni;
-
     private DatabaseHelper db;
+
+    GoogleMap mapAPI;
+
+    SupportMapFragment mapFragment;
+
+    private boolean flagOmiljeni;
 
     @Nullable
     @BindView(R.id.detailToolbar)
@@ -116,6 +127,9 @@ public class DetailViewActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.detailToolbar);
         toolbar.setTitle(R.string.detalji_automobila);
         setSupportActionBar(toolbar);
+
+        db = new DatabaseHelper(this);
+
 
         /* ZA BACK DUGME */
         /*if (getSupportActionBar() != null){
@@ -147,8 +161,10 @@ public class DetailViewActivity extends AppCompatActivity {
         grad = (TextView) findViewById(R.id.detailViewFirmaGrad);
         email= (TextView) findViewById(R.id.detailViewFirmaEmail);
         brojTelefona = (TextView) findViewById(R.id.brojTelefona);
-        mapa= (MapView) findViewById(R.id.detailMapView);
+
         tekstKomentara = (MultiAutoCompleteTextView) findViewById(R.id.detailUnesiKomentar);
+        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapAPI);
+        mapFragment.getMapAsync(this);
 
 
 //        imena = new String[]{"Marko", "Slavko", "Zivko"};                //ovi nizovi su samo za potrebe testiranja,svi ovi podaci ce se vuci iz baze
@@ -287,5 +303,34 @@ public class DetailViewActivity extends AppCompatActivity {
         Intent myIntent = new Intent(getApplicationContext(), MasterViewActivity.class);
         startActivityForResult(myIntent, 0);
         return true;
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        Intent intent= getIntent();
+
+        FirmaModel firma = db.getFirmaById(intent.getIntExtra("faId", 0));
+
+        mapAPI = googleMap;
+
+        if (firma != null){
+            if (firma.getMapaLat() != 0 && firma.getMapaLong() != 0){
+                LatLng geo = new LatLng(firma.getMapaLat(),firma.getMapaLong());
+                mapAPI.addMarker(new MarkerOptions().position(geo));
+                mapAPI.moveCamera(CameraUpdateFactory.newLatLngZoom(geo,10));
+            }
+            else {
+                LatLng Gacko = new LatLng(43.166002, 18.535319);
+
+                mapAPI.addMarker(new MarkerOptions().position(Gacko).title("Gacko"));
+                mapAPI.moveCamera(CameraUpdateFactory.newLatLngZoom(Gacko,10));
+            }
+        } else {
+            LatLng Gacko = new LatLng(43.166002, 18.535319);
+
+            mapAPI.addMarker(new MarkerOptions().position(Gacko).title("Gacko"));
+            mapAPI.moveCamera(CameraUpdateFactory.newLatLngZoom(Gacko, 10));
+        }
     }
 }

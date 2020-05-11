@@ -10,10 +10,10 @@ import android.util.Log;
 
 import com.example.rentacar.Modeli.AutomobilItemModel;
 import com.example.rentacar.Modeli.KomentarItemModel;
+import com.example.rentacar.Modeli.FirmaModel;
 import com.example.rentacar.utils.Hesiranje;
 import com.example.rentacar.utils.Session;
 import com.example.rentacar.utils.Validation;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -296,6 +296,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         return listaAutomobila;
+    }
+    public FirmaModel getFirmaById(int id){
+        SQLiteDatabase sqLiteDb = this.getReadableDatabase();
+
+        Cursor cursor = sqLiteDb.rawQuery("SELECT * FROM " + FIRMA_TABLE + " WHERE FIRMA_ID = "+ id+ ";",null);
+        FirmaModel fm= new FirmaModel();
+        if (cursor.moveToFirst()) {
+                fm.setId( cursor.getInt(cursor.getColumnIndex("FIRMA_ID")));
+                fm.setAdresa( cursor.getString(cursor.getColumnIndex("FIRMA_ADRESA")));
+                fm.setBrojTelefona( cursor.getInt(cursor.getColumnIndex("FIRMA_BROJ_TELEFONA")));
+                fm.setEmail( cursor.getString(cursor.getColumnIndex("FIRMA_EMAIL")));
+                fm.setGrad( cursor.getString(cursor.getColumnIndex("FIRMA_GRAD")));
+                fm.setIme( cursor.getString(cursor.getColumnIndex("FIRMA_IME")));
+                fm.setOpis( cursor.getString(cursor.getColumnIndex("FIRMA_OPIS")));
+                fm.setPib(cursor.getInt(cursor.getColumnIndex("FIRMA_PIB")));
+                fm.setMapaLat(cursor.getInt(cursor.getColumnIndex("FIRMA_LAT")));
+                fm.setMapaLong(cursor.getInt(cursor.getColumnIndex("FIRMA_LONG")));
+        }
+        return fm;
     }
 
     public ArrayList<String> getDetailSlike(int id) {

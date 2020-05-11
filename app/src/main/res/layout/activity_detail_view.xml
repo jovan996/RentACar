@@ -159,6 +159,8 @@
 
             </LinearLayout>
 
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -247,11 +249,12 @@
                 android:layout_marginLeft="20dp"
                 android:textSize="20sp"/>
 
-            <com.google.android.gms.maps.MapView
-                android:id="@+id/detailMapView"
+            <fragment
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="10dp"/>
+                android:id="@+id/mapAPI"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_height="200dp">
+            </fragment>
 
             <TextView
                 android:id="@+id/detailViewKomentarNaslov"
