@@ -2,6 +2,7 @@ package com.example.rentacar.Aktivnosti;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,6 +37,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -165,21 +167,22 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
         mapFragment.getMapAsync(this);
 
 
-        imena = new String[]{"Marko", "Slavko", "Zivko"};                //ovi nizovi su samo za potrebe testiranja,svi ovi podaci ce se vuci iz baze
-        prezimena = new String[]{"Petovic", "Minic", "Spajic"};
-        tekstovi = new String[]{"Odlicna kola", "Krs", "Posto su?"};
-        datumi = new Date[]{new Date(), new Date(), new Date()};
-
-        for (int i = 0; i < imena.length; i++) {
-            KomentarItemModel model = new KomentarItemModel(1, 1, imena[i], prezimena[i], tekstovi[i], datumi[i]);
-            listaKomentara.add(model);
-        }
-
-        komentarViewAdapter=new KomentarViewAdapter(this, listaKomentara); //samo za potrebe testiranja posto jos nemamo bazu
-        listView.setAdapter(komentarViewAdapter);
+//        imena = new String[]{"Marko", "Slavko", "Zivko"};                //ovi nizovi su samo za potrebe testiranja,svi ovi podaci ce se vuci iz baze
+//        prezimena = new String[]{"Petovic", "Minic", "Spajic"};
+//        tekstovi = new String[]{"Odlicna kola", "Krs", "Posto su?"};
+//        datumi = new Date[]{new Date(), new Date(), new Date()};
+//
+//        for (int i = 0; i < imena.length; i++) {
+//            KomentarItemModel model = new KomentarItemModel(1, 1, imena[i], prezimena[i], tekstovi[i], datumi[i]);
+//            listaKomentara.add(model);
+//        }
 
         Intent intent = getIntent();
         int id = intent.getIntExtra("faId",0);
+
+        listaKomentara = db.getKomentari(id);
+        komentarViewAdapter=new KomentarViewAdapter(this, listaKomentara); //samo za potrebe testiranja posto jos nemamo bazu
+        listView.setAdapter(komentarViewAdapter);
 
         if(!sesija.getKorisnikId().equals("") && sesija.getKorisnikId()!=null){
             flagOmiljeni = db.daLiJeOmiljeni(Integer.parseInt(sesija.getKorisnikId()), id);
@@ -214,7 +217,12 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 if(fromUser){
                     if (!sesija.getKorisnikId().equals("") && sesija.getKorisnikId()!=null) {
-                        boolean b = db.provjeriDaLiJeIznajmio(Integer.parseInt(sesija.getKorisnikId()), id);
+                        boolean b = false;
+                        try {
+                            b = db.provjeriDaLiJeIznajmio(Integer.parseInt(sesija.getKorisnikId()), id);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                         if(b){
                             int a = 1;
                             if(rating >= 4)
@@ -268,7 +276,26 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
             @Override
             public void onClick(View v) {
                 // ovdje se izvrsava upit nad bazom
-
+                if (!sesija.getKorisnikId().equals("") && sesija.getKorisnikId()!=null) {
+                    boolean b = false;
+                    try {
+                        b = db.provjeriDaLiJeIznajmio(Integer.parseInt(sesija.getKorisnikId()), id);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if(b){
+                        Editable tx = tekstKomentara.getText();//.toString();
+                        String ss = tx.toString();
+                        db.dodajKomentarUBazu(ss, "naslov" ,Integer.parseInt(sesija.getKorisnikId()), id);
+                        tekstKomentara.setText(R.string.komentar_ostavljanje);
+                    }else{
+                        Toast.makeText(DetailViewActivity.this, R.string.poruka_niste_iznajmili,Toast.LENGTH_LONG).show();
+                    }
+                }
+                else {
+                    Toast.makeText(DetailViewActivity.this, R.string.poruka_mora_se_logovati,Toast.LENGTH_LONG).show();
+                    tekstKomentara.setText(R.string.komentar_ostavljanje);
+                }
             }
         });
     }

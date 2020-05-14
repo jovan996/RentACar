@@ -9,14 +9,18 @@ import android.nfc.Tag;
 import android.util.Log;
 
 import com.example.rentacar.Modeli.AutomobilItemModel;
+import com.example.rentacar.Modeli.KomentarItemModel;
 import com.example.rentacar.Modeli.FirmaModel;
 import com.example.rentacar.utils.Hesiranje;
 import com.example.rentacar.utils.Session;
 import com.example.rentacar.utils.Validation;
-
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -128,7 +132,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "   KORISNIK_ID          integer                        not null,\n" +
                 "   FA_ID                integer                        not null,\n" +
                 "   KOMENTAR_NASLOV      varchar(100)                   not null,\n" +
-                "   KOMENTAR_TEKST       text                   not null,\n" +
+                "   KOMENTAR_TEKST       varchar(100)                   not null,\n" +
                 "   FOREIGN KEY (KORISNIK_ID)\n" +
                 "   REFERENCES " + KORISNIK_TABLE + "(KORISNIK_ID)," +
                 "   FOREIGN KEY (FA_ID)\n" +
@@ -352,11 +356,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return podaci;
     }
 
-    public boolean provjeriDaLiJeIznajmio(int korisnikId, int faId){
-        boolean brojac = false;
-        Date date = new Date();
-        String str;
+    public ArrayList<KomentarItemModel> getKomentari(int faId) {
+        SQLiteDatabase sqLiteDb = this.getReadableDatabase();
+        ArrayList<KomentarItemModel> listaKomentara = new ArrayList<>();
+        //Cursor cursor = sqLiteDb.rawQuery("SELECT * FROM " + AUTOMOBIL_TABLE + " as a INNER JOIN " + FIRMA_AUTOMOBIL_TABLE + " as fa ON a.AUTOMOBIL_ID = fa.AUTOMOBIL_ID" +
+              //  " INNER JOIN " + SLIKA_TABLE + " as s ON fa.FA_ID = s.FA_ID WHERE fa.STATUS = 0;", null);
+        Cursor cursor = sqLiteDb.rawQuery("SELECT * FROM " + KOMENTAR_TABLE + " WHERE FA_ID = '" + faId + "'", null);
 
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(cursor.getColumnIndex("FA_ID"));
+                String komNslov = cursor.getString(cursor.getColumnIndex("KOMENTAR_NASLOV"));
+                String komTekst = cursor.getString(cursor.getColumnIndex("KOMENTAR_TEKST"));
+                //String slikaPutanja = cursor.getString(cursor.getColumnIndex("SLIKA_PUTANJA"));
+                //int cijenaPoDanu = cursor.getInt(cursor.getColumnIndex("CENA_PO_DANU"));
+                listaKomentara.add(new KomentarItemModel("Marko", "Markovic", komTekst, new Date()));
+            } while (cursor.moveToNext());
+        }
+
+        return listaKomentara;
+    }
+
+
+    public boolean provjeriDaLiJeIznajmio(int korisnikId, int faId) throws ParseException {
+        boolean brojac = false;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         SQLiteDatabase sqLiteDb = this.getWritableDatabase();
         Cursor cursor = sqLiteDb.rawQuery("SELECT KORISNIK_ID, FA_ID " +
                 "FROM " + EVIDENCIJA_TABLE + " WHERE KORISNIK_ID = '" + korisnikId + "'" + " AND FA_ID = '" + faId + "'" , null);
@@ -364,6 +388,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()){
             do {
                 brojac = true;
+                //yyyy-MM-dd HH:mm:ss
+                //Date d = getDate(cursor, naziv);
+                //str = cursor.getString(cursor.getColumnIndex("DATUM_UZIMANJA"));
+                //Date strDate = sdf.parse(str);
+                //if (new Date().after(d)) {
+                //}
                 //str = cursor.getString(cursor.getColumnIndex("DATUM_UZIMANJA"));
             } while(cursor.moveToNext());
         }
@@ -448,7 +478,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
     }
 
+    public void dodajKomentarUBazu(String textKomentara,String naslovKomentara, int korisnikId, int faId){
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        ContentValues vrednosti = new ContentValues();
 
+        Cursor cursor = sqLiteDb.rawQuery("SELECT KORISNIK_ID, FA_ID " +
+                "FROM " + KOMENTAR_TABLE + " WHERE KORISNIK_ID = '" + korisnikId + "'" + " AND FA_ID = '" + faId + "'" , null);
+
+        if(cursor.moveToFirst()){
+            sqLiteDb.delete(KOMENTAR_TABLE, "KORISNIK_ID=" + korisnikId + " AND FA_ID=" + faId, null);
+            vrednosti.put("KORISNIK_ID", korisnikId);
+            vrednosti.put("FA_ID", faId);
+            vrednosti.put("KOMENTAR_NASLOV", naslovKomentara);
+            vrednosti.put("KOMENTAR_TEKST", textKomentara);
+            sqLiteDb.insert(KOMENTAR_TABLE, null, vrednosti);
+        }else{
+            vrednosti.put("KORISNIK_ID", korisnikId);
+            vrednosti.put("FA_ID", faId);
+            vrednosti.put("KOMENTAR_NASLOV", naslovKomentara);
+            vrednosti.put("KOMENTAR_TEKST", textKomentara);
+            sqLiteDb.insert(KOMENTAR_TABLE, null, vrednosti);
+        }
+
+    }
 
     public String registracija(String ime, String prezime, String email, String brojTelefona, String jmbg, String lozinka) {
         //if (ime.trim() == "" || prezime.trim() == "" || email.trim() == "" || brojTelefona.trim() == "" || jmbg.trim() == "" ||  lozinka.trim() == "") return "Niste unijeli jedan od podataka!";
@@ -569,4 +621,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         context.deleteDatabase(DATABASE_NAME);
     }
 
+    public static Date getDate(Cursor cursor, String columnName) {
+        String dateString = cursor.getString(cursor
+                .getColumnIndex(columnName));
+        if (dateString == null) {
+            return null;
+        }
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",
+                Locale.ENGLISH);
+        Date date = null;
+        try {
+            date = format.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
 }

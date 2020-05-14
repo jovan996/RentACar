@@ -37,6 +37,12 @@ public class KomentarItemModel {
         this.komentarTekst = komentarTekst;
         this.komentarDatum = komentarDatum;
     }
+    public KomentarItemModel(String korisnikIme, String korisnikPrezime, String komentarTekst, Date komentarDatum) {
+        this.korisnikIme = korisnikIme;
+        this.korisnikPrezime = korisnikPrezime;
+        this.komentarTekst = komentarTekst;
+        this.komentarDatum = komentarDatum;
+    }
 
     public int getKomentarId() {
         return komentarId;
