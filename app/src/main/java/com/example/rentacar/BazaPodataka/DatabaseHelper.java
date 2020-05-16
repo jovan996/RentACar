@@ -46,9 +46,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
 
-        String createAutomobil = "CREATE TABLE " + AUTOMOBIL_TABLE + " (AUTOMOBIL_ID integer PRIMARY KEY AUTOINCREMENT not null, AUTOMOBIL_MARKA varchar(50) not null," +
-                "AUTOMOBIL_MODEL varchar(50) not null, AUTOMOBIL_BROJ_SJEDISTA integer not null, AUTOMOBIL_BROJ_VRATA integer not null," +
-                "AUTOMOBIL_KUBIKAZA integer not null, AUTOMOBIL_MOTOR VARCHAR(50), AUTOMOBIL_SNAGA_MOTORA integer not null);";
+        String createAutomobil = "CREATE TABLE " + AUTOMOBIL_TABLE + " (AUTOMOBIL_ID integer PRIMARY KEY AUTOINCREMENT not null, " +
+                "AUTOMOBIL_MARKA varchar(50) not null," +
+                "AUTOMOBIL_MODEL varchar(50) not null, " +
+                "AUTOMOBIL_BROJ_SJEDISTA integer not null, " +
+                "AUTOMOBIL_BROJ_VRATA integer not null," +
+                "AUTOMOBIL_KUBIKAZA integer not null, " +
+                "AUTOMOBIL_MOTOR VARCHAR(50), " +
+                "AUTOMOBIL_SNAGA_MOTORA integer not null);";
 
         String createIndexAutomobil = "create unique index AUTOMOBIL_PK on " + AUTOMOBIL_TABLE + " (\n" +
                 "AUTOMOBIL_ID ASC);";
@@ -423,14 +428,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
     }
-    public float uzmiOcjenu() {
+    public float uzmiOcjenu(int faId) {
         float korId = 0;
         int brojac = 0;
         float ocjena = 0;
 
         SQLiteDatabase sqLiteDb = this.getWritableDatabase();
         Cursor cursor = sqLiteDb.rawQuery("SELECT OCJENA_BROJ " +
-                "FROM " + OCJENA_TABLE, null);
+                "FROM " + OCJENA_TABLE + " WHERE FA_ID = '" + faId + "'", null);
 
         if (cursor.moveToFirst()){
             do {
@@ -502,6 +507,179 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+
+    public String setujImeMarkuAuta(int id) {
+        String marka = "";
+        String model = "";
+
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT AUTOMOBIL_MARKA, AUTOMOBIL_MODEL " +
+                "FROM " + AUTOMOBIL_TABLE + " WHERE AUTOMOBIL_ID = '" + id + "'", null);
+
+        if (cursor.moveToFirst()){
+            do {
+                // Passing values
+                marka = cursor.getString(cursor.getColumnIndex("AUTOMOBIL_MARKA"));
+                model = cursor.getString(cursor.getColumnIndex("AUTOMOBIL_MODEL"));
+            } while(cursor.moveToNext());
+        }
+
+        String ret = marka + ", " + model;
+        return ret;
+    }
+
+    public int setujBrSjedista(int id){
+        int BrSjedista = 5;
+
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT AUTOMOBIL_BROJ_SJEDISTA " +
+                "FROM " + AUTOMOBIL_TABLE + " WHERE AUTOMOBIL_ID = '" + id + "'", null);
+
+        if (cursor.moveToFirst()){
+            do {
+                // Passing values
+                BrSjedista = cursor.getInt(cursor.getColumnIndex("AUTOMOBIL_BROJ_SJEDISTA"));
+            } while(cursor.moveToNext());
+        }
+
+        return BrSjedista;
+    }
+
+    public int setujBrVrata(int id){
+        int brVrata = 5;
+
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT AUTOMOBIL_BROJ_VRATA " +
+                "FROM " + AUTOMOBIL_TABLE + " WHERE AUTOMOBIL_ID = '" + id + "'", null);
+
+        if (cursor.moveToFirst()){
+            do {
+                // Passing values
+                brVrata = cursor.getInt(cursor.getColumnIndex("AUTOMOBIL_BROJ_VRATA"));
+            } while(cursor.moveToNext());
+        }
+
+        return brVrata;
+    }
+
+    public int setujKubikazu(int id){
+        int kubikaza = 1900;
+
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT AUTOMOBIL_KUBIKAZA " +
+                "FROM " + AUTOMOBIL_TABLE + " WHERE AUTOMOBIL_ID = '" + id + "'", null);
+
+        if (cursor.moveToFirst()){
+            do {
+                // Passing values
+                kubikaza = cursor.getInt(cursor.getColumnIndex("AUTOMOBIL_KUBIKAZA"));
+            } while(cursor.moveToNext());
+        }
+
+        return kubikaza;
+    }
+
+    public String setujTipMotora(int id){
+        String tip = "TDI";
+
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT AUTOMOBIL_MOTOR " +
+                "FROM " + AUTOMOBIL_TABLE + " WHERE AUTOMOBIL_ID = '" + id + "'", null);
+
+        if (cursor.moveToFirst()){
+            do {
+                // Passing values
+                tip = cursor.getString(cursor.getColumnIndex("AUTOMOBIL_MOTOR"));
+            } while(cursor.moveToNext());
+        }
+
+        return tip;
+    }
+
+    public int setujSnaguMotora(int id){
+        int snaga = 120;
+
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT AUTOMOBIL_SNAGA_MOTORA " +
+                "FROM " + AUTOMOBIL_TABLE + " WHERE AUTOMOBIL_ID = '" + id + "'", null);
+
+        if (cursor.moveToFirst()){
+            do {
+                // Passing values
+                snaga = cursor.getInt(cursor.getColumnIndex("AUTOMOBIL_SNAGA_MOTORA"));
+            } while(cursor.moveToNext());
+        }
+
+        return snaga;
+    }
+
+    public int setujCijenuPoDanu(int faId){
+        int cijena = 1;
+
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT CENA_PO_DANU " +
+                "FROM " + FIRMA_AUTOMOBIL_TABLE + " WHERE AUTOMOBIL_ID = '" + faId + "'", null);
+
+        if (cursor.moveToFirst()){
+            do {
+                // Passing values
+                cijena = cursor.getInt(cursor.getColumnIndex("CENA_PO_DANU"));
+            } while(cursor.moveToNext());
+        }
+
+        return cijena;
+    }
+
+    public String setujBoju(int faId){
+        String boja = "Plava";
+
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT BOJA " +
+                "FROM " + FIRMA_AUTOMOBIL_TABLE + " WHERE AUTOMOBIL_ID = '" + faId + "'", null);
+
+        if (cursor.moveToFirst()){
+            do {
+                // Passing values
+                boja = cursor.getString(cursor.getColumnIndex("BOJA"));
+            } while(cursor.moveToNext());
+        }
+
+        return boja;
+    }
+
+    public int setujKilometrazu(int faId){
+        int kilometraza = 60000;
+
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT KILOMETRAZA " +
+                "FROM " + FIRMA_AUTOMOBIL_TABLE + " WHERE AUTOMOBIL_ID = '" + faId + "'", null);
+
+        if (cursor.moveToFirst()){
+            do {
+                // Passing values
+                kilometraza = cursor.getInt(cursor.getColumnIndex("KILOMETRAZA"));
+            } while(cursor.moveToNext());
+        }
+
+        return kilometraza;
+    }
+
+    public int setujGodiste(int faId){
+        int godiste = 2000;
+
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT GODISTE " +
+                "FROM " + FIRMA_AUTOMOBIL_TABLE + " WHERE AUTOMOBIL_ID = '" + faId + "'", null);
+
+        if (cursor.moveToFirst()){
+            do {
+                // Passing values
+                godiste = cursor.getInt(cursor.getColumnIndex("GODISTE"));
+            } while(cursor.moveToNext());
+        }
+
+        return godiste;
+    }
     public String registracija(String ime, String prezime, String email, String brojTelefona, String jmbg, String lozinka) {
         //if (ime.trim() == "" || prezime.trim() == "" || email.trim() == "" || brojTelefona.trim() == "" || jmbg.trim() == "" ||  lozinka.trim() == "") return "Niste unijeli jedan od podataka!";
 

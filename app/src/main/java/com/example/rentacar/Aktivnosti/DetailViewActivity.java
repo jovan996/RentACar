@@ -1,6 +1,7 @@
 package com.example.rentacar.Aktivnosti;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -119,6 +121,7 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
     @BindView(R.id.detailToolbar)
     public Toolbar toolbar;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -179,6 +182,34 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
 
         Intent intent = getIntent();
         int id = intent.getIntExtra("faId",0);
+        
+        int c = db.setujCijenuPoDanu(id);
+        cijenaPoDanu.append(" " + Integer.toString(c));
+
+        //string b = db.setujBoju(id);
+        boja.append(" " + db.setujBoju(id));
+
+        int g = db.setujGodiste(id);
+        godiste.append(" " + Integer.toString(g));
+
+        int k = db.setujKilometrazu(id);
+        kilometraza.append(" " + Integer.toString(k));
+
+        naslov.setText(db.setujImeMarkuAuta(id));
+
+        int brS = db.setujBrSjedista(id);
+        brojSjedista.append(" " + Integer.toString(brS));
+
+        int brV = db.setujBrVrata(id);
+        brojVrata.append(" " + Integer.toString(brV));
+
+        int kub = db.setujKubikazu(id);
+        kubikaza.append(" " + Integer.toString(kub));
+
+        tipMotora.append(" " + db.setujTipMotora(id));
+
+        int snaga = db.setujSnaguMotora(id);
+        snagaMotora.append(" " + Integer.toString(snaga));
 
         listaKomentara = db.getKomentari(id);
         komentarViewAdapter=new KomentarViewAdapter(this, listaKomentara); //samo za potrebe testiranja posto jos nemamo bazu
@@ -192,7 +223,7 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
             else
                 omiljeni.setChecked(false);
         }
-        ocjena.setRating(db.uzmiOcjenu());
+        ocjena.setRating(db.uzmiOcjenu(id));
 
 
         iznajmi = findViewById(R.id.detailViewIznajmiButton);
@@ -235,14 +266,14 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
                             if(rating >=0 && rating < 1)
                                 a = 1;
                             db.ocijeniAutomobil(a, Integer.parseInt(sesija.getKorisnikId()), id);
-                            ocjena.setRating(db.uzmiOcjenu());
+                            ocjena.setRating(db.uzmiOcjenu(id));
                         }else{
-                            ocjena.setRating(db.uzmiOcjenu());
+                            ocjena.setRating(db.uzmiOcjenu(id));
                             Toast.makeText(DetailViewActivity.this, R.string.poruka_niste_iznajmili,Toast.LENGTH_LONG).show();
                         }
                     }
                     else {
-                        ocjena.setRating(db.uzmiOcjenu());
+                        ocjena.setRating(db.uzmiOcjenu(id));
                         Toast.makeText(DetailViewActivity.this, R.string.poruka_mora_se_logovati,Toast.LENGTH_LONG).show();
                     }
                 }
