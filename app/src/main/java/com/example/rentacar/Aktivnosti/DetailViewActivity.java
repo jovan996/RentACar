@@ -238,6 +238,7 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
                 else {
                     Toast.makeText(DetailViewActivity.this, R.string.poruka_mora_se_logovati,Toast.LENGTH_LONG).show();
                 }
+
             }
         });
 
