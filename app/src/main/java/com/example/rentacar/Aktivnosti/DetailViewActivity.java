@@ -163,7 +163,7 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
         adresa = (TextView) findViewById(R.id.detailViewFirmaAdresa);
         grad = (TextView) findViewById(R.id.detailViewFirmaGrad);
         email= (TextView) findViewById(R.id.detailViewFirmaEmail);
-        brojTelefona = (TextView) findViewById(R.id.brojTelefona);
+        brojTelefona = (TextView) findViewById(R.id.detailViewFirmaBrojTelefona);
 
         tekstKomentara = (MultiAutoCompleteTextView) findViewById(R.id.detailUnesiKomentar);
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapAPI);
@@ -211,6 +211,18 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
         int snaga = db.setujSnaguMotora(id);
         snagaMotora.append(" " + Integer.toString(snaga));
 
+        firma.append(":"+ " " + db.setujNazivFirme(id));
+
+        opis.setText(db.setujOpisFirme(id));
+
+        grad.append(" " + db.setujGrad(id));
+
+        adresa.append(" " + db.setujAdresu(id));
+
+        email.append(" " + db.setujEmail(id));
+
+        brojTelefona.append(" " + db.setujBrTelefona(id));
+
         listaKomentara = db.getKomentari(id);
         komentarViewAdapter=new KomentarViewAdapter(this, listaKomentara); //samo za potrebe testiranja posto jos nemamo bazu
         listView.setAdapter(komentarViewAdapter);
@@ -236,7 +248,7 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
                     startActivityForResult(intent, 0);
                 }
                 else {
-                    Toast.makeText(DetailViewActivity.this, R.string.poruka_mora_se_logovati,Toast.LENGTH_LONG).show();
+                    Toast.makeText(DetailViewActivity.this, R.string.poruka_mora_se_logovati,Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -270,12 +282,12 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
                             ocjena.setRating(db.uzmiOcjenu(id));
                         }else{
                             ocjena.setRating(db.uzmiOcjenu(id));
-                            Toast.makeText(DetailViewActivity.this, R.string.poruka_niste_iznajmili,Toast.LENGTH_LONG).show();
+                            Toast.makeText(DetailViewActivity.this, R.string.poruka_niste_iznajmili,Toast.LENGTH_SHORT).show();
                         }
                     }
                     else {
                         ocjena.setRating(db.uzmiOcjenu(id));
-                        Toast.makeText(DetailViewActivity.this, R.string.poruka_mora_se_logovati,Toast.LENGTH_LONG).show();
+                        Toast.makeText(DetailViewActivity.this, R.string.poruka_mora_se_logovati,Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -291,7 +303,7 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
                         db.dodajOmiljeni(Integer.parseInt(sesija.getKorisnikId()), id);
                     }
                     else {
-                        Toast.makeText(DetailViewActivity.this, R.string.poruka_mora_se_logovati,Toast.LENGTH_LONG).show();
+                        Toast.makeText(DetailViewActivity.this, R.string.poruka_mora_se_logovati,Toast.LENGTH_SHORT).show();
                         omiljeni.setChecked(false);
                     }
                 }else{
@@ -315,16 +327,20 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
                         e.printStackTrace();
                     }
                     if(b){
-                        Editable tx = tekstKomentara.getText();//.toString();
+                        Editable tx = tekstKomentara.getText();
                         String ss = tx.toString();
                         db.dodajKomentarUBazu(ss, "naslov" ,Integer.parseInt(sesija.getKorisnikId()), id);
                         tekstKomentara.setText(R.string.komentar_ostavljanje);
+                        finish();
+                        overridePendingTransition( 0, 0);
+                        startActivity(getIntent());
+                        overridePendingTransition( 0, 0);
                     }else{
-                        Toast.makeText(DetailViewActivity.this, R.string.poruka_niste_iznajmili,Toast.LENGTH_LONG).show();
+                        Toast.makeText(DetailViewActivity.this, R.string.poruka_niste_iznajmili,Toast.LENGTH_SHORT).show();
                     }
                 }
                 else {
-                    Toast.makeText(DetailViewActivity.this, R.string.poruka_mora_se_logovati,Toast.LENGTH_LONG).show();
+                    Toast.makeText(DetailViewActivity.this, R.string.poruka_mora_se_logovati,Toast.LENGTH_SHORT).show();
                     tekstKomentara.setText(R.string.komentar_ostavljanje);
                 }
             }

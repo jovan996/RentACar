@@ -150,7 +150,7 @@ public class RentActivity extends AppCompatActivity {
         datumVracanja.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                //Toast.makeText(RentActivity.this," You are changed date is : "+dayOfMonth +" -  "+ ++monthOfYear+ " - "+year,Toast.LENGTH_LONG).show();
+                //Toast.makeText(RentActivity.this," You are changed date is : "+dayOfMonth +" -  "+ ++monthOfYear+ " - "+year,Toast.LENGTH_SHORT).show();
 
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -186,7 +186,7 @@ public class RentActivity extends AppCompatActivity {
 
                 db.iznajmiAutomobil(Integer.parseInt(sesija.getKorisnikId()), faId, datumEvidencije, datum1, datum2);
                 //db.setStatusAutomobil(faId);   samo podesiti u ovoj metodi da se promijeni status automobila u bazi
-                Toast.makeText(RentActivity.this,"Uspjesno ste iznajmili automobil!",Toast.LENGTH_LONG).show();
+                Toast.makeText(RentActivity.this,"Uspjesno ste iznajmili automobil!",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), MasterViewActivity.class);
                 startActivityForResult(intent, 0);
             }

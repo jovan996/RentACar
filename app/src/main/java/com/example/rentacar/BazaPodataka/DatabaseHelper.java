@@ -58,7 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String createIndexAutomobil = "create unique index AUTOMOBIL_PK on " + AUTOMOBIL_TABLE + " (\n" +
                 "AUTOMOBIL_ID ASC);";
 
-        String createKorisnik =  "CREATE TABLE " + KORISNIK_TABLE + " (KORISNIK_ID integer PRIMARY KEY AUTOINCREMENT not null, KORISNIK_IME varchar(50) not null," +
+        String createKorisnik =  "CREATE TABLE " + KOMENTAR_TABLE + " (KORISNIK_ID integer PRIMARY KEY AUTOINCREMENT not null, KORISNIK_IME varchar(50) not null," +
                 "   KORISNIK_PREZIME     varchar(50)                    not null,\n" +
                 "   KORISNIK_EMAIL       varchar(50)                    not null,\n" +
                 "   KORISNIK_BR_TEL      varchar(20)                    not null,\n" +
@@ -73,7 +73,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String createFirma = "CREATE TABLE " + FIRMA_TABLE + "(FIRMA_ID integer PRIMARY KEY AUTOINCREMENT not null,\n" +
                 "   FIRMA_IME            varchar(50)                    not null,\n" +
                 "   FIRMA_PIB            varchar(30)                    not null,\n" +
-                "   FIRMA_OPIS           text                   not null,\n" +
+                "   FIRMA_OPIS           varchar(50)                   not null,\n" +
                 "   FIRMA_ADRESA         varchar(50)                    not null,\n" +
                 "   FIRMA_GRAD           varchar(50)                    not null,\n" +
                 "   FIRMA_EMAIL          varchar(50)                    not null,\n" +
@@ -375,7 +375,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String komTekst = cursor.getString(cursor.getColumnIndex("KOMENTAR_TEKST"));
                 //String slikaPutanja = cursor.getString(cursor.getColumnIndex("SLIKA_PUTANJA"));
                 //int cijenaPoDanu = cursor.getInt(cursor.getColumnIndex("CENA_PO_DANU"));
-                listaKomentara.add(new KomentarItemModel("Marko", "Markovic", komTekst, new Date()));
+                String ime = "Marko";
+                String prezime = "Maric";
+                String parts[] = komNslov.split(" ");
+                if(parts[0] != null && parts[1] != null){
+                    ime = parts[0];
+                    prezime = parts[1];
+                }
+
+                listaKomentara.add(new KomentarItemModel(ime, prezime, komTekst, new Date()));
             } while (cursor.moveToNext());
         }
 
@@ -483,9 +491,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
     }
 
-    public void dodajKomentarUBazu(String textKomentara,String naslovKomentara, int korisnikId, int faId){
+    public void dodajKomentarUBazu(String textKomentara, String naslovKomentara, int korisnikId, int faId){
         SQLiteDatabase sqLiteDb = this.getWritableDatabase();
         ContentValues vrednosti = new ContentValues();
+        String ime = "Marko";
+        String prezime = "Maric";
+
+        Cursor cursor1 = sqLiteDb.rawQuery("SELECT KORISNIK_IME, KORISNIK_PREZIME " +
+                "FROM " + KORISNIK_TABLE + " WHERE KORISNIK_ID = '" + korisnikId + "'", null);
+
+        if (cursor1.moveToFirst()){
+                // Passing values
+                ime = cursor1.getString(cursor1.getColumnIndex("KORISNIK_IME"));
+                prezime = cursor1.getString(cursor1.getColumnIndex("KORISNIK_PREZIME"));
+        }
+        String naslovK = ime +" "+ prezime;
 
         Cursor cursor = sqLiteDb.rawQuery("SELECT KORISNIK_ID, FA_ID " +
                 "FROM " + KOMENTAR_TABLE + " WHERE KORISNIK_ID = '" + korisnikId + "'" + " AND FA_ID = '" + faId + "'" , null);
@@ -494,13 +514,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             sqLiteDb.delete(KOMENTAR_TABLE, "KORISNIK_ID=" + korisnikId + " AND FA_ID=" + faId, null);
             vrednosti.put("KORISNIK_ID", korisnikId);
             vrednosti.put("FA_ID", faId);
-            vrednosti.put("KOMENTAR_NASLOV", naslovKomentara);
+            vrednosti.put("KOMENTAR_NASLOV", naslovK);
             vrednosti.put("KOMENTAR_TEKST", textKomentara);
             sqLiteDb.insert(KOMENTAR_TABLE, null, vrednosti);
         }else{
             vrednosti.put("KORISNIK_ID", korisnikId);
             vrednosti.put("FA_ID", faId);
-            vrednosti.put("KOMENTAR_NASLOV", naslovKomentara);
+            vrednosti.put("KOMENTAR_NASLOV", naslovK);
             vrednosti.put("KOMENTAR_TEKST", textKomentara);
             sqLiteDb.insert(KOMENTAR_TABLE, null, vrednosti);
         }
@@ -680,6 +700,109 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return godiste;
     }
+
+    public String setujNazivFirme(int id){
+        String naziv = "Firma doo";
+
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT FIRMA_IME FROM " + FIRMA_TABLE + " as ft INNER JOIN "
+                + FIRMA_AUTOMOBIL_TABLE + " as fa ON ft.FIRMA_ID = fa.FIRMA_ID WHERE fa.FA_ID = " + id + ";", null);
+
+        if (cursor.moveToFirst()){
+            do {
+                // Passing values
+                naziv = cursor.getString(cursor.getColumnIndex("FIRMA_IME"));
+            } while(cursor.moveToNext());
+        }
+
+        return naziv;
+    }
+
+    public String setujOpisFirme(int id){
+        String opis = "Najbolja firma";
+
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT FIRMA_OPIS FROM " + FIRMA_TABLE + " as ft INNER JOIN "
+                + FIRMA_AUTOMOBIL_TABLE + " as fa ON ft.FIRMA_ID = fa.FIRMA_ID WHERE fa.FA_ID = " + id + ";", null);
+
+        if (cursor.moveToFirst()){
+            do {
+                // Passing values
+                opis = cursor.getString(cursor.getColumnIndex("FIRMA_OPIS"));
+            } while(cursor.moveToNext());
+        }
+
+        return opis;
+    }
+
+    public String setujGrad(int id){
+        String grad = "Gacko";
+
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT FIRMA_GRAD FROM " + FIRMA_TABLE + " as ft INNER JOIN "
+                + FIRMA_AUTOMOBIL_TABLE + " as fa ON ft.FIRMA_ID = fa.FIRMA_ID WHERE fa.FA_ID = " + id + ";", null);
+
+        if (cursor.moveToFirst()){
+            do {
+                // Passing values
+                grad = cursor.getString(cursor.getColumnIndex("FIRMA_GRAD"));
+            } while(cursor.moveToNext());
+        }
+
+        return grad;
+    }
+
+    public String setujAdresu(int id){
+        String adresa = "Nemanjina bb";
+
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT FIRMA_ADRESA FROM " + FIRMA_TABLE + " as ft INNER JOIN "
+                + FIRMA_AUTOMOBIL_TABLE + " as fa ON ft.FIRMA_ID = fa.FIRMA_ID WHERE fa.FA_ID = " + id + ";", null);
+
+        if (cursor.moveToFirst()){
+            do {
+                // Passing values
+                adresa = cursor.getString(cursor.getColumnIndex("FIRMA_ADRESA"));
+            } while(cursor.moveToNext());
+        }
+
+        return adresa;
+    }
+
+    public String setujEmail(int id){
+        String email = "firma@gmail.com";
+
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT FIRMA_EMAIL FROM " + FIRMA_TABLE + " as ft INNER JOIN "
+                + FIRMA_AUTOMOBIL_TABLE + " as fa ON ft.FIRMA_ID = fa.FIRMA_ID WHERE fa.FA_ID = " + id + ";", null);
+
+        if (cursor.moveToFirst()){
+            do {
+                // Passing values
+                email = cursor.getString(cursor.getColumnIndex("FIRMA_EMAIL"));
+            } while(cursor.moveToNext());
+        }
+
+        return email;
+    }
+
+    public String setujBrTelefona(int id){
+        String brTel = "0645698720";
+
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT FIRMA_BROJ_TELEFONA FROM " + FIRMA_TABLE + " as ft INNER JOIN "
+                + FIRMA_AUTOMOBIL_TABLE + " as fa ON ft.FIRMA_ID = fa.FIRMA_ID WHERE fa.FA_ID = " + id + ";", null);
+
+        if (cursor.moveToFirst()){
+            do {
+                // Passing values
+                brTel = cursor.getString(cursor.getColumnIndex("FIRMA_BROJ_TELEFONA"));
+            } while(cursor.moveToNext());
+        }
+
+        return brTel;
+    }
+
     public String registracija(String ime, String prezime, String email, String brojTelefona, String jmbg, String lozinka) {
         //if (ime.trim() == "" || prezime.trim() == "" || email.trim() == "" || brojTelefona.trim() == "" || jmbg.trim() == "" ||  lozinka.trim() == "") return "Niste unijeli jedan od podataka!";
 

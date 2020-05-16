@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(RegisterActivity.this,"Molim vas da prihvatite uslove koriscenja!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this,"Molim vas da prihvatite uslove koriscenja!",Toast.LENGTH_SHORT).show();
                 }
 
             }

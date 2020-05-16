@@ -103,7 +103,7 @@ public class SettingsActivity extends AppCompatActivity {
                         startActivity(getIntent());
                         overridePendingTransition( 0, 0);
                         Toast.makeText(getApplicationContext(), "Srpski!",
-                                Toast.LENGTH_LONG).show();
+                                Toast.LENGTH_SHORT).show();
 
 
 
@@ -117,7 +117,7 @@ public class SettingsActivity extends AppCompatActivity {
                         startActivity(getIntent());
                         overridePendingTransition( 0, 0);
                         Toast.makeText(getApplicationContext(), "English!",
-                                Toast.LENGTH_LONG).show();
+                                Toast.LENGTH_SHORT).show();
                     }
                 }
             }
