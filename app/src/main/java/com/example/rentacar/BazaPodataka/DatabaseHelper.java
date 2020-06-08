@@ -58,7 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String createIndexAutomobil = "create unique index AUTOMOBIL_PK on " + AUTOMOBIL_TABLE + " (\n" +
                 "AUTOMOBIL_ID ASC);";
 
-        String createKorisnik =  "CREATE TABLE " + KOMENTAR_TABLE + " (KORISNIK_ID integer PRIMARY KEY AUTOINCREMENT not null, KORISNIK_IME varchar(50) not null," +
+        String createKorisnik =  "CREATE TABLE " + KORISNIK_TABLE + " (KORISNIK_ID integer PRIMARY KEY AUTOINCREMENT not null, KORISNIK_IME varchar(50) not null," +
                 "   KORISNIK_PREZIME     varchar(50)                    not null,\n" +
                 "   KORISNIK_EMAIL       varchar(50)                    not null,\n" +
                 "   KORISNIK_BR_TEL      varchar(20)                    not null,\n" +
@@ -782,7 +782,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 email = cursor.getString(cursor.getColumnIndex("FIRMA_EMAIL"));
             } while(cursor.moveToNext());
         }
-
         return email;
     }
 

@@ -120,6 +120,7 @@ public class RentActivity extends AppCompatActivity {
         kilometraza = (TextView) findViewById(R.id.iznajmiKilometraza);
         cijenaPoDanu = (TextView) findViewById(R.id.iznajmiCijenaPoDanu);
         ukupnaCijena =  (TextView) findViewById(R.id.rentUkupnaCijena);
+        String pobrisiPrethodnuCijenu = ukupnaCijena.getText().toString();
         iznajmiAutomobil = (Button) findViewById(R.id.rentIznajmi);
         datumUzimanja = (DatePicker) findViewById(R.id.rentDatumUzimanja);
         datumVracanja = (DatePicker) findViewById(R.id.rentDatumVracanja);
@@ -143,9 +144,11 @@ public class RentActivity extends AppCompatActivity {
         boja.setText(iznajmiBoja.getText() + " " + podaci.get("boja"));
         godiste.setText(iznajmiGodiste.getText() + " " + podaci.get("godiste"));
         kilometraza.setText(iznajmiKilometraza.getText() + " " + podaci.get("kilometraza") + " km");
-        cijenaPoDanu.setText(iznajmiCijenaPoDanu.getText() + ":" + "  " + podaci.get("cijena") + " €/dan");
+        cijenaPoDanu.setText(iznajmiCijenaPoDanu.getText() + "" + "  " + podaci.get("cijena") + " €/dan");
 
         int cijena = Integer.parseInt(podaci.get("cijena"));
+
+        ukupnaCijena.setText(ukupnaCijena.getText() + " " + podaci.get("cijena") + "€");
 
         datumVracanja.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
             @Override
@@ -162,6 +165,7 @@ public class RentActivity extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                ukupnaCijena.setText(pobrisiPrethodnuCijenu);
                 ukupnaCijena.setText(ukupnaCijena.getText() + " " + Integer.toString(izracunajUkupnuCijenu(datum1, datum2, cijena)) + "€");
             }
         });
@@ -184,11 +188,23 @@ public class RentActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                db.iznajmiAutomobil(Integer.parseInt(sesija.getKorisnikId()), faId, datumEvidencije, datum1, datum2);
-                //db.setStatusAutomobil(faId);   samo podesiti u ovoj metodi da se promijeni status automobila u bazi
-                Toast.makeText(RentActivity.this,"Uspjesno ste iznajmili automobil!",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), MasterViewActivity.class);
-                startActivityForResult(intent, 0);
+//                if(datumVracanja.getYear() < datumUzimanja.getYear() || datumUzimanja.getMonth() > datumVracanja.getMonth() || datumUzimanja.getDayOfMonth() > datumVracanja.getDayOfMonth()){
+//                    Toast.makeText(RentActivity.this,"Ne moze datum iznajmljivanja biti prije danasnjeg datuma!",Toast.LENGTH_SHORT).show();
+//                }
+                if(datum2.before(datum1)){
+                    Toast.makeText(RentActivity.this,"Ne moze datum vracanja biti prije datuma iznajmljivanja!",Toast.LENGTH_SHORT).show();
+                }
+//                else if(datum1.before(datumEvidencije)){
+//                    Toast.makeText(RentActivity.this,"Ne moze datum iznajmljivanja biti prije danasnjeg datuma!",Toast.LENGTH_SHORT).show();
+//               }
+                else{
+                    db.iznajmiAutomobil(Integer.parseInt(sesija.getKorisnikId()), faId, datumEvidencije, datum1, datum2);
+                    //db.setStatusAutomobil(faId);   //samo podesiti u ovoj metodi da se promijeni status automobila u bazi
+                    Toast.makeText(RentActivity.this,"Uspjesno ste iznajmili automobil!",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), MasterViewActivity.class);
+                    startActivityForResult(intent, 0);
+                }
+
             }
         });
     }
@@ -201,6 +217,8 @@ public class RentActivity extends AppCompatActivity {
 
     public int izracunajUkupnuCijenu(Date datumUzimanja, Date datumVracanja, int cijenaPoDanu) {
         int brojDana = Datum.getBrojDana(datumUzimanja, datumVracanja);
+        if(brojDana == 0)
+            brojDana = 1;
         return brojDana * cijenaPoDanu;
     }
 

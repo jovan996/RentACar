@@ -28,6 +28,7 @@ public class KomentarViewAdapter extends BaseAdapter {
         this.context=context;
         this.listaModel = new ArrayList<>(listaModel);
         this.inflater=LayoutInflater.from(context);
+
     }
 
     public class ViewHolder{

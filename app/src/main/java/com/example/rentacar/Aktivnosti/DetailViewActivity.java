@@ -222,7 +222,7 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
         email.append(" " + db.setujEmail(id));
 
         brojTelefona.append(" " + db.setujBrTelefona(id));
-
+        listView= findViewById(R.id.detailViewKomentari);
         listaKomentara = db.getKomentari(id);
         komentarViewAdapter=new KomentarViewAdapter(this, listaKomentara); //samo za potrebe testiranja posto jos nemamo bazu
         listView.setAdapter(komentarViewAdapter);

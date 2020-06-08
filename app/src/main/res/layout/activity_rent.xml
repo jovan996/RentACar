@@ -161,7 +161,7 @@
                 android:id="@+id/rentUkupnaCijena"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ukupna cijena: "
+                android:text="@string/ukupna_cijena"
                 android:textSize="20sp"
                 />
 
