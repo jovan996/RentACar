@@ -41,7 +41,7 @@ public class DrawerUtil {
 
         switch (AppCompatDelegate.getDefaultNightMode()){
             case AppCompatDelegate.MODE_NIGHT_YES:
-                backgroundColor= 0xFF080808;
+                backgroundColor= 0xFF1F1B24;
                 textColor= Color.LTGRAY;
                 pocetnaSlika= R.drawable.ic_home_black_24dp_siva;
                 prijavaSlika=R.drawable.ic_account_circle_black_24dp_siva;

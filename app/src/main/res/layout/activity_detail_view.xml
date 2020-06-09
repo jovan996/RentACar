@@ -154,8 +154,8 @@
                     android:text="@string/iznajmi"
                     android:textSize="18sp"
                     android:padding="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@color/svijetloPlava2"/>
+                    android:layout_marginRight="10dp" />
+<!--                    android:background="@color/svijetloPlava2"/>-->
 
             </LinearLayout>
 

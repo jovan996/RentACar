@@ -151,9 +151,9 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
         brojVrata = (TextView) findViewById(R.id.detailViewBrojVrata);
         kubikaza = (TextView) findViewById(R.id.detailViewKubikaza);
         tipMotora= (TextView) findViewById(R.id.detailViewMotor);
-        snagaMotora = (TextView) findViewById(R.id.detailViewSnagaMotora);
+        snagaMotora = findViewById(R.id.detailViewSnagaMotora);
         boja= (TextView) findViewById(R.id.detailViewBoja);
-        godiste= (TextView) findViewById(R.id.detailViewGodiste);
+        godiste= findViewById(R.id.detailViewGodiste);
         kilometraza = (TextView) findViewById(R.id.detailViewKilometraza);
         cijenaPoDanu = (TextView) findViewById(R.id.detailViewCijeniPoDanu);
         omiljeni = (CheckBox) findViewById(R.id.detailViewCekirajOmiljeni);
