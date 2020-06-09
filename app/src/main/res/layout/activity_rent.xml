@@ -173,8 +173,8 @@
                 android:padding="10dp"
                 android:text="Iznajmi"
                 android:textSize="18sp"
-                android:layout_gravity="right"
-                android:background="@color/svijetloPlava2"/>
+                android:layout_gravity="right" />
+<!--                android:background="@color/svijetloPlava2"/>-->
 
         </LinearLayout>
 

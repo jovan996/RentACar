@@ -42,12 +42,12 @@
         <Button
             android:id="@+id/prikaziDetalje"
             android:layout_width="wrap_content"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginRight="7dp"
             android:layout_marginBottom="10dp"
             android:padding="6dp"
             android:text="@string/prikazi_detalje"
-            android:textSize="10sp" />
+            android:textSize="15sp" />
 <!--            android:background="@color/svijetloPlava2"-->
 
     </LinearLayout>

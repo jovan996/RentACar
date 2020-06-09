@@ -187,8 +187,8 @@
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
-                android:padding="6dp"
-                android:background="@color/svijetloPlava2">
+                android:padding="6dp">
+<!--                android:background="@color/svijetloPlava2">-->
             </Button>
 
         </LinearLayout>
