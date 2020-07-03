@@ -24,7 +24,7 @@
     <string name="godiste">Godiste:</string>
     <string name="kilometraza">Kilometraza:</string>
     <string name="cijena_po_danu">Cijena po danu:</string>
-    <string name="ocijeni_automobil">Ocijeni automobil</string>
+    <string name="ocijeni_automobil">Ocijeni automobil(prosjecna ocjena)</string>
     <string name="firma">Firma</string>
     <string name="ovdje_ide_neki_opis_firme">Ovdje ide neki opis firme</string>
     <string name="grad">Grad:</string>
@@ -107,6 +107,7 @@
     <string name="cijena">Cijena</string>
     <string name="dan_d">dan</string>
     <string name="poruka_niste_iznajmili">Niste ispunili uslove da ocijenite auto!</string>
+    <string name="poruka_niste_komentar">Niste ispunili uslove da komentarisete auto!</string>
     <string name="firma_naslov">Firma</string>
     <string name="ukupna_cijena">Ukupna cijena:</string>
 </resources>

@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:id="@+id/rootRL"-->
+<!--    android:orientation="vertical"-->
+<!--    android:layout_width="fill_parent"-->
+<!--    android:layout_height="fill_parent"-->
+<!--    android:background="@drawable/audi_a6">-->
+<!--</RelativeLayout>-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,12 +13,13 @@
     android:layout_height="match_parent"
     tools:context=".Aktivnosti.LoginActivity"
     android:orientation="vertical">
+<!--    android:background="@drawable/bmw_x3_2">-->
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/loginToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"/>
+        android:background="@color/colorPrimaryDark"/>
 
     <TextView
         android:id="@+id/emailLogin"
@@ -88,6 +96,7 @@
             android:padding="5dp"
             android:layout_marginTop="30dp"
             android:layout_gravity="right"
+
             android:text="@string/prijavi_se">
 <!--            android:background="@color/svijetloPlava2">-->
         </Button>

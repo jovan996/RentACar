@@ -24,7 +24,7 @@
     <string name="godiste">Year of production:</string>
     <string name="kilometraza">Mileage:</string>
     <string name="cijena_po_danu">Price per day:</string>
-    <string name="ocijeni_automobil">Rate the car</string>
+    <string name="ocijeni_automobil">Rate the car(average grade)</string>
     <string name="firma">The firm</string>
     <string name="ovdje_ide_neki_opis_firme">Description of the company</string>
     <string name="grad">Sity:</string>
@@ -106,7 +106,8 @@
     <string name="poruka_mora_se_logovati">Please login first!</string>
     <string name="cijena">Price</string>
     <string name="dan_d">day</string>
-    <string name="poruka_niste_iznajmili">Niste ispunili uslove da ocijenite auto!</string>
+    <string name="poruka_niste_iznajmili">You did not meet the conditions to rate the car!</string>
+    <string name="poruka_niste_komentar">You did not meet the conditions to comment the car!</string>
     <string name="firma_naslov">The firm</string>
     <string name="ukupna_cijena">Total price:</string>
 </resources>
