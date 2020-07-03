@@ -9,8 +9,11 @@ import android.nfc.Tag;
 import android.util.Log;
 
 import com.example.rentacar.Modeli.AutomobilItemModel;
+import com.example.rentacar.Modeli.KomentarDTO;
 import com.example.rentacar.Modeli.KomentarItemModel;
 import com.example.rentacar.Modeli.FirmaModel;
+import com.example.rentacar.Modeli.KomentarModel;
+import com.example.rentacar.Modeli.OcjenaModel;
 import com.example.rentacar.utils.Hesiranje;
 import com.example.rentacar.utils.Session;
 import com.example.rentacar.utils.Validation;
@@ -360,6 +363,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return podaci;
     }
+    public ArrayList<KomentarDTO> getSviKomentari() {
+        SQLiteDatabase sqLiteDb = this.getReadableDatabase();
+        ArrayList<KomentarDTO> listaKomentara = new ArrayList<>();
+
+        Cursor cursor = sqLiteDb.rawQuery("SELECT * FROM " + KOMENTAR_TABLE, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(cursor.getColumnIndex("KOMENTAR_ID"));
+                int fa_id = cursor.getInt(cursor.getColumnIndex("FA_ID"));
+                String komNslov = cursor.getString(cursor.getColumnIndex("KOMENTAR_NASLOV"));
+                String komTekst = cursor.getString(cursor.getColumnIndex("KOMENTAR_TEKST"));
+                int korId = cursor.getInt(cursor.getColumnIndex("KOMENTAR_ID"));
+
+
+                listaKomentara.add(new KomentarDTO(id,korId,fa_id,komTekst,komNslov));
+            } while (cursor.moveToNext());
+        }
+
+        return listaKomentara;
+    }
 
     public ArrayList<KomentarItemModel> getKomentari(int faId) {
         SQLiteDatabase sqLiteDb = this.getReadableDatabase();
@@ -434,6 +458,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             vrednosti.put("OCJENA_BROJ", ocjena);
             sqLiteDb.insert(OCJENA_TABLE, null, vrednosti);
         }
+
+    }
+    public ArrayList<OcjenaModel> getSveOcjene() {
+        SQLiteDatabase sqLiteDb = this.getReadableDatabase();
+        ArrayList<OcjenaModel> listaOcjena = new ArrayList<>();
+
+        Cursor cursor = sqLiteDb.rawQuery("SELECT * FROM " + OCJENA_TABLE, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(cursor.getColumnIndex("OCJENA_ID"));
+                int fa_id = cursor.getInt(cursor.getColumnIndex("FA_ID"));
+                int broj = cursor.getInt(cursor.getColumnIndex("OCJENA_BROJ"));
+                int korId = cursor.getInt(cursor.getColumnIndex("KORISNIK_ID"));
+
+                listaOcjena.add(new OcjenaModel(id,korId,fa_id,broj));
+            } while (cursor.moveToNext());
+        }
+
+        return listaOcjena;
 
     }
     public float uzmiOcjenu(int faId) {

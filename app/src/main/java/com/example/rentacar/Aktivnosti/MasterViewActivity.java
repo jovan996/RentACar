@@ -3,12 +3,23 @@ package com.example.rentacar.Aktivnosti;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -20,6 +31,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import com.example.rentacar.Adapteri.AutomobilViewAdapter;
 import com.example.rentacar.BazaPodataka.DatabaseHelper;
 import com.example.rentacar.Modeli.AutomobilItemModel;
+import com.example.rentacar.Modeli.KomentarDTO;
+import com.example.rentacar.Modeli.OcjenaModel;
 import com.example.rentacar.R;
 import com.example.rentacar.utils.DrawerUtil;
 import com.example.rentacar.utils.Session;
@@ -85,6 +98,8 @@ public class MasterViewActivity  extends AppCompatActivity {
         db = new DatabaseHelper(this);
         SQLiteDatabase database = db.getWritableDatabase();
 
+        Task task=new Task();
+        task.execute();
         //SQLiteDatabase database = db.getReadableDatabase();
 
         ButterKnife.bind(this);
@@ -163,4 +178,77 @@ public class MasterViewActivity  extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    private class Task extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            String ip="192.168.1.8";
+            Boolean s1=false;
+            Boolean s2=false;
+            ArrayList<KomentarDTO> komentari = db.getSviKomentari();
+            String url= "http://"+ip+":11000/syncKomentari";
+            RestTemplate restTemplate = new RestTemplate();
+            try {
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/json");
+                HttpEntity<ArrayList<KomentarDTO>> entity = new HttpEntity<ArrayList<KomentarDTO>>(komentari, headers);
+                ResponseEntity<KomentarDTO> response = restTemplate.exchange(url, HttpMethod.POST, entity, KomentarDTO.class);
+                HttpStatus status = response.getStatusCode();
+                if (status == HttpStatus.OK) {
+                    s1=true;
+                }
+            } catch (Exception e) {
+                System.out.println(e.getLocalizedMessage());
+                MasterViewActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MasterViewActivity.this, R.string.sync_neuspjesno,Toast.LENGTH_SHORT).show();
+                    }
+                });
+                return null;
+            }
+
+            ArrayList<OcjenaModel> ocjene = db.getSveOcjene();
+            url= "http://"+ip+":11000/syncOcjene";
+            try {
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Type", "application/json");
+                HttpEntity<ArrayList<OcjenaModel>> entity = new HttpEntity<ArrayList<OcjenaModel>>(ocjene, headers);
+                ResponseEntity<OcjenaModel> response = restTemplate.exchange(url, HttpMethod.POST, entity, OcjenaModel.class);
+                HttpStatus status = response.getStatusCode();
+                if (status == HttpStatus.OK) {
+                    s2=true;
+
+                }
+            } catch (Exception e) {
+                System.out.println(e.getLocalizedMessage());
+                MasterViewActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MasterViewActivity.this, R.string.sync_neuspjesno,Toast.LENGTH_SHORT).show();
+                    }
+                });
+                return null;
+            }
+            if (s1 && s2){
+                MasterViewActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MasterViewActivity.this, R.string.sync_uspjesno,Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else {
+                MasterViewActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MasterViewActivity.this, R.string.sync_neuspjesno,Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+            return null;
+
+        }
+    }
 }

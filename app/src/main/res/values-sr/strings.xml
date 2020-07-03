@@ -93,6 +93,9 @@
         <item>Srpski</item>
         <item>English</item>
     </string-array>
+    <string name="sync_uspjesno">Uspjesna sinhronizacija</string>
+    <string name="sync_neuspjesno">Neuspjesna sinhronizacija</string>
+
     <string name="language_prompt">Izaberite jezik</string>
     <string name="odjava">Odjava</string>
     <string name="serijski_broj">7A85BX9A55Q</string>

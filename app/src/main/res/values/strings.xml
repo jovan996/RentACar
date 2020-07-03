@@ -92,6 +92,8 @@
         <item>English</item>
     </string-array>
     <string name="language_prompt">Izaberite jezik</string>
+    <string name="sync_uspjesno">Uspjesna sinhronizacija</string>
+    <string name="sync_neuspjesno">Neuspjesna sinhronizacija</string>
 
     <string name="odjava">Odjava</string>
     <string name="marka_model">Marka model</string>
