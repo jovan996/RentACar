@@ -883,7 +883,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             sb.append(sb.toString() == "" ? " Lozinka" : " ,Lozinka");
         }
 
-        if (!status) {
+        if (status) {
             SQLiteDatabase sqLiteDb = this.getWritableDatabase();
             String salt = Hesiranje.generateSalt(32);
             ContentValues vrednosti = new ContentValues();
@@ -918,7 +918,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             sb.append(sb.toString() == "" ? " Lozinka" : " ,Lozinka");
         }
 
-        if (!status) {
+        if (status) {
 
             Cursor cursor = sqLiteDb.rawQuery("SELECT KORISNIK_ID, KORISNIK_EMAIL, KORISNIK_LOZINKA, KORISNIK_SALT " +
                     "FROM " + KORISNIK_TABLE + " WHERE KORISNIK_EMAIL = '" + email + "'", null);
