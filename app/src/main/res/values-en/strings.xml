@@ -89,6 +89,9 @@
     <string name="promijenite_temu_aplikacije">Change the theme</string>
     <string name="tema">The theme</string>
 
+    <string name="sync_uspjesno">Successful sunchronisation</string>
+    <string name="sync_neuspjesno">Unsuccessful sunchronisation</string>
+
     <string-array name="language_arrays">
         <item>Srpski</item>
         <item>English</item>
