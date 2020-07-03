@@ -22,6 +22,7 @@
         <activity android:name=".Aktivnosti.LoginActivity" />
         <activity android:name=".Aktivnosti.AboutActivity" />
         <activity android:name=".Aktivnosti.AboutAppActivity" />
+        <activity android:name=".Aktivnosti.OmiljeniActivity" />
         <activity
             android:name=".Aktivnosti.DetailViewActivity"
             android:parentActivityName="Aktivnosti.MasterViewActivity" />

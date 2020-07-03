@@ -113,4 +113,5 @@
     <string name="poruka_niste_komentar">Niste ispunili uslove da komentarisete auto!</string>
     <string name="firma_naslov">Firma</string>
     <string name="ukupna_cijena">Ukupna cijena:</string>
+    <string name="omiljeni">Omiljeni</string>
 </resources>

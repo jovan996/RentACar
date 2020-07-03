@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.rentacar.Aktivnosti.LoginActivity;
 import com.example.rentacar.Aktivnosti.MasterViewActivity;
+import com.example.rentacar.Aktivnosti.OmiljeniActivity;
 import com.example.rentacar.Aktivnosti.RegisterActivity;
 import com.example.rentacar.Aktivnosti.SettingsActivity;
 import com.mikepenz.materialdrawer.Drawer;
@@ -38,6 +39,7 @@ public class DrawerUtil {
         int registracijaSlika = 0;
         int podesavanjeSlika = 0;
         int odjavaSlika = 0;
+        int omiljeniSlika = 0;
 
         switch (AppCompatDelegate.getDefaultNightMode()){
             case AppCompatDelegate.MODE_NIGHT_YES:
@@ -48,6 +50,7 @@ public class DrawerUtil {
                 registracijaSlika= R.drawable.ic_account_box_black_24dp_siva;
                 podesavanjeSlika=R.drawable.ic_settings_black_24dp_siva;
                 odjavaSlika= R.drawable.ic_subdirectory_arrow_right_black_24dp_siva;
+                omiljeniSlika = R.drawable.ic_subdirectory_arrow_right_black_24dp_siva;
                 break;
             default:
                 backgroundColor= Color.WHITE;
@@ -57,6 +60,7 @@ public class DrawerUtil {
                 registracijaSlika= R.drawable.ic_account_box_black_24dp;
                 podesavanjeSlika=R.drawable.ic_settings_black_24dp;
                 odjavaSlika= R.drawable.ic_subdirectory_arrow_right_black_24dp;
+                omiljeniSlika= R.drawable.ic_subdirectory_arrow_right_black_24dp;
                 break;
 
         }
@@ -71,6 +75,8 @@ public class DrawerUtil {
                 .withName(R.string.podesavanja).withIcon(podesavanjeSlika).withTextColor(textColor);
         PrimaryDrawerItem drawerItemOdjava = new PrimaryDrawerItem().withIdentifier(5)
                 .withName(R.string.odjava).withIcon(odjavaSlika).withTextColor(textColor);
+        PrimaryDrawerItem drawerItemOmiljeni = new PrimaryDrawerItem().withIdentifier(6)
+                .withName(R.string.omiljeni).withIcon(omiljeniSlika).withTextColor(textColor);
 
         String id = sesija.getKorisnikId();
         if (id == null || id.equals("")) {
@@ -136,7 +142,8 @@ public class DrawerUtil {
                             new DividerDrawerItem(),
                             drawerItemPocetna,
                             drawerItemOdjava,
-                            drawerItemPodesavanja
+                            drawerItemPodesavanja,
+                            drawerItemOmiljeni
                     )
                     .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                         @Override
@@ -154,6 +161,11 @@ public class DrawerUtil {
                             if (drawerItem.getIdentifier() == 5) {
                                 sesija.destroy();
                                 Intent intent = new Intent(activity, MasterViewActivity.class);
+                                view.getContext().startActivity(intent);
+                            }
+
+                            if (drawerItem.getIdentifier() == 6) {
+                                Intent intent = new Intent(activity, OmiljeniActivity.class);
                                 view.getContext().startActivity(intent);
                             }
 

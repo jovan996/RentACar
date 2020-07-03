@@ -113,4 +113,5 @@
     <string name="poruka_niste_komentar">You did not meet the conditions to comment the car!</string>
     <string name="firma_naslov">The firm</string>
     <string name="ukupna_cijena">Total price:</string>
+    <string name="omiljeni">Favorite</string>
 </resources>
