@@ -22,10 +22,13 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.rentacar.Adapteri.AutomobilViewAdapter;
 import com.example.rentacar.Adapteri.KomentarViewAdapter;
+import com.example.rentacar.Adapteri.SlideAdapter;
 import com.example.rentacar.BazaPodataka.DatabaseHelper;
+import com.example.rentacar.Modeli.AutomobilItemModel;
 import com.example.rentacar.Modeli.FirmaModel;
 import com.example.rentacar.Modeli.KomentarItemModel;
 import com.example.rentacar.R;
@@ -127,11 +130,32 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_view);
 
+        Intent intent = getIntent();
+        int id = intent.getIntExtra("faId",0);
+
         toolbar = (Toolbar) findViewById(R.id.detailToolbar);
         toolbar.setTitle(R.string.detalji_automobila);
         setSupportActionBar(toolbar);
 
         db = new DatabaseHelper(this);
+
+        ArrayList<AutomobilItemModel> lista = db.getAutomobili();
+        ArrayList<Integer> slike = new ArrayList<Integer>();
+
+        for (AutomobilItemModel a : lista){
+            if (a.getFaId()==id){
+                String putanjaId = a.getSlikaPutanja().replace("R.drawable.", "");
+                int idslike = getResources().getIdentifier(putanjaId, "drawable", getPackageName());
+
+                slike.add(idslike);
+            }
+        }
+
+        ViewPager viewPager = findViewById(R.id.slide);
+
+        SlideAdapter slideAdapter = new SlideAdapter(this, slike);
+
+        viewPager.setAdapter(slideAdapter);
 
 
         /* ZA BACK DUGME */
@@ -145,7 +169,7 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
         db = new DatabaseHelper(this);
 
         listView = (ListView)findViewById(R.id.detailViewKomentari);
-        slika=(ImageView) findViewById(R.id.detailViewGlavnaSlika);
+        //slika=(ImageView) findViewById(R.id.detailViewGlavnaSlika);
         naslov =(TextView) findViewById(R.id.detailViewNaslov);
         brojSjedista = (TextView) findViewById(R.id.detailViewBrojSedista);
         brojVrata = (TextView) findViewById(R.id.detailViewBrojVrata);
@@ -180,8 +204,7 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
 //            listaKomentara.add(model);
 //        }
 
-        Intent intent = getIntent();
-        int id = intent.getIntExtra("faId",0);
+
         
         int c = db.setujCijenuPoDanu(id);
         cijenaPoDanu.append(" " + Integer.toString(c));
