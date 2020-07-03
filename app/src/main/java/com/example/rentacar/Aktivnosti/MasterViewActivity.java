@@ -131,7 +131,7 @@ public class MasterViewActivity  extends AppCompatActivity {
 
         listaAutomobila = db.getAutomobili();
 
-        automobilViewAdapter = new AutomobilViewAdapter(this, listaAutomobila);
+        automobilViewAdapter = new AutomobilViewAdapter(this, filtriraj(listaAutomobila));
         listView.setAdapter(automobilViewAdapter);
 
         //db.obrisiBazu(this);
@@ -250,5 +250,20 @@ public class MasterViewActivity  extends AppCompatActivity {
             return null;
 
         }
+    }
+
+    private ArrayList<AutomobilItemModel> filtriraj(ArrayList<AutomobilItemModel> lista){
+        ArrayList<AutomobilItemModel> pom= new ArrayList<AutomobilItemModel>();
+
+        for(AutomobilItemModel a : lista){
+            boolean t=false;
+            for(AutomobilItemModel b : pom) {
+                if (a.getFaId()==b.getFaId())
+                    t=true;
+            }
+            if(!t)
+                pom.add(a);
+        }
+        return pom;
     }
 }
