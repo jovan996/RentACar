@@ -43,4 +43,3 @@ Aplikacija raspolaže sledećim funkcionalnostima:
 
    - odabir jezika
    - odabir teme
-   - promjena velicine fonta

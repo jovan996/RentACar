@@ -183,7 +183,7 @@ public class MasterViewActivity  extends AppCompatActivity {
     private class Task extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
-            String ip="192.168.1.8";
+            String ip="192.168.56.1";
             Boolean s1=false;
             Boolean s2=false;
             ArrayList<KomentarDTO> komentari = db.getSviKomentari();

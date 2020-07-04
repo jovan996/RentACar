@@ -114,4 +114,5 @@
     <string name="firma_naslov">The firm</string>
     <string name="ukupna_cijena">Total price:</string>
     <string name="omiljeni">Favorite</string>
+    <string name="iznajmljivanjeUspjesnoPoruka">You have successfully rented a car!</string>
 </resources>

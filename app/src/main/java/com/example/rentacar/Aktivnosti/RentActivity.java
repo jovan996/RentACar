@@ -200,7 +200,7 @@ public class RentActivity extends AppCompatActivity {
                 else{
                     db.iznajmiAutomobil(Integer.parseInt(sesija.getKorisnikId()), faId, datumEvidencije, datum1, datum2);
                     //db.setStatusAutomobil(faId);   //samo podesiti u ovoj metodi da se promijeni status automobila u bazi
-                    Toast.makeText(RentActivity.this,"Uspjesno ste iznajmili automobil!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RentActivity.this, R.string.iznajmljivanjeUspjesnoPoruka ,Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), MasterViewActivity.class);
                     startActivityForResult(intent, 0);
                 }
