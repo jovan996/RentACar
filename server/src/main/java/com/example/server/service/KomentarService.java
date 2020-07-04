@@ -22,4 +22,7 @@ public class KomentarService {
 	public List<Komentar> saveAll(List<Komentar> lista){
 		return repo.saveAll(lista);
 	}
+	public Komentar save(Komentar kom){
+		return repo.save(kom);
+	}
 }

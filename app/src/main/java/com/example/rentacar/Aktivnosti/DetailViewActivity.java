@@ -413,7 +413,7 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
             return;
         }
 
-        int totalHeight = listAdapter.getCount()*200;
+        int totalHeight = listAdapter.getCount()*300;
 
 
         ViewGroup.LayoutParams params = listView.getLayoutParams();

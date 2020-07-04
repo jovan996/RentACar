@@ -41,7 +41,22 @@ public class SyncController {
 	@RequestMapping(value = "/syncKomentari", method = RequestMethod.POST)
 	public ResponseEntity<List<Komentar>> syncKomentari(@RequestBody List<Komentar> komentari) {
 		
-		List<Komentar> pom=komentarService.saveAll(komentari);
+		List<Komentar> lista  = komentarService.getAllKomentari();
+		int brojac = 0;
+		
+		for(Komentar kom : komentari){			
+			for(Komentar ll : lista){
+				if(kom.getKomentarId() == ll.getKomentarId()){
+					brojac++;
+				}
+			}
+			if(brojac == 0){
+				komentarService.save(kom);
+			}
+			brojac = 0;
+		}
+		
+		//List<Komentar> pom=komentarService.saveAll(komentari);
 		System.out.println("fddfdfdf");
 		
 			return new ResponseEntity<>(HttpStatus.OK);
@@ -51,7 +66,23 @@ public class SyncController {
 	@RequestMapping(value = "/syncOcjene", method = RequestMethod.POST)
 	public ResponseEntity<List<Ocjena>> syncOcjene(@RequestBody List<Ocjena> komentari) {
 		
-		List<Ocjena> pom=ocjenaService.saveAll(komentari);
+		List<Ocjena> lista  = ocjenaService.getAllOcjene();
+		int brojac = 0;
+		
+		for(Ocjena kom : komentari){			
+			for(Ocjena ll : lista){
+				if(kom.getOcjenaId() == ll.getOcjenaId()){
+					brojac++;
+				}
+			}
+			if(brojac == 0){
+				ocjenaService.save(kom);
+			}
+			brojac = 0;
+		}
+		
+		
+		//List<Ocjena> pom=ocjenaService.saveAll(komentari);
 		System.out.println("fddfdfdf");
 		
 			return new ResponseEntity<>(HttpStatus.OK);

@@ -50,7 +50,7 @@ public class DrawerUtil {
                 registracijaSlika= R.drawable.ic_account_box_black_24dp_siva;
                 podesavanjeSlika=R.drawable.ic_settings_black_24dp_siva;
                 odjavaSlika= R.drawable.ic_subdirectory_arrow_right_black_24dp_siva;
-                omiljeniSlika = R.drawable.favorite_foreground;
+                omiljeniSlika = R.drawable.favorite1_background;
                 break;
             default:
                 backgroundColor= Color.WHITE;
@@ -60,7 +60,7 @@ public class DrawerUtil {
                 registracijaSlika= R.drawable.ic_account_box_black_24dp;
                 podesavanjeSlika=R.drawable.ic_settings_black_24dp;
                 odjavaSlika= R.drawable.ic_subdirectory_arrow_right_black_24dp;
-                omiljeniSlika= R.drawable.favorite_background;
+                omiljeniSlika= R.drawable.favorite_foreground111;
                 break;
 
         }

@@ -929,12 +929,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         StringBuilder sb = new StringBuilder();
         sb.append("");
 
-        if (Validation.valIme(ime)) {
+        if (!Validation.valIme(ime)) {
             status = false;
             sb.append(" Ime");
         }
 
-        if (Validation.valPrezime(prezime)) {
+        if (!Validation.valPrezime(prezime)) {
             status = false;
             sb.append(sb.toString() == "" ? " Prezime" : " ,Prezime");
         }
@@ -944,17 +944,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             sb.append(sb.toString() == "" ? " Email" : " ,Email");
         }
 
-        if (Validation.valBrojTelefona(brojTelefona)) {
+        if (!Validation.valBrojTelefona(brojTelefona)) {
             status = false;
             sb.append(sb.toString() == "" ? " Broj telefona" : " ,Broj telefona");
         }
 
-        if (Validation.valJMBG(jmbg)) {
+        if (!Validation.valJMBG(jmbg)) {
             status = false;
             sb.append(sb.toString() == "" ? " JMBG" : " ,JMBG");
         }
 
-        if (Validation.valLozinka(lozinka)) {
+        if (!Validation.valLozinka(lozinka)) {
             status = false;
             sb.append(sb.toString() == "" ? " Lozinka" : " ,Lozinka");
         }
@@ -989,7 +989,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             sb.append(sb.toString() == "" ? " Email" : " ,Email");
         }
 
-        if (Validation.valLozinka(lozinka)) {
+        if (!Validation.valLozinka(lozinka)) {
             status = false;
             sb.append(sb.toString() == "" ? " Lozinka" : " ,Lozinka");
         }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.server.model.Komentar;
 import com.example.server.model.Ocjena;
 import com.example.server.repository.OcjenaRepository;
 
@@ -20,5 +21,8 @@ public class OcjenaService {
 	
 	public List<Ocjena> saveAll(List<Ocjena> lista){
 		return repo.saveAll(lista);
+	}
+	public Ocjena save(Ocjena kom){
+		return repo.save(kom);
 	}
 }
