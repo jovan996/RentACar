@@ -12,7 +12,7 @@ REST server je implementiran uz oslonac na Spring Boot radni okvir koji se nalaz
 
 Uputstvo za pokretanje servera:
 
-- pokrenuti na portu 11000
+- pokrenuti server na portu 11000
 
 ***„ Rent A Car “*** je mobilna aplikacija namijenjena prvenstveno za rezervaciju automobila.
 
