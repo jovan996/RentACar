@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -249,6 +250,7 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
         listaKomentara = db.getKomentari(id);
         komentarViewAdapter=new KomentarViewAdapter(this, listaKomentara); //samo za potrebe testiranja posto jos nemamo bazu
         listView.setAdapter(komentarViewAdapter);
+        setListViewHeightBasedOnChildren(listView);
 
         if(!sesija.getKorisnikId().equals("") && sesija.getKorisnikId()!=null){
             flagOmiljeni = db.daLiJeOmiljeni(Integer.parseInt(sesija.getKorisnikId()), id);
@@ -403,5 +405,20 @@ public class DetailViewActivity extends AppCompatActivity implements OnMapReadyC
             mapAPI.addMarker(new MarkerOptions().position(Gacko).title("Gacko"));
             mapAPI.moveCamera(CameraUpdateFactory.newLatLngZoom(Gacko, 10));
         }
+    }
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        KomentarViewAdapter listAdapter = (KomentarViewAdapter) listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
+
+        int totalHeight = listAdapter.getCount()*200;
+
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+        listView.requestLayout();
     }
 }
