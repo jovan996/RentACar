@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -533,6 +534,81 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
         else
             return false;
+    }
+
+    public ArrayList<AutomobilItemModel> listaOmiljenih(int korisnikId) {
+        int korId = 0;
+        List<Integer> listaID_FA = new ArrayList<>();
+
+
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT KORISNIK_ID, FA_ID " +
+                "FROM " + OMILJENI_TABLE + " WHERE KORISNIK_ID = '" + korisnikId + "'" , null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                listaID_FA.add(cursor.getInt(cursor.getColumnIndex("FA_ID")));
+            } while (cursor.moveToNext());
+        }
+
+
+       List<Integer> ID_auta = new ArrayList<>();
+        ID_auta = idAuta(listaID_FA);
+//        ArrayList<AutomobilItemModel> listaAutomobila = new ArrayList<>();
+//        listaAutomobila = getOmiljeniAutomobili(ID_auta);
+        return getOmiljeniAutomobili(ID_auta);
+       // return ID_auta;
+    }
+    public ArrayList<AutomobilItemModel> getOmiljeniAutomobili(List idAuta) {
+
+        ArrayList<AutomobilItemModel> listaAutomobila = new ArrayList<>();
+        int y = 2;
+        List<Integer> pomLista = new ArrayList<>();
+        for (Object faid : idAuta){
+            pomLista.add((Integer) faid);
+        }
+        for(int m : pomLista) {
+            SQLiteDatabase sqLiteDb = this.getReadableDatabase();
+
+            Cursor cursor = sqLiteDb.rawQuery("SELECT * FROM " + AUTOMOBIL_TABLE + " as a INNER JOIN "
+                    + FIRMA_AUTOMOBIL_TABLE + " as fa ON a.AUTOMOBIL_ID = fa.AUTOMOBIL_ID" +
+                    " INNER JOIN " + SLIKA_TABLE + " as s ON fa.FA_ID = s.FA_ID WHERE a.AUTOMOBIL_ID = " + m + ";", null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    int id = cursor.getInt(cursor.getColumnIndex("FA_ID"));
+                    String marka = cursor.getString(cursor.getColumnIndex("AUTOMOBIL_MARKA"));
+                    String model = cursor.getString(cursor.getColumnIndex("AUTOMOBIL_MODEL"));
+                    String slikaPutanja = cursor.getString(cursor.getColumnIndex("SLIKA_PUTANJA"));
+                    int cijenaPoDanu = cursor.getInt(cursor.getColumnIndex("CENA_PO_DANU"));
+                    listaAutomobila.add(new AutomobilItemModel(id, marka, model, cijenaPoDanu, slikaPutanja));
+                } while (cursor.moveToNext());
+            }
+        }
+
+        return listaAutomobila;
+    }
+    public List idAuta(List listaID){
+
+        List<Integer> pomLista = new ArrayList<>();
+        for (Object faid : listaID){
+            pomLista.add((Integer) faid);
+        }
+
+        List<Integer> ID_auta = new ArrayList<>();
+        for (int faid : pomLista){
+        //int b = 2;
+        SQLiteDatabase sqLiteDb = this.getWritableDatabase();
+        Cursor cursor = sqLiteDb.rawQuery("SELECT AUTOMOBIL_ID " +
+                "FROM " + FIRMA_AUTOMOBIL_TABLE + " WHERE FA_ID = '" + faid + "'", null);
+
+        if (cursor.moveToFirst()){
+            do {
+                ID_auta.add(cursor.getInt(cursor.getColumnIndex("AUTOMOBIL_ID")));
+            } while(cursor.moveToNext());
+        }
+        }
+        return ID_auta;
     }
 
     public void dodajKomentarUBazu(String textKomentara, String naslovKomentara, int korisnikId, int faId){

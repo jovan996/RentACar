@@ -3,6 +3,7 @@ package com.example.rentacar.Aktivnosti;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -113,48 +114,19 @@ public class OmiljeniActivity extends AppCompatActivity {
         DrawerUtil.getDrawer(this, toolBar, sesija);
 
         listView = findViewById(R.id.listaAutomobila);
+        int idKorisnika = Integer.parseInt(sesija.getKorisnikId());
+        //db.listaOmiljenih(idKorisnika);
 
-        /*identifikatori=new int[]{1,2,3,4,5};                      //ovi nizovi su samo za potrebe testiranja kao i for petlja
-        marke=new String[]{"audi","honda","mercedes","ferarri","citroen"};
-        modeli=new String[]{"a6","civic","s300","k67","c4"};
-        cijene=new int[]{3400,765,987,45,789};
-        slike=new String[]{"R.drawable.slika1","R.drawable.slika2","R.drawable.slika3","R.drawable.slika4","R.drawable.slika5"};
+        listaAutomobila = db.listaOmiljenih(idKorisnika);
+        //listaAutomobila = db.getAutomobili();
 
-        for(int i=0;i<identifikatori.length;i++){
-            AutomobilItemModel a=new AutomobilItemModel(identifikatori[i],marke[i],modeli[i],cijene[i],slike[i]);
-            listaAutomobila.add(a);
-        }*/
-
-        //db.insertAutomobil("audi", "a5", 4, 5, 2000, "benzin", 150);
-
-        listaAutomobila = db.getAutomobili();
-
-        //ovdje
-        //automobilViewAdapter = new AutomobilViewAdapter(this, listaAutomobila);
-        //listView.setAdapter(automobilViewAdapter);
+        automobilViewAdapter = new AutomobilViewAdapter(this, listaAutomobila);
+        listView.setAdapter(automobilViewAdapter);
 
         //db.obrisiBazu(this);
 
     }
 
-//    public boolean onCreateOptionsMenu(Menu meni){
-//        getMenuInflater().inflate(R.menu.menu,meni);
-//        MenuItem search=meni.findItem(R.id.pretraga);
-//        SearchView sv=(SearchView) search.getActionView();
-//        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                automobilViewAdapter.getFilter().filter(newText);
-//                return false;
-//            }
-//        });
-//        return true;
-//    }
 
     public void LoadLocale(){
         SharedPreferences prefs = getSharedPreferences("Settings", MODE_PRIVATE);
