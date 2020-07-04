@@ -113,14 +113,14 @@ public class OmiljeniActivity extends AppCompatActivity {
 
         DrawerUtil.getDrawer(this, toolBar, sesija);
 
-        listView = findViewById(R.id.listaAutomobila);
+        listView = findViewById(R.id.listaAutomobilaOmiljeni);
         int idKorisnika = Integer.parseInt(sesija.getKorisnikId());
         //db.listaOmiljenih(idKorisnika);
 
         listaAutomobila = db.listaOmiljenih(idKorisnika);
         //listaAutomobila = db.getAutomobili();
 
-        automobilViewAdapter = new AutomobilViewAdapter(this, listaAutomobila);
+        automobilViewAdapter = new AutomobilViewAdapter(this, filtriraj(listaAutomobila));
         listView.setAdapter(automobilViewAdapter);
 
         //db.obrisiBazu(this);
@@ -147,6 +147,21 @@ public class OmiljeniActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private ArrayList<AutomobilItemModel> filtriraj(ArrayList<AutomobilItemModel> lista){
+        ArrayList<AutomobilItemModel> pom= new ArrayList<AutomobilItemModel>();
+
+        for(AutomobilItemModel a : lista){
+            boolean t=false;
+            for(AutomobilItemModel b : pom) {
+                if (a.getFaId()==b.getFaId())
+                    t=true;
+            }
+            if(!t)
+                pom.add(a);
+        }
+        return pom;
     }
 }
 
