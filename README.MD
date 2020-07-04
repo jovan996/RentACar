@@ -2,7 +2,7 @@
 
 Predmet: Programiranje mobilnih aplikacija (Android)
 
-Demo aplikacije:  
+Demo aplikacije: https://youtu.be/BNtkwG7hQ6E 
 
 Uputstvo za aplikaciju:
 
